@@ -17,12 +17,13 @@ class MenuScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        view.backgroundColor = .red
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.backgroundColor = .gray
         
-        let newGameButton = SKButtonNode(image: .init(color: buttonColor, size: CGSize(width: 260.0, height: 70.0)), label: .init(text: "Novo jogo"), action: {print("Clicou!")})
-        let continueGameButton = SKButtonNode(image: .init(color: buttonColor, size: CGSize(width: 260.0, height: 70.0)), label: .init(text: "Continuar"), action: {print("Clicou!")})
-        let configGameButton = SKButtonNode(image: .init(color: buttonColor, size: CGSize(width: 260.0, height: 70.0)), label: .init(text: "Configurações"), action: {print("Clicou!")})
-        let helpGameButton = SKButtonNode(image: .init(color: buttonColor, size: CGSize(width: 260.0, height: 70.0)), label: .init(text: "Ajuda"), action: {print("Clicou!")})
+        let continueGameButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0), color: buttonColor,  label: .init(text: "Continuar"), action: {print("Clicou!")})
+        let newGameButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0), color: buttonColor,  label: .init(text: "Novo jogo"), action: {print("Clicou!")})
+        let configGameButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0), color: buttonColor,  label: .init(text: "Configurações"), action: {print("Clicou!")})
+        let helpGameButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0), color: buttonColor,  label: .init(text: "Ajuda"), action: {print("Clicou!")})
         
         addChild(vitRegiaFlor)
         vitRegiaFlor.position = CGPoint(x: frame.midX, y: 700.0)
@@ -46,16 +47,16 @@ class MenuScene: SKScene {
         
         
         addChild(continueGameButton)
-        continueGameButton.position = CGPoint(x: frame.midX, y: 500.0)
+        continueGameButton.position = CGPoint(x: 0, y: 100.0)
         
         addChild(newGameButton)
-        newGameButton.position = CGPoint(x: frame.midX, y: 410.0)
+        newGameButton.position = CGPoint(x: 0, y: 10.0)
         
         addChild(configGameButton)
-        configGameButton.position = CGPoint(x: frame.midX, y: 320.0)
+        configGameButton.position = CGPoint(x: 0, y: -80.0)
         
         addChild(helpGameButton)
-        helpGameButton.position = CGPoint(x: frame.midX, y: 230.0)
+        helpGameButton.position = CGPoint(x: 0, y: -170.0)
         
     }
     

@@ -10,28 +10,35 @@ import SpriteKit
 
 class SKButtonNode: SKNode {
     
-    var image: SKSpriteNode?
-    var label: SKLabelNode?
-    var action: (() -> Void)?
+    let shape: SKShapeNode
+    let label: SKLabelNode
+    let action: (() -> Void)
     
-    init(image: SKSpriteNode, label: SKLabelNode, action: @escaping () -> Void ) {
-        self.image = image
+    init(size: CGSize, color: UIColor, label: SKLabelNode, action: @escaping () -> Void ) {
+        self.shape = SKShapeNode(rect: CGRect(x: -size.width/2, y: -size.height/2, width: size.width , height: size.height), cornerRadius: 15.0)
+        self.shape.fillColor = color
+        self.shape.strokeColor = color
+        
+        
         self.label = label
+        self.label.verticalAlignmentMode = .center
+        //self.label.position = CGPoint(x: size.width/2, y: size.height/2)
         self.action = action
         super.init()
         self.isUserInteractionEnabled = true
         
-        self.addChild(image)
+        self.addChild(shape)
         self.addChild(label)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.action?()
+        self.action()
     }
     
     
