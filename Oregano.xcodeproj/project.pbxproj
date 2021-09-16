@@ -16,6 +16,15 @@
 		2137064026EFC8240085794F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2137063E26EFC8240085794F /* Main.storyboard */; };
 		2137064226EFC8270085794F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2137064126EFC8270085794F /* Assets.xcassets */; };
 		2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2137064326EFC8270085794F /* LaunchScreen.storyboard */; };
+		C0304C9326F3D52D004546C1 /* ContinueGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8A26F3D52C004546C1 /* ContinueGame.mp3 */; };
+		C0304C9426F3D52D004546C1 /* Help.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8B26F3D52C004546C1 /* Help.mp3 */; };
+		C0304C9526F3D52D004546C1 /* ControlsMenu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8C26F3D52C004546C1 /* ControlsMenu.mp3 */; };
+		C0304C9626F3D52D004546C1 /* DeactivateScreen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8D26F3D52D004546C1 /* DeactivateScreen.mp3 */; };
+		C0304C9726F3D52D004546C1 /* NewGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8E26F3D52D004546C1 /* NewGame.mp3 */; };
+		C0304C9826F3D52D004546C1 /* Settings.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8F26F3D52D004546C1 /* Settings.mp3 */; };
+		C0304C9926F3D52D004546C1 /* DeactivateVibrations.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C9026F3D52D004546C1 /* DeactivateVibrations.mp3 */; };
+		C0304C9A26F3D52D004546C1 /* Menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C9126F3D52D004546C1 /* Menu.mp3 */; };
+		C0304C9B26F3D52D004546C1 /* ControlsGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C9226F3D52D004546C1 /* ControlsGame.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +39,15 @@
 		2137064126EFC8270085794F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2137064426EFC8270085794F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2137064626EFC8270085794F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0304C8A26F3D52C004546C1 /* ContinueGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ContinueGame.mp3; sourceTree = "<group>"; };
+		C0304C8B26F3D52C004546C1 /* Help.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Help.mp3; sourceTree = "<group>"; };
+		C0304C8C26F3D52C004546C1 /* ControlsMenu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ControlsMenu.mp3; sourceTree = "<group>"; };
+		C0304C8D26F3D52D004546C1 /* DeactivateScreen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DeactivateScreen.mp3; sourceTree = "<group>"; };
+		C0304C8E26F3D52D004546C1 /* NewGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NewGame.mp3; sourceTree = "<group>"; };
+		C0304C8F26F3D52D004546C1 /* Settings.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Settings.mp3; sourceTree = "<group>"; };
+		C0304C9026F3D52D004546C1 /* DeactivateVibrations.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DeactivateVibrations.mp3; sourceTree = "<group>"; };
+		C0304C9126F3D52D004546C1 /* Menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Menu.mp3; sourceTree = "<group>"; };
+		C0304C9226F3D52D004546C1 /* ControlsGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ControlsGame.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,15 +68,6 @@
 				212EE77B26F136CE0065FB03 /* MenuViewController.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		212EE77E26F136F60065FB03 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				2137063E26EFC8240085794F /* Main.storyboard */,
-				2137064326EFC8270085794F /* LaunchScreen.storyboard */,
-			);
-			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		212EE77F26F225040065FB03 /* Scenes */ = {
@@ -88,16 +97,42 @@
 		2137063726EFC8240085794F /* Oregano */ = {
 			isa = PBXGroup;
 			children = (
-				212EE77E26F136F60065FB03 /* Storyboards */,
+				C0304C8926F3CD94004546C1 /* Assets */,
+				C0304C8826F3CD72004546C1 /* Classes */,
 				212EE77D26F136D90065FB03 /* ViewControllers */,
 				212EE77F26F225040065FB03 /* Scenes */,
 				2137063826EFC8240085794F /* AppDelegate.swift */,
 				2137063A26EFC8240085794F /* SceneDelegate.swift */,
-				2137064126EFC8270085794F /* Assets.xcassets */,
+				2137063E26EFC8240085794F /* Main.storyboard */,
+				2137064326EFC8270085794F /* LaunchScreen.storyboard */,
 				2137064626EFC8270085794F /* Info.plist */,
-				212EE78226F242B50065FB03 /* SKButtonNode.swift */,
 			);
 			path = Oregano;
+			sourceTree = "<group>";
+		};
+		C0304C8826F3CD72004546C1 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				212EE78226F242B50065FB03 /* SKButtonNode.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		C0304C8926F3CD94004546C1 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2137064126EFC8270085794F /* Assets.xcassets */,
+				C0304C8A26F3D52C004546C1 /* ContinueGame.mp3 */,
+				C0304C9226F3D52D004546C1 /* ControlsGame.mp3 */,
+				C0304C8C26F3D52C004546C1 /* ControlsMenu.mp3 */,
+				C0304C8D26F3D52D004546C1 /* DeactivateScreen.mp3 */,
+				C0304C9026F3D52D004546C1 /* DeactivateVibrations.mp3 */,
+				C0304C8B26F3D52C004546C1 /* Help.mp3 */,
+				C0304C9126F3D52D004546C1 /* Menu.mp3 */,
+				C0304C8E26F3D52D004546C1 /* NewGame.mp3 */,
+				C0304C8F26F3D52D004546C1 /* Settings.mp3 */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +193,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */,
+				C0304C9526F3D52D004546C1 /* ControlsMenu.mp3 in Resources */,
+				C0304C9826F3D52D004546C1 /* Settings.mp3 in Resources */,
+				C0304C9926F3D52D004546C1 /* DeactivateVibrations.mp3 in Resources */,
+				C0304C9326F3D52D004546C1 /* ContinueGame.mp3 in Resources */,
+				C0304C9A26F3D52D004546C1 /* Menu.mp3 in Resources */,
+				C0304C9426F3D52D004546C1 /* Help.mp3 in Resources */,
+				C0304C9626F3D52D004546C1 /* DeactivateScreen.mp3 in Resources */,
+				C0304C9B26F3D52D004546C1 /* ControlsGame.mp3 in Resources */,
+				C0304C9726F3D52D004546C1 /* NewGame.mp3 in Resources */,
 				2137064226EFC8270085794F /* Assets.xcassets in Resources */,
 				2137064026EFC8240085794F /* Main.storyboard in Resources */,
 			);
@@ -323,7 +367,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QMPGVXKJVA;
+				DEVELOPMENT_TEAM = 337G99FP8D;
 				INFOPLIST_FILE = Oregano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -332,7 +376,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Gabriel.Oregano;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -342,7 +386,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QMPGVXKJVA;
+				DEVELOPMENT_TEAM = 337G99FP8D;
 				INFOPLIST_FILE = Oregano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -351,7 +395,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Gabriel.Oregano;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
