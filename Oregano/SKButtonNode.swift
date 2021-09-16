@@ -8,21 +8,31 @@
 import Foundation
 import SpriteKit
 
+
+
 class SKButtonNode: SKNode {
     
     let shape: SKShapeNode
-    let label: SKLabelNode
+    var label = SKLabelNode()
     let action: (() -> Void)
+    
     
     init(size: CGSize, color: UIColor, label: SKLabelNode, action: @escaping () -> Void ) {
         self.shape = SKShapeNode(rect: CGRect(x: -size.width/2, y: -size.height/2, width: size.width , height: size.height), cornerRadius: 15.0)
         self.shape.fillColor = color
         self.shape.strokeColor = color
         
+ 
         
         self.label = label
         self.label.verticalAlignmentMode = .center
-        //self.label.position = CGPoint(x: size.width/2, y: size.height/2)
+        self.label.attributedText = NSAttributedString(
+            string: label.text!,
+            attributes: [
+                .foregroundColor: UIColor(red: 234/255, green: 219/255, blue: 207/255, alpha: 1.0),
+                .font: UIFont.systemFont(ofSize: 32, weight: .semibold)
+            ])
+        
         self.action = action
         super.init()
         self.isUserInteractionEnabled = true
