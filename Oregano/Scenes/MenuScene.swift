@@ -167,14 +167,14 @@ class MenuScene: SKScene {
         switch sender.direction {
             case .up:
                 print("Para cima")
-            case .left:
+            case .right:
                 let menuItems = audioMenu.filter { $0.isHidden == false }
                 selectedButton = mod(selectedButton + 1, menuItems.count)
                 menuItems[selectedButton].audio.run(.play())
                 print(selectedButton)
             case .down:
                 print("Baixo")
-            case .right:
+            case .left:
                 let menuItems = audioMenu.filter { $0.isHidden == false }
                 selectedButton = mod(selectedButton - 1, menuItems.count)
                 menuItems[selectedButton].audio.run(.play())
@@ -188,6 +188,9 @@ class MenuScene: SKScene {
         switch sender.numberOfTapsRequired {
             case 1:
                 print("FOI 1")
+                let menuItems = audioMenu.filter { $0.isHidden == false }
+                menuItems[selectedButton].audio.run(.play())
+                print(selectedButton)
             case 2:
                 print("FOI 2")
             default:
