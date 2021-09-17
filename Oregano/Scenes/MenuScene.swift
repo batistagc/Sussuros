@@ -9,7 +9,6 @@ class MenuScene: SKScene {
     let lilypadSmallBottom = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
     let lilypadBottom = SKSpriteNode(imageNamed: "halfVitoriaRegia")
     
-    let buttonColor: UIColor
     let continueGameButton: SKButtonNode
     let newGameButton: SKButtonNode
     let settingsButton: SKButtonNode
@@ -24,50 +23,24 @@ class MenuScene: SKScene {
     let audioMenu: [SKButtonNode]
     var selectedButton: Int
     
-    override init(size: CGSize) {
-        buttonColor = UIColor(red: 95/255, green: 143/255, blue: 153/255, alpha: 1.0)
-        
-        continueGameButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0),
-                                          color: buttonColor,
-                                          label: "Continuar jogo",
-                                          audio: "ContinueGame.mp3",
+    override init(size: CGSize) {        
+        continueGameButton = SKButtonNode(audio: "ContinueGame.mp3",
                                           action: { })
-        newGameButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0),
-                                     color: buttonColor,
-                                     label: "Novo jogo",
-                                     audio: "NewGame.mp3",
+        newGameButton = SKButtonNode(audio: "NewGame.mp3",
                                      action: { })
-        settingsButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0),
-                                      color: buttonColor,
-                                      label: "Configurações",
-                                      audio: "Settings.mp3",
+        settingsButton = SKButtonNode(audio: "Settings.mp3",
                                       action: { })
-        helpButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0),
-                                  color: buttonColor,
-                                  label: "Ajuda",
-                                  audio: "Help.mp3",
+        helpButton = SKButtonNode(audio: "Help.mp3",
                                   action: { })
         
-        vibrationsButton = SKButtonNode(size: .zero,
-                                        color: .clear,
-                                        label: "Desativar vibrações",
-                                        audio: "DeactivateVibrations.mp3",
+        vibrationsButton = SKButtonNode(audio: "DeactivateVibrations.mp3",
                                         action: { })
-        screenButton = SKButtonNode(size: .zero,
-                                    color: .clear,
-                                    label: "Desativar tela",
-                                    audio: "DeactivateScreen.mp3",
+        screenButton = SKButtonNode(audio: "DeactivateScreen.mp3",
                                     action: { })
         
-        controlsMenu = SKButtonNode(size: .zero,
-                                    color: .clear,
-                                    label: "Menu controls",
-                                    audio: "ControlsMenu.mp3",
+        controlsMenu = SKButtonNode(audio: "ControlsMenu.mp3",
                                     action: { })
-        controlsGame = SKButtonNode(size: .zero,
-                                    color: .clear,
-                                    label: "Game controls",
-                                    audio: "ControlsGame.mp3",
+        controlsGame = SKButtonNode(audio: "ControlsGame.mp3",
                                     action: { })
         
         audioMenu = [
