@@ -12,11 +12,20 @@
 		212EE78326F242B50065FB03 /* SKButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EE78226F242B50065FB03 /* SKButtonNode.swift */; };
 		2137063926EFC8240085794F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2137063826EFC8240085794F /* AppDelegate.swift */; };
 		2137063B26EFC8240085794F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2137063A26EFC8240085794F /* SceneDelegate.swift */; };
-		2137063D26EFC8240085794F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2137063C26EFC8240085794F /* ViewController.swift */; };
 		2137064026EFC8240085794F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2137063E26EFC8240085794F /* Main.storyboard */; };
 		2137064226EFC8270085794F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2137064126EFC8270085794F /* Assets.xcassets */; };
 		2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2137064326EFC8270085794F /* LaunchScreen.storyboard */; };
+		214859FD26F5332200BD193F /* HeadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214859FC26F5332200BD193F /* HeadScene.swift */; };
 		216A675D26F3D00C004F043C /* NewGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216A675C26F3D00C004F043C /* NewGameScene.swift */; };
+		C0304C9326F3D52D004546C1 /* ContinueGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8A26F3D52C004546C1 /* ContinueGame.mp3 */; };
+		C0304C9426F3D52D004546C1 /* Help.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8B26F3D52C004546C1 /* Help.mp3 */; };
+		C0304C9526F3D52D004546C1 /* ControlsMenu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8C26F3D52C004546C1 /* ControlsMenu.mp3 */; };
+		C0304C9626F3D52D004546C1 /* DeactivateScreen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8D26F3D52D004546C1 /* DeactivateScreen.mp3 */; };
+		C0304C9726F3D52D004546C1 /* NewGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8E26F3D52D004546C1 /* NewGame.mp3 */; };
+		C0304C9826F3D52D004546C1 /* Settings.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C8F26F3D52D004546C1 /* Settings.mp3 */; };
+		C0304C9926F3D52D004546C1 /* DeactivateVibrations.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C9026F3D52D004546C1 /* DeactivateVibrations.mp3 */; };
+		C0304C9A26F3D52D004546C1 /* Menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C9126F3D52D004546C1 /* Menu.mp3 */; };
+		C0304C9B26F3D52D004546C1 /* ControlsGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0304C9226F3D52D004546C1 /* ControlsGame.mp3 */; };
 		216A675F26F3E484004F043C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216A675E26F3E484004F043C /* GameViewController.swift */; };
 		C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */; };
 		C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */; };
@@ -29,12 +38,21 @@
 		2137063526EFC8240085794F /* Oregano.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oregano.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2137063826EFC8240085794F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2137063A26EFC8240085794F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2137063C26EFC8240085794F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2137063F26EFC8240085794F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2137064126EFC8270085794F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2137064426EFC8270085794F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2137064626EFC8270085794F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		214859FC26F5332200BD193F /* HeadScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadScene.swift; sourceTree = "<group>"; };
 		216A675C26F3D00C004F043C /* NewGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameScene.swift; sourceTree = "<group>"; };
+		C0304C8A26F3D52C004546C1 /* ContinueGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ContinueGame.mp3; sourceTree = "<group>"; };
+		C0304C8B26F3D52C004546C1 /* Help.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Help.mp3; sourceTree = "<group>"; };
+		C0304C8C26F3D52C004546C1 /* ControlsMenu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ControlsMenu.mp3; sourceTree = "<group>"; };
+		C0304C8D26F3D52D004546C1 /* DeactivateScreen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DeactivateScreen.mp3; sourceTree = "<group>"; };
+		C0304C8E26F3D52D004546C1 /* NewGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NewGame.mp3; sourceTree = "<group>"; };
+		C0304C8F26F3D52D004546C1 /* Settings.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Settings.mp3; sourceTree = "<group>"; };
+		C0304C9026F3D52D004546C1 /* DeactivateVibrations.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DeactivateVibrations.mp3; sourceTree = "<group>"; };
+		C0304C9126F3D52D004546C1 /* Menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Menu.mp3; sourceTree = "<group>"; };
+		C0304C9226F3D52D004546C1 /* ControlsGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ControlsGame.mp3; sourceTree = "<group>"; };
 		216A675E26F3E484004F043C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKToggleNode.swift; sourceTree = "<group>"; };
@@ -54,9 +72,7 @@
 		212EE77D26F136D90065FB03 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2137063C26EFC8240085794F /* ViewController.swift */,
 				212EE77B26F136CE0065FB03 /* MenuViewController.swift */,
-				216A675E26F3E484004F043C /* GameViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -66,6 +82,7 @@
 			children = (
 				212EE78026F2251F0065FB03 /* MenuScene.swift */,
 				216A675C26F3D00C004F043C /* NewGameScene.swift */,
+				214859FC26F5332200BD193F /* HeadScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -190,7 +207,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2137063D26EFC8240085794F /* ViewController.swift in Sources */,
 				216A675D26F3D00C004F043C /* NewGameScene.swift in Sources */,
 				2137063926EFC8240085794F /* AppDelegate.swift in Sources */,
 				212EE78126F2251F0065FB03 /* MenuScene.swift in Sources */,
@@ -198,6 +214,7 @@
 				C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */,
 				212EE78326F242B50065FB03 /* SKButtonNode.swift in Sources */,
 				2137063B26EFC8240085794F /* SceneDelegate.swift in Sources */,
+				214859FD26F5332200BD193F /* HeadScene.swift in Sources */,
 				212EE77C26F136CE0065FB03 /* MenuViewController.swift in Sources */,
 				C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */,
 			);

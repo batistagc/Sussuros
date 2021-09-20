@@ -6,12 +6,24 @@ class MenuViewController: UIViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        if let view = self.view as! SKView? {
-            if isHeadsetPluggedIn() {
+        
+        if !isHeadsetPluggedIn(){
+            
+            if let view = self.view as! SKView? {
+                
+                let scene = HeadScene(size: view.bounds.size)
+                scene.scaleMode = .resizeFill
+                view.presentScene(scene)
+                
+            }
+        }
+        else {
+            if let view = self.view as! SKView? {
                 let scene = MenuScene(size: view.bounds.size)
                 scene.scaleMode = .resizeFill
                 
                 view.presentScene(scene)
+                
             }
         }
     }
