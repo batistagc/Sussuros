@@ -9,7 +9,6 @@ class MenuScene: SKScene {
     let lilypadSmallBottom = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
     let lilypadBottom = SKSpriteNode(imageNamed: "halfVitoriaRegia")
     
-    let buttonColor: UIColor
     let continueGameButton: SKButtonNode
     let newGameButton: SKButtonNode
     let settingsButton: SKButtonNode
@@ -24,51 +23,17 @@ class MenuScene: SKScene {
     let audioMenu: [SKButtonNode]
     var selectedButton: Int
     
-    override init(size: CGSize) {
-        buttonColor = UIColor(red: 95/255, green: 143/255, blue: 153/255, alpha: 1.0)
+    override init(size: CGSize) {        
+        continueGameButton = SKButtonNode(tts: "Continuar jogo.")
+        newGameButton = SKButtonNode(tts: "Novo jogo.")
+        settingsButton = SKButtonNode(tts: "Configurações.")
+        helpButton = SKButtonNode(tts: "Ajuda.")
         
-        continueGameButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0),
-                                          color: buttonColor,
-                                          label: "Continuar jogo",
-                                          audio: "ContinueGame.mp3",
-                                          action: { })
-        newGameButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0),
-                                     color: buttonColor,
-                                     label: "Novo jogo",
-                                     audio: "NewGame.mp3",
-                                     action: { })
-        settingsButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0),
-                                      color: buttonColor,
-                                      label: "Configurações",
-                                      audio: "Settings.mp3",
-                                      action: { })
-        helpButton = SKButtonNode(size: CGSize(width: 260.0, height: 70.0),
-                                  color: buttonColor,
-                                  label: "Ajuda",
-                                  audio: "Help.mp3",
-                                  action: { })
+        vibrationsButton = SKToggleNode(tts: "Vibrações.")
+        screenButton = SKToggleNode(tts: "Tela.")
         
-        vibrationsButton = SKButtonNode(size: .zero,
-                                        color: .clear,
-                                        label: "Desativar vibrações",
-                                        audio: "DeactivateVibrations.mp3",
-                                        action: { })
-        screenButton = SKButtonNode(size: .zero,
-                                    color: .clear,
-                                    label: "Desativar tela",
-                                    audio: "DeactivateScreen.mp3",
-                                    action: { })
-        
-        controlsMenu = SKButtonNode(size: .zero,
-                                    color: .clear,
-                                    label: "Menu controls",
-                                    audio: "ControlsMenu.mp3",
-                                    action: { })
-        controlsGame = SKButtonNode(size: .zero,
-                                    color: .clear,
-                                    label: "Game controls",
-                                    audio: "ControlsGame.mp3",
-                                    action: { })
+        controlsMenu = SKButtonNode(tts: "Controles do menu.")
+        controlsGame = SKButtonNode(tts: "Controles do jogo.")
         
         audioMenu = [
             continueGameButton,
@@ -170,15 +135,13 @@ class MenuScene: SKScene {
             case .left:
                 let menuItems = audioMenu.filter { $0.isHidden == false }
                 selectedButton = mod(selectedButton + 1, menuItems.count)
-                menuItems[selectedButton].audio.run(.play())
-                print(selectedButton)
+                menuItems[selectedButton].announce()
             case .down:
                 print("Baixo")
             case .right:
                 let menuItems = audioMenu.filter { $0.isHidden == false }
                 selectedButton = mod(selectedButton - 1, menuItems.count)
-                menuItems[selectedButton].audio.run(.play())
-                print(selectedButton)
+                menuItems[selectedButton].announce()
             default:
                 print("Sem swipe")
         }
@@ -187,7 +150,8 @@ class MenuScene: SKScene {
     @objc func handleTap(sender: UITapGestureRecognizer) {
         switch sender.numberOfTapsRequired {
             case 1:
-                print("FOI 1")
+                let menuItems = audioMenu.filter { $0.isHidden == false }
+                menuItems[selectedButton].announce()
             case 2:
                 print("FOI 2")
             default:
