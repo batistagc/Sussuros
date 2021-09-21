@@ -20,6 +20,7 @@
 		216A675F26F3E484004F043C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216A675E26F3E484004F043C /* GameViewController.swift */; };
 		C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */; };
 		C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */; };
+		C0FD2C5B26FA4D83007C370A /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FD2C5A26FA4D83007C370A /* MenuNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		216A675E26F3E484004F043C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKToggleNode.swift; sourceTree = "<group>"; };
+		C0FD2C5A26FA4D83007C370A /* MenuNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				212EE78226F242B50065FB03 /* SKButtonNode.swift */,
 				C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */,
 				C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */,
+				C0FD2C5A26FA4D83007C370A /* MenuNode.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -199,9 +202,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				216A675D26F3D00C004F043C /* NewGameScene.swift in Sources */,
+				C0FD2C5B26FA4D83007C370A /* MenuNode.swift in Sources */,
 				2137063926EFC8240085794F /* AppDelegate.swift in Sources */,
 				212EE78126F2251F0065FB03 /* MenuScene.swift in Sources */,
-				216A675F26F3E484004F043C /* GameViewController.swift in Sources */,
 				C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */,
 				212EE78326F242B50065FB03 /* SKButtonNode.swift in Sources */,
 				2137063B26EFC8240085794F /* SceneDelegate.swift in Sources */,

@@ -48,29 +48,26 @@ class HeadScene: SKScene {
     }
     
     func addTapGestureRecognizer() {
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        self.scene?.view?.addGestureRecognizer(singleTap)
+//        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+//        self.scene?.view?.addGestureRecognizer(singleTap)
         
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         doubleTap.numberOfTapsRequired = 2
         self.scene?.view?.addGestureRecognizer(doubleTap)
         
-        singleTap.require(toFail: doubleTap)
+//        singleTap.require(toFail: doubleTap)
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
         switch sender.numberOfTapsRequired {
-            case 1:
-                print("FOI 1")
             case 2:
-                print("FOI 2")
                 if let newView = self.view {
                     let scene = MenuScene(size: (self.view?.bounds.size)!)
                     scene.scaleMode = .resizeFill
                     newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
                 }
             default:
-                print("Sem toque")
+                break
         }
     }
     

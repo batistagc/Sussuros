@@ -1,4 +1,5 @@
 import SpriteKit
+import AVFAudio
 
 class MenuScene: SKScene {
     
@@ -9,53 +10,47 @@ class MenuScene: SKScene {
     let lilypadSmallBottom = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
     let lilypadBottom = SKSpriteNode(imageNamed: "halfVitoriaRegia")
     
-    let continueGameButton: SKButtonNode
-    let newGameButton: SKButtonNode
-    let settingsButton: SKButtonNode
-    let helpButton: SKButtonNode
+    let continueGameButton: MenuNode<SKButtonNode>
+    let newGameButton: MenuNode<SKButtonNode>
+    let settingsButton: MenuNode<SKButtonNode>
+    let helpButton: MenuNode<SKButtonNode>
     
-    let vibrationsButton: SKButtonNode
-    let screenButton: SKButtonNode
+    let vibrationsButton: MenuNode<SKButtonNode>
+    let screenButton: MenuNode<SKButtonNode>
     
-    let controlsMenu: SKButtonNode
-    let controlsGame: SKButtonNode
+    let controlsMenu: MenuNode<SKButtonNode>
+    let controlsGame: MenuNode<SKButtonNode>
     
-    let audioMenu: [SKButtonNode]
-    var selectedButton: Int
+    let mainMenu: MenuNode<SKButtonNode>
+    var currentMenu: MenuNode<SKButtonNode>
     
-    override init(size: CGSize) {        
-        continueGameButton = SKButtonNode(tts: "Continuar jogo.")
-        newGameButton = SKButtonNode(tts: "Novo jogo.")
-        settingsButton = SKButtonNode(tts: "Configurações.")
-        helpButton = SKButtonNode(tts: "Ajuda.")
+    var nextSpeech: String?
+    
+    override init(size: CGSize) {
+        mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
         
-        vibrationsButton = SKToggleNode(tts: "Vibrações.")
-        screenButton = SKToggleNode(tts: "Tela.")
+        continueGameButton = MenuNode(SKButtonNode(tts: "Continuar jogo."))
         
-        controlsMenu = SKButtonNode(tts: "Controles do menu.")
-        controlsGame = SKButtonNode(tts: "Controles do jogo.")
+        newGameButton = MenuNode(SKButtonNode(tts: "Novo jogo."))
         
-        audioMenu = [
-            continueGameButton,
-            newGameButton,
-            settingsButton,
-                vibrationsButton,
-                screenButton,
-            helpButton,
-                controlsMenu,
-                controlsGame
-        ]
+        settingsButton = MenuNode(SKButtonNode(tts: "Configurações."))
+        vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
+        screenButton = MenuNode(SKToggleNode(tts: "Tela."))
         
-        vibrationsButton.isHidden = true
-        screenButton.isHidden = true
+        helpButton = MenuNode(SKButtonNode(tts: "Ajuda."))
+        controlsMenu = MenuNode(SKButtonNode(tts: "Controles do menu."))
+        controlsGame = MenuNode(SKButtonNode(tts: "Controles do jogo."))
         
-        controlsMenu.isHidden = true
-        controlsGame.isHidden = true
-                
-        selectedButton = 0
+        mainMenu.add(child: continueGameButton)
+        mainMenu.add(child: newGameButton)
+        mainMenu.add(child: settingsButton)
+        settingsButton.add(child: vibrationsButton)
+        settingsButton.add(child: screenButton)
+        mainMenu.add(child: helpButton)
+        helpButton.add(child: controlsMenu)
+        helpButton.add(child: controlsGame)
         
-        let menu = SKAudioNode(fileNamed: "Menu.mp3")
-        menu.run(.play())
+        currentMenu = mainMenu
         
         super.init(size: size)
     }
@@ -67,6 +62,8 @@ class MenuScene: SKScene {
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.backgroundColor = UIColor(red: 5/255, green: 31/255, blue: 30/255, alpha: 1.0)
+        
+        SpeechSynthesizer.shared.synthesizer.delegate = self
         
         // Background
         
@@ -86,21 +83,8 @@ class MenuScene: SKScene {
         lilypadSmallBottom.position = CGPoint(x: 60.0, y: -260.0)
         lilypadBottom.position = CGPoint(x: 70.0, y: -340.0)
         
-        // Menu Buttons
-        
-        addChild(continueGameButton)
-        addChild(newGameButton)
-        addChild(settingsButton)
-        settingsButton.addChild(vibrationsButton)
-        settingsButton.addChild(screenButton)
-        addChild(helpButton)
-        helpButton.addChild(controlsMenu)
-        helpButton.addChild(controlsGame)
-        
-        continueGameButton.position = CGPoint(x: 0, y: 100.0)
-        newGameButton.position = CGPoint(x: 0, y: 10.0)
-        settingsButton.position = CGPoint(x: 0, y: -80.0)
-        helpButton.position = CGPoint(x: 0, y: -170.0)
+        currentMenu.value.announce()
+        nextSpeech = mainMenu.children[mainMenu.select].value.tts
         
         // Gestures Recognizers
         
@@ -131,29 +115,37 @@ class MenuScene: SKScene {
     @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
         switch sender.direction {
             case .up:
-                print("Para cima")
+                if let parent = currentMenu.parent {
+                    currentMenu = parent
+                    currentMenu.value.announce()
+                    nextSpeech = currentMenu.children[currentMenu.select].value.tts
+                }
             case .left:
-                let menuItems = audioMenu.filter { $0.isHidden == false }
-                selectedButton = mod(selectedButton + 1, menuItems.count)
-                menuItems[selectedButton].announce()
-            case .down:
-                print("Baixo")
+                currentMenu.select = mod(currentMenu.select + 1, currentMenu.children.count)
+                currentMenu.children[currentMenu.select].value.announce()
             case .right:
-                let menuItems = audioMenu.filter { $0.isHidden == false }
-                selectedButton = mod(selectedButton - 1, menuItems.count)
-                menuItems[selectedButton].announce()
+                currentMenu.select = mod(currentMenu.select - 1, currentMenu.children.count)
+                currentMenu.children[currentMenu.select].value.announce()
             default:
                 print("Sem swipe")
         }
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
+        
         switch sender.numberOfTapsRequired {
             case 1:
-                let menuItems = audioMenu.filter { $0.isHidden == false }
-                menuItems[selectedButton].announce()
+                currentMenu.children[currentMenu.select].value.announce()
             case 2:
-                print("FOI 2")
+                if currentMenu.children[currentMenu.select].children.count > 0 {
+                    currentMenu.children[currentMenu.select].value.announce()
+                    currentMenu = currentMenu.children[currentMenu.select]
+                    currentMenu.select = 0
+                    nextSpeech = currentMenu.children[currentMenu.select].value.tts
+                } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
+                    toggle.toggle()
+                    currentMenu.children[currentMenu.select].value.announce()
+                }
             default:
                 print("Sem toque")
         }
@@ -163,5 +155,14 @@ class MenuScene: SKScene {
         precondition(n > 0, "modulus must be positive")
         let r = a % n
         return r >= 0 ? r : r + n
+    }
+}
+
+extension MenuScene: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        if let nextSpeech = nextSpeech {
+            SpeechSynthesizer.shared.speak(nextSpeech)
+            self.nextSpeech = nil
+        }
     }
 }
