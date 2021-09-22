@@ -17,7 +17,7 @@
 		2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2137064326EFC8270085794F /* LaunchScreen.storyboard */; };
 		214859FD26F5332200BD193F /* HeadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214859FC26F5332200BD193F /* HeadScene.swift */; };
 		216A675D26F3D00C004F043C /* NewGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216A675C26F3D00C004F043C /* NewGameScene.swift */; };
-		216A675F26F3E484004F043C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216A675E26F3E484004F043C /* GameViewController.swift */; };
+		C00083EA26FB924D005B0748 /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00083E926FB924D005B0748 /* AnalogStick.swift */; };
 		C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */; };
 		C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */; };
 		C0FD2C5B26FA4D83007C370A /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FD2C5A26FA4D83007C370A /* MenuNode.swift */; };
@@ -36,7 +36,7 @@
 		2137064626EFC8270085794F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214859FC26F5332200BD193F /* HeadScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadScene.swift; sourceTree = "<group>"; };
 		216A675C26F3D00C004F043C /* NewGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameScene.swift; sourceTree = "<group>"; };
-		216A675E26F3E484004F043C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		C00083E926FB924D005B0748 /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
 		C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKToggleNode.swift; sourceTree = "<group>"; };
 		C0FD2C5A26FA4D83007C370A /* MenuNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
@@ -76,7 +76,6 @@
 			children = (
 				2137063726EFC8240085794F /* Oregano */,
 				2137063626EFC8240085794F /* Products */,
-				9DDD733D26FA4185008221F1 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,14 +103,6 @@
 			path = Oregano;
 			sourceTree = "<group>";
 		};
-		9DDD733D26FA4185008221F1 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				216A675E26F3E484004F043C /* GameViewController.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		C0304C8826F3CD72004546C1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +110,7 @@
 				C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */,
 				C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */,
 				C0FD2C5A26FA4D83007C370A /* MenuNode.swift */,
+				C00083E926FB924D005B0748 /* AnalogStick.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -211,6 +203,7 @@
 				214859FD26F5332200BD193F /* HeadScene.swift in Sources */,
 				212EE77C26F136CE0065FB03 /* MenuViewController.swift in Sources */,
 				C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */,
+				C00083EA26FB924D005B0748 /* AnalogStick.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
