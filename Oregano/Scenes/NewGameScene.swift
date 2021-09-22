@@ -16,10 +16,13 @@ class NewGameScene: SKScene, AVAudioPlayerDelegate {
     private let steps = SKAudioNode(fileNamed: "coin.mp3")
     
     
+    var background = SKSpriteNode(imageNamed: "DelegaciaDelegacia")
     
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.backgroundColor = .red
+//        self.backgroundColor = UIImage(named: "DelegaciaDelegacia")!
+        
+        addChild(background)
         
         circle.position = CGPoint(x: frame.midX, y: frame.midY)
         circle.fillColor = .yellow
