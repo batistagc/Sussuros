@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Oregano
-//
-//  Created by Gabriel Batista Cristiano on 13/09/21.
-//
-
 import UIKit
 
 @main

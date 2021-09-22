@@ -3,11 +3,11 @@ import SpriteKit
 class SKButtonNode: SKNode {
 
     var tts: String
-    let action: (() -> Void)
+    var action: (() -> Void)?
     
-    init(tts: String, action: @escaping () -> Void = {}) {
+    init(tts: String) {
         self.tts = tts
-        self.action = action
+        action = nil
         
         super.init()
         
