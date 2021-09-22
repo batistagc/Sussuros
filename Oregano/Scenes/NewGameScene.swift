@@ -7,10 +7,15 @@
 
 import Foundation
 import SpriteKit
+import AVFoundation
 
-class NewGameScene: SKScene {
+class NewGameScene: SKScene, AVAudioPlayerDelegate {
     
     var circle = SKShapeNode(circleOfRadius: 30)
+    private var backgroundSound: AVAudioPlayer?
+    private let steps = SKAudioNode(fileNamed: "coin.mp3")
+    
+    
     var background = SKSpriteNode(imageNamed: "DelegaciaDelegacia")
     
     override func didMove(to view: SKView) {
@@ -23,12 +28,15 @@ class NewGameScene: SKScene {
         circle.fillColor = .yellow
         circle.strokeColor = .yellow
         addChild(circle)
+        addChild(steps)
+        steps.run(.stop())
         
         print("x: \(circle.position.x), y: \(circle.position.y)")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        steps.run(.play())
+
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -37,11 +45,15 @@ class NewGameScene: SKScene {
             
             circle.position.x = location.x
             circle.position.y = location.y
+            
+            
         }
     }
     
-    override func update(_ currentTime: CFTimeInterval) {
-        
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        steps.run(.stop())
     }
+    
+
     
 }

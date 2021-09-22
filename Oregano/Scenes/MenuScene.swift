@@ -121,10 +121,10 @@ class MenuScene: SKScene {
                     nextSpeech = currentMenu.children[currentMenu.select].value.tts
                 }
             case .left:
-                currentMenu.select = mod(currentMenu.select + 1, currentMenu.children.count)
+                currentMenu.select = mod(currentMenu.select - 1, currentMenu.children.count)
                 currentMenu.children[currentMenu.select].value.announce()
             case .right:
-                currentMenu.select = mod(currentMenu.select - 1, currentMenu.children.count)
+                currentMenu.select = mod(currentMenu.select + 1, currentMenu.children.count)
                 currentMenu.children[currentMenu.select].value.announce()
             default:
                 print("Sem swipe")
@@ -145,6 +145,12 @@ class MenuScene: SKScene {
                 } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
+                } else {
+                    if let newView = self.view {
+                        let scene = NewGameScene(size: (self.view?.bounds.size)!)
+                        scene.scaleMode = .resizeFill
+                        newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+                    }
                 }
             default:
                 print("Sem toque")
