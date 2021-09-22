@@ -11,7 +11,7 @@ class MenuViewController: UIViewController {
             
             if let view = self.view as! SKView? {
                 
-                let scene = HeadScene(size: view.bounds.size)
+                let scene = HeadphonesScene(size: view.bounds.size)
                 scene.scaleMode = .resizeFill
                 view.presentScene(scene)
                 

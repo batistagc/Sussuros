@@ -1,36 +1,28 @@
-//
-//  HeadScene.swift
-//  Oregano
-//
-//  Created by Gabriel Batista Cristiano on 17/09/21.
-//
-
-import Foundation
 import SpriteKit
+import AVFAudio
 
-class HeadScene: SKScene {
+class HeadphonesScene: SKScene {
     
-
-    let headImageView = SKSpriteNode(texture: SKTexture(imageNamed: "􀑈"))
+    let headphonesImage = SKSpriteNode(texture: SKTexture(imageNamed: "􀑈"))
     let warningLabel = SKLabelNode()
+    
+    let loopSpeech: String = "Sussurros é um audio game. Utilize fones de ouvido para que tenha uma melhor experiência."
 
     override func didMove(to view: SKView) {
-        
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.backgroundColor = UIColor(red: 34/255, green: 32/255, blue: 53/255, alpha: 1)
         
+        SpeechSynthesizer.shared.synthesizer.delegate = self
         
-        addChild(headImageView)
+        addChild(headphonesImage)
         addChild(warningLabel)
         
-        
-        
-        headImageView.position = CGPoint(x: 0, y: 70)
+        headphonesImage.position = CGPoint(x: 0, y: 70)
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         warningLabel.attributedText = NSAttributedString(
-                                    string: "Snaps é um audiogame.\nUtilize fones para que tenha uma melhor experiência.",
+                                    string: "Sussurros é um audiogame.\nUtilize fones de ouvido para que tenha uma melhor experiência.",
                                     attributes: [
                                         .foregroundColor: UIColor.white,
                                         .font: UIFont.systemFont(ofSize: 17, weight: .regular),
@@ -40,22 +32,15 @@ class HeadScene: SKScene {
         warningLabel.preferredMaxLayoutWidth = 300
         warningLabel.position = CGPoint(x: 0, y: -70)
         
-
-        
+        SpeechSynthesizer.shared.speak(loopSpeech)
         
         addTapGestureRecognizer()
-        
     }
     
     func addTapGestureRecognizer() {
-//        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-//        self.scene?.view?.addGestureRecognizer(singleTap)
-        
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         doubleTap.numberOfTapsRequired = 2
         self.scene?.view?.addGestureRecognizer(doubleTap)
-        
-//        singleTap.require(toFail: doubleTap)
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
@@ -71,4 +56,12 @@ class HeadScene: SKScene {
         }
     }
     
+}
+
+extension HeadphonesScene: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        run(.wait(forDuration: 4)) { [self] in
+            SpeechSynthesizer.shared.speak(loopSpeech)
+        }
+    }
 }
