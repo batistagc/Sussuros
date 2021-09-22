@@ -11,10 +11,13 @@ import SpriteKit
 class NewGameScene: SKScene {
     
     var circle = SKShapeNode(circleOfRadius: 30)
+    var background = SKSpriteNode(imageNamed: "DelegaciaDelegacia")
     
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.backgroundColor = .red
+//        self.backgroundColor = UIImage(named: "DelegaciaDelegacia")!
+        
+        addChild(background)
         
         circle.position = CGPoint(x: frame.midX, y: frame.midY)
         circle.fillColor = .yellow
