@@ -127,7 +127,7 @@ class MenuScene: SKScene {
                 currentMenu.select = mod(currentMenu.select + 1, currentMenu.children.count)
                 currentMenu.children[currentMenu.select].value.announce()
             default:
-                print("Sem swipe")
+                break
         }
     }
     
@@ -153,7 +153,7 @@ class MenuScene: SKScene {
                     }
                 }
             default:
-                print("Sem toque")
+                break
         }
     }
     

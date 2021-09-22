@@ -2,12 +2,12 @@ import SpriteKit
 
 class SKToggleNode: SKButtonNode {
     
-    var activated: Bool
+    var state: Bool
     var ttsOn: String
     var ttsOff: String
     
-    override init(tts: String, action: @escaping () -> Void = {}) {
-        activated = false
+    init(tts: String, state: Bool = true, action: @escaping () -> Void = {}) {
+        self.state = state
         ttsOn = "Desativar " + tts
         ttsOff = "Ativar " + tts
         super.init(tts: tts)
@@ -18,11 +18,11 @@ class SKToggleNode: SKButtonNode {
     }
     
     func toggle() {
-        activated.toggle()
+        state.toggle()
     }
     
     override func announce() {
-        if activated {
+        if state {
             tts = ttsOn
         } else {
             tts = ttsOff

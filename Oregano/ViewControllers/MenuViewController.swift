@@ -1,30 +1,24 @@
 import UIKit
 import SpriteKit
-import AVFoundation
+import AVFAudio
 
 class MenuViewController: UIViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        if !isHeadsetPluggedIn(){
-            
-            if let view = self.view as! SKView? {
-                
-                let scene = HeadphonesScene(size: view.bounds.size)
-                scene.scaleMode = .resizeFill
-                view.presentScene(scene)
-                
+        view.isAccessibilityElement = true
+        view.accessibilityTraits = .allowsDirectInteraction
+        
+        if let view = view as! SKView? {
+            var scene: SKScene
+            if isHeadsetPluggedIn() {
+                scene = MenuScene(size: view.bounds.size)
+            } else {
+                scene = HeadphonesScene(size: view.bounds.size)
             }
-        }
-        else {
-            if let view = self.view as! SKView? {
-                let scene = MenuScene(size: view.bounds.size)
-                scene.scaleMode = .resizeFill
-                
-                view.presentScene(scene)
-                
-            }
+            scene.scaleMode = .resizeFill
+            view.presentScene(scene)
         }
     }
     
