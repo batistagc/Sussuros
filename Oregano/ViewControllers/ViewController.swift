@@ -2,23 +2,39 @@ import UIKit
 import SpriteKit
 import AVFAudio
 
-class MenuViewController: UIViewController {
+class ViewController: UIViewController {
+    
+    let blackView = SKView(frame: UIScreen.main.bounds)
+    
+    override func loadView() {
+        self.view = SKView(frame: UIScreen.main.bounds)
+    }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
         
+        let blackScene = SKScene(size: blackView.frame.size)
+        blackScene.backgroundColor = .black
+        blackView.presentScene(blackScene)
+        
+        blackView.isHidden = true
+        blackView.tag = 1
+        blackView.backgroundColor = .black
+        view.addSubview(blackView)
+        
         view.isAccessibilityElement = true
         view.accessibilityTraits = .allowsDirectInteraction
         
-        if let view = view as! SKView? {
+        if let view = self.view as! SKView? {
             var scene: SKScene
             if isHeadsetPluggedIn() {
                 scene = MenuScene(size: view.bounds.size)
             } else {
                 scene = HeadphonesScene(size: view.bounds.size)
             }
-            scene.scaleMode = .resizeFill
+            scene.scaleMode = .aspectFill
             view.presentScene(scene)
+            view.ignoresSiblingOrder = true
         }
     }
     
@@ -30,5 +46,9 @@ class MenuViewController: UIViewController {
             }
         }
         return false
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }

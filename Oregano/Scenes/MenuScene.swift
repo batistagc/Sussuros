@@ -1,4 +1,5 @@
 import SpriteKit
+import UIKit
 import AVFAudio
 
 class MenuScene: SKScene {
@@ -24,7 +25,7 @@ class MenuScene: SKScene {
     let mainMenu: MenuNode<SKButtonNode>
     var currentMenu: MenuNode<SKButtonNode>
     
-    var nextSpeech: String?
+    var nextSpeech: (() -> Void)?
     
     override init(size: CGSize) {
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
@@ -53,6 +54,17 @@ class MenuScene: SKScene {
         currentMenu = mainMenu
         
         super.init(size: size)
+        
+        if let screen = screenButton.value as? SKToggleNode {
+            screen.action = { [self] in
+                let blackScreen = view?.subviews.filter { $0.tag == 1 }
+                blackScreen![0].isHidden = false
+            }
+            screen.secondaryAction = { [self] in
+                let blackScreen = view?.subviews.filter { $0.tag == 1 }
+                blackScreen![0].isHidden = true
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -84,7 +96,9 @@ class MenuScene: SKScene {
         lilypadBottom.position = CGPoint(x: 70.0, y: -340.0)
         
         currentMenu.value.announce()
-        nextSpeech = mainMenu.children[mainMenu.select].value.tts
+        nextSpeech = { [self] in
+            mainMenu.children[mainMenu.select].value.announce()
+        }
         
         // Gestures Recognizers
         
@@ -118,7 +132,9 @@ class MenuScene: SKScene {
                 if let parent = currentMenu.parent {
                     currentMenu = parent
                     currentMenu.value.announce()
-                    nextSpeech = currentMenu.children[currentMenu.select].value.tts
+                    nextSpeech = { [self] in
+                        currentMenu.children[currentMenu.select].value.announce()
+                    }
                 }
             case .left:
                 currentMenu.select = mod(currentMenu.select - 1, currentMenu.children.count)
@@ -141,7 +157,9 @@ class MenuScene: SKScene {
                     currentMenu.children[currentMenu.select].value.announce()
                     currentMenu = currentMenu.children[currentMenu.select]
                     currentMenu.select = 0
-                    nextSpeech = currentMenu.children[currentMenu.select].value.tts
+                    nextSpeech = { [self] in
+                        currentMenu.children[currentMenu.select].value.announce()
+                    }
                 } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
@@ -167,7 +185,7 @@ class MenuScene: SKScene {
 extension MenuScene: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         if let nextSpeech = nextSpeech {
-            SpeechSynthesizer.shared.speak(nextSpeech)
+            nextSpeech()
             self.nextSpeech = nil
         }
     }
