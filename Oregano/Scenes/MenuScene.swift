@@ -133,15 +133,11 @@ class MenuScene: SKScene {
             case .up:
                 print("Para cima")
             case .left:
-                let menuItems = audioMenu.filter { $0.isHidden == false }
-                selectedButton = mod(selectedButton + 1, menuItems.count)
-                menuItems[selectedButton].announce()
-            case .down:
-                print("Baixo")
+                currentMenu.select = mod(currentMenu.select - 1, currentMenu.children.count)
+                currentMenu.children[currentMenu.select].value.announce()
             case .right:
-                let menuItems = audioMenu.filter { $0.isHidden == false }
-                selectedButton = mod(selectedButton - 1, menuItems.count)
-                menuItems[selectedButton].announce()
+                currentMenu.select = mod(currentMenu.select + 1, currentMenu.children.count)
+                currentMenu.children[currentMenu.select].value.announce()
             default:
                 print("Sem swipe")
         }
@@ -153,7 +149,21 @@ class MenuScene: SKScene {
                 let menuItems = audioMenu.filter { $0.isHidden == false }
                 menuItems[selectedButton].announce()
             case 2:
-                print("FOI 2")
+                if currentMenu.children[currentMenu.select].children.count > 0 {
+                    currentMenu.children[currentMenu.select].value.announce()
+                    currentMenu = currentMenu.children[currentMenu.select]
+                    currentMenu.select = 0
+                    nextSpeech = currentMenu.children[currentMenu.select].value.tts
+                } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
+                    toggle.toggle()
+                    currentMenu.children[currentMenu.select].value.announce()
+                } else {
+                    if let newView = self.view {
+                        let scene = NewGameScene(size: (self.view?.bounds.size)!)
+                        scene.scaleMode = .resizeFill
+                        newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+                    }
+                }
             default:
                 print("Sem toque")
         }
