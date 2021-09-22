@@ -35,6 +35,24 @@ class HeadphonesScene: SKScene {
         SpeechSynthesizer.shared.speak(loopSpeech)
         
         addTapGestureRecognizer()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(foneConectado(_:)), name: AVAudioSession.routeChangeNotification, object: nil)
+        
+    }
+    
+    @objc func foneConectado(_ notification:NSNotification) {
+        let audioRouteChangeReason = notification.userInfo![AVAudioSessionRouteChangeReasonKey] as! UInt
+     
+        switch audioRouteChangeReason {
+        case AVAudioSession.RouteChangeReason.newDeviceAvailable.rawValue:
+            if let newView = self.view {
+                let scene = MenuScene(size: (self.view?.bounds.size)!)
+                scene.scaleMode = .resizeFill
+                newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+            }
+        default:
+            break
+        }
     }
     
     func addTapGestureRecognizer() {
@@ -42,6 +60,7 @@ class HeadphonesScene: SKScene {
         doubleTap.numberOfTapsRequired = 2
         self.scene?.view?.addGestureRecognizer(doubleTap)
     }
+    
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
         switch sender.numberOfTapsRequired {
