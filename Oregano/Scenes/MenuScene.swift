@@ -1,5 +1,4 @@
 import SpriteKit
-import UIKit
 import AVFAudio
 
 class MenuScene: SKScene {
@@ -117,9 +116,9 @@ class MenuScene: SKScene {
     func addSwipeGestureRecognizer() {
         let gestureDirections: [UISwipeGestureRecognizer.Direction] = [.up, .right, .down, .left]
         for gestureDirection in gestureDirections{
-            let gestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-            gestureRecognizer.direction = gestureDirection
-            self.view?.addGestureRecognizer(gestureRecognizer)
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+            swipe.direction = gestureDirection
+            self.view?.addGestureRecognizer(swipe)
         }
     }
     
@@ -134,7 +133,7 @@ class MenuScene: SKScene {
         singleTap.require(toFail: doubleTap)
     }
     
-    @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
+    @objc func handleSwipe(_ sender: UISwipeGestureRecognizer) {
         switch sender.direction {
             case .up:
                 if let parent = currentMenu.parent {
@@ -155,7 +154,7 @@ class MenuScene: SKScene {
         }
     }
     
-    @objc func handleTap(sender: UITapGestureRecognizer) {
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
         
         switch sender.numberOfTapsRequired {
             case 1:
