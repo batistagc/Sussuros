@@ -21,4 +21,9 @@ class SKButtonNode: SKNode {
     func announce() {
         SpeechSynthesizer.shared.speak(tts)
     }
+    
+    func runAction() {
+        guard let action = action else { return }
+        action()
+    }
 }
