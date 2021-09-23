@@ -1,5 +1,4 @@
 import SpriteKit
-import UIKit
 import AVFAudio
 
 class MenuScene: SKScene {
@@ -31,8 +30,10 @@ class MenuScene: SKScene {
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
         
         continueGameButton = MenuNode(SKButtonNode(tts: "Continuar jogo."))
+        continueGameButton.value.name = "continueGame"
         
         newGameButton = MenuNode(SKButtonNode(tts: "Novo jogo."))
+        newGameButton.value.name = "newGame"
         
         settingsButton = MenuNode(SKButtonNode(tts: "Configurações."))
         vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
@@ -40,7 +41,14 @@ class MenuScene: SKScene {
         
         helpButton = MenuNode(SKButtonNode(tts: "Ajuda."))
         controlsMenu = MenuNode(SKButtonNode(tts: "Controles do menu."))
+        controlsMenu.value.action = {
+            SpeechSynthesizer.shared.speak("Para ir para a próxima opção, deslize para a direita. Para voltar à opção anterior, deslize para a esquerda. Para ir ao menu principal, deslize para cima. Caso queira ouvir novamente os comandos, dê um toque na tela. Para selecionar a opção, dê dois toques.")
+        }
+        
         controlsGame = MenuNode(SKButtonNode(tts: "Controles do jogo."))
+        controlsGame.value.action = {
+            SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Com dois dedos, faça um gesto de pinça para coletar um item. Para pausar o jogo, toque duas vezes na tela com 3 dedos. Caso queira ouvir novamente os comandos, agite o celular.")
+        }
         
         mainMenu.add(child: continueGameButton)
         mainMenu.add(child: newGameButton)
@@ -104,14 +112,15 @@ class MenuScene: SKScene {
         
         addSwipeGestureRecognizer()
         addTapGestureRecognizer()
+        
     }
     
     func addSwipeGestureRecognizer() {
         let gestureDirections: [UISwipeGestureRecognizer.Direction] = [.up, .right, .down, .left]
         for gestureDirection in gestureDirections{
-            let gestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-            gestureRecognizer.direction = gestureDirection
-            self.view?.addGestureRecognizer(gestureRecognizer)
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+            swipe.direction = gestureDirection
+            self.view?.addGestureRecognizer(swipe)
         }
     }
     
@@ -126,7 +135,7 @@ class MenuScene: SKScene {
         singleTap.require(toFail: doubleTap)
     }
     
-    @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
+    @objc func handleSwipe(_ sender: UISwipeGestureRecognizer) {
         switch sender.direction {
             case .up:
                 if let parent = currentMenu.parent {
@@ -147,7 +156,7 @@ class MenuScene: SKScene {
         }
     }
     
-    @objc func handleTap(sender: UITapGestureRecognizer) {
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
         
         switch sender.numberOfTapsRequired {
             case 1:
@@ -163,12 +172,15 @@ class MenuScene: SKScene {
                 } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
-                } else {
+                } else if currentMenu.children[currentMenu.select].value.name == "continueGame" || currentMenu.children[currentMenu.select].value.name == "newGame" {
                     if let newView = self.view {
                         let scene = GameScene(size: (self.view?.bounds.size)!)
                         scene.scaleMode = .resizeFill
                         newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
                     }
+                } else {
+                    let controls = currentMenu.children[currentMenu.select].value
+                    controls.runAction()
                 }
             default:
                 break

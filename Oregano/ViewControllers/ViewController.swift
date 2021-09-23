@@ -32,9 +32,12 @@ class ViewController: UIViewController {
             } else {
                 scene = HeadphonesScene(size: view.bounds.size)
             }
+//            scene = GameScene(size: view.bounds.size)
             scene.scaleMode = .aspectFill
             view.presentScene(scene)
             view.ignoresSiblingOrder = true
+            view.showsPhysics = true
+            view.isMultipleTouchEnabled = true
         }
     }
     

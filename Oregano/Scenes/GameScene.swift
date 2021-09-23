@@ -2,7 +2,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    let analogStick = AnalogStick(stick: "", outline: "")
+    let analogStick = AnalogStick(stick: "stick-1", outline: "outline-1")
     var singleTouch: UITouch?
     
     let backgroundDelegacia = SKSpriteNode(imageNamed: "DelegaciaDelegacia")
