@@ -175,7 +175,7 @@ class MenuScene: SKScene {
                     controls.runAction()
                 } else {
                     if let newView = self.view {
-                        let scene = NewGameScene(size: (self.view?.bounds.size)!)
+                        let scene = GameScene(size: (self.view?.bounds.size)!)
                         scene.scaleMode = .resizeFill
                         newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
                     }
