@@ -25,6 +25,7 @@ class MenuScene: SKScene {
     var currentMenu: MenuNode<SKButtonNode>
     
     var nextSpeech: (() -> Void)?
+    let defaults: UserDefaults
     
     override init(size: CGSize) {
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
@@ -60,6 +61,8 @@ class MenuScene: SKScene {
         helpButton.add(child: controlsGame)
         
         currentMenu = mainMenu
+        
+        defaults = UserDefaults.standard
         
         super.init(size: size)
         
@@ -113,6 +116,10 @@ class MenuScene: SKScene {
         addSwipeGestureRecognizer()
         addTapGestureRecognizer()
         
+    }
+    
+    func resetGame() {
+        SpeechSynthesizer.shared.speak("Tem certeza que quer iniciar um novo jogo? Todo o progresso do jogo anterior será perdido.")
     }
     
     func addSwipeGestureRecognizer() {
@@ -172,13 +179,24 @@ class MenuScene: SKScene {
                 } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
-                } else if currentMenu.children[currentMenu.select].value.name == "continueGame" || currentMenu.children[currentMenu.select].value.name == "newGame" {
+                } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
                     if let newView = self.view {
                         let scene = GameScene(size: (self.view?.bounds.size)!)
                         scene.scaleMode = .resizeFill
                         newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
                     }
-                } else {
+                } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
+                    if defaults.bool(forKey: "savedGame") == true {
+                        resetGame()
+                    }else {
+                        defaults.set(true, forKey: "savedGame")
+                        if let newView = self.view {
+                            let scene = GameScene(size: (self.view?.bounds.size)!)
+                            scene.scaleMode = .resizeFill
+                            newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+                        }
+                    }
+                }else {
                     let controls = currentMenu.children[currentMenu.select].value
                     controls.runAction()
                 }
