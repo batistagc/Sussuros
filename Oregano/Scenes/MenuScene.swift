@@ -15,7 +15,7 @@ class MenuScene: SKScene {
     let settingsButton: MenuNode<SKButtonNode>
     let helpButton: MenuNode<SKButtonNode>
     
-    let vibrationsButton: MenuNode<SKButtonNode>
+//    let vibrationsButton: MenuNode<SKButtonNode>
     let screenButton: MenuNode<SKButtonNode>
     
     let controlsMenu: MenuNode<SKButtonNode>
@@ -38,7 +38,7 @@ class MenuScene: SKScene {
         newGameButton.value.name = "newGame"
         
         settingsButton = MenuNode(SKButtonNode(tts: "Configurações."))
-        vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
+//        vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
         screenButton = MenuNode(SKToggleNode(tts: "Tela."))
         
         helpButton = MenuNode(SKButtonNode(tts: "Ajuda."))
@@ -55,7 +55,7 @@ class MenuScene: SKScene {
         mainMenu.add(child: continueGameButton)
         mainMenu.add(child: newGameButton)
         mainMenu.add(child: settingsButton)
-        settingsButton.add(child: vibrationsButton)
+//        settingsButton.add(child: vibrationsButton)
         settingsButton.add(child: screenButton)
         mainMenu.add(child: helpButton)
         helpButton.add(child: controlsMenu)
