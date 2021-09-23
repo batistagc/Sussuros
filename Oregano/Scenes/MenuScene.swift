@@ -30,8 +30,10 @@ class MenuScene: SKScene {
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
         
         continueGameButton = MenuNode(SKButtonNode(tts: "Continuar jogo."))
+        continueGameButton.value.name = "continueGame"
         
         newGameButton = MenuNode(SKButtonNode(tts: "Novo jogo."))
+        newGameButton.value.name = "newGame"
         
         settingsButton = MenuNode(SKButtonNode(tts: "Configurações."))
         vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
@@ -170,14 +172,15 @@ class MenuScene: SKScene {
                 } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
-                } else if let controls = currentMenu.children[currentMenu.select].value as? SKButtonNode {
-                    controls.runAction()
-                } else {
+                } else if currentMenu.children[currentMenu.select].value.name == "continueGame" || currentMenu.children[currentMenu.select].value.name == "newGame" {
                     if let newView = self.view {
                         let scene = GameScene(size: (self.view?.bounds.size)!)
                         scene.scaleMode = .resizeFill
                         newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
                     }
+                } else {
+                    let controls = currentMenu.children[currentMenu.select].value
+                    controls.runAction()
                 }
             default:
                 break
