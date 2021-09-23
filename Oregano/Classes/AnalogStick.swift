@@ -9,11 +9,13 @@ class AnalogStick {
     private var velocityY: CGFloat
     private var isStatic: Bool
     private var position: CGPoint
+    let steps: SKAudioNode
     
     init(stick: String, outline: String, position: CGPoint = .zero) {
         self.stick = SKSpriteNode(imageNamed: stick)
         self.outline = SKSpriteNode(imageNamed: outline)
         self.outline.alpha = 0.5
+        self.steps = SKAudioNode(fileNamed: "coin.mp3")
         isUsing = false
         velocityX = 0
         velocityY = 0
@@ -32,6 +34,7 @@ class AnalogStick {
         outline.position = position
         outline.zPosition = 1
         outline.addChild(stick)
+        outline.addChild(steps)
         
         return outline
     }
@@ -39,6 +42,7 @@ class AnalogStick {
     public func changeState(for location: CGPoint) {
         if !isUsing {
             isUsing = true
+            steps.run(.play())
             if !isStatic {
                 outline.run(.unhide())
                 stick.run(.unhide())

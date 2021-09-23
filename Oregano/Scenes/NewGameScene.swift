@@ -14,46 +14,52 @@ class NewGameScene: SKScene, AVAudioPlayerDelegate {
     var circle = SKShapeNode(circleOfRadius: 30)
     private var backgroundSound: AVAudioPlayer?
     private let steps = SKAudioNode(fileNamed: "coin.mp3")
+    let joystick = AnalogStick(stick: "", outline: "")
     
     
     var background = SKSpriteNode(imageNamed: "DelegaciaDelegacia")
     
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-//        self.backgroundColor = UIImage(named: "DelegaciaDelegacia")!
         
         addChild(background)
         
-        circle.position = CGPoint(x: frame.midX, y: frame.midY)
-        circle.fillColor = .yellow
-        circle.strokeColor = .yellow
-        addChild(circle)
-        addChild(steps)
-        steps.run(.stop())
+//        circle.position = CGPoint(x: frame.midX, y: frame.midY)
+//        circle.fillColor = .yellow
+//        circle.strokeColor = .yellow
+//        addChild(circle)
+     //   addChild(steps)
+      //  steps.run(.stop())
+        addChild(joystick.createStick(named: ""))
         
         print("x: \(circle.position.x), y: \(circle.position.y)")
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        steps.run(.play())
-
-    }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        for touch in touches {
+            let location = touch.location(in: self.view)
+            joystick.changeState(for: location)
+           // steps.run(.play())
+        }
+    }
+
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
-            
-            circle.position.x = location.x
-            circle.position.y = location.y
-            
-            
+            joystick.updateVector(for: location)
+        }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        for touch in touches {
+            joystick.resetStick()
+          //  steps.run(.stop())
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        steps.run(.stop())
-    }
-    
 
-    
+
 }
