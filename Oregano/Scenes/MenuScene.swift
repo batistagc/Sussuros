@@ -25,6 +25,7 @@ class MenuScene: SKScene {
     var currentMenu: MenuNode<SKButtonNode>
     
     var nextSpeech: (() -> Void)?
+    let defaults: UserDefaults
     
     override init(size: CGSize) {
         
@@ -61,6 +62,8 @@ class MenuScene: SKScene {
         helpButton.add(child: controlsGame)
         
         currentMenu = mainMenu
+        
+        defaults = UserDefaults.standard
         
         super.init(size: size)
         
@@ -173,19 +176,33 @@ class MenuScene: SKScene {
                 } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
-                } else if currentMenu.children[currentMenu.select].value.name == "continueGame" || currentMenu.children[currentMenu.select].value.name == "newGame" {
-                    if let view = self.view {
-                        let newScene = GameScene(size: view.bounds.size)
-                        newScene.scaleMode = .aspectFill
-                        view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
-                        view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
+                } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
+                    presentGame()
+                } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
+                    if defaults.bool(forKey: "savedGame") {
+                        resetGame()
+                    } else {
+                        defaults.set(true, forKey: "savedGame")
+                        presentGame()
                     }
                 } else {
-                    let controls = currentMenu.children[currentMenu.select].value
-                    controls.runAction()
+                    currentMenu.children[currentMenu.select].value.runAction()
                 }
             default:
                 break
+        }
+    }
+
+    func resetGame() {
+        SpeechSynthesizer.shared.speak("Tem certeza que quer iniciar um novo jogo? Todo o progresso do jogo anterior será perdido.")
+    }
+
+    func presentGame() {
+        if let view = self.view {
+            let newScene = GameScene(size: view.bounds.size)
+            newScene.scaleMode = .resizeFill
+            view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
+            view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
         }
     }
     
