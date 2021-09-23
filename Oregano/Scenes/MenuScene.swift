@@ -27,6 +27,7 @@ class MenuScene: SKScene {
     var nextSpeech: (() -> Void)?
     
     override init(size: CGSize) {
+        
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
         
         continueGameButton = MenuNode(SKButtonNode(tts: "Continuar jogo."))
@@ -173,10 +174,11 @@ class MenuScene: SKScene {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
                 } else if currentMenu.children[currentMenu.select].value.name == "continueGame" || currentMenu.children[currentMenu.select].value.name == "newGame" {
-                    if let newView = self.view {
-                        let scene = GameScene(size: (self.view?.bounds.size)!)
-                        scene.scaleMode = .resizeFill
-                        newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+                    if let view = self.view {
+                        let newScene = GameScene(size: view.bounds.size)
+                        newScene.scaleMode = .aspectFill
+                        view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
+                        view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
                     }
                 } else {
                     let controls = currentMenu.children[currentMenu.select].value
