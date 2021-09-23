@@ -3,7 +3,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     let background = SKSpriteNode(imageNamed: "DelegaciaDelegacia")
-    let analogStick = AnalogStick(stick: "", outline: "")
+    let analogStick = AnalogStick(stick: "stick-1", outline: "outline-1")
     let delegacia = SKNode()
     let player = SKShapeNode(circleOfRadius: 30)
     
