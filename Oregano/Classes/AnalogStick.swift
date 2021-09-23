@@ -51,7 +51,7 @@ class AnalogStick {
         if isUsing {
             let vector = CGVector(dx: location.x - outline.position.x, dy: location.y - outline.position.y)
             let angle = atan2(vector.dy, vector.dx)
-            let outlineRadius: CGFloat = 128
+            let outlineRadius: CGFloat = 192
             let distanceX: CGFloat = sin(angle - CGFloat.pi/2) * outlineRadius
             let distanceY: CGFloat = cos(angle - CGFloat.pi/2) * outlineRadius
             
@@ -62,8 +62,8 @@ class AnalogStick {
                 stick.position = CGPoint(x: -distanceX, y: distanceY)
             }
             
-            velocityX = (stick.position.x) / 10
-            velocityY = (stick.position.y) / 10
+            velocityX = (stick.position.x) / 50
+            velocityY = (stick.position.y) / 50
             
 //            player.zRotation = angle
         }
