@@ -17,6 +17,9 @@
 		214859FD26F5332200BD193F /* HeadphonesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214859FC26F5332200BD193F /* HeadphonesScene.swift */; };
 		216A675D26F3D00C004F043C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216A675C26F3D00C004F043C /* GameScene.swift */; };
 		21BAEEFA26FBA80500CA9A2D /* coin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21BAEEF926FBA80500CA9A2D /* coin.mp3 */; };
+		9D2E627626FE0A4100B05A9B /* footsteps.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E627526FE0A4100B05A9B /* footsteps.mp3 */; };
+		9D2E627826FE0C2200B05A9B /* Pimenta 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E627726FE0C2200B05A9B /* Pimenta 1.mp3 */; };
+		9D2E627A26FE190100B05A9B /* latido.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E627926FE190100B05A9B /* latido.mp3 */; };
 		C00083EA26FB924D005B0748 /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00083E926FB924D005B0748 /* AnalogStick.swift */; };
 		C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */; };
 		C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */; };
@@ -36,6 +39,9 @@
 		214859FC26F5332200BD193F /* HeadphonesScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadphonesScene.swift; sourceTree = "<group>"; };
 		216A675C26F3D00C004F043C /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		21BAEEF926FBA80500CA9A2D /* coin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = coin.mp3; sourceTree = "<group>"; };
+		9D2E627526FE0A4100B05A9B /* footsteps.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = footsteps.mp3; sourceTree = "<group>"; };
+		9D2E627726FE0C2200B05A9B /* Pimenta 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pimenta 1.mp3"; sourceTree = "<group>"; };
+		9D2E627926FE190100B05A9B /* latido.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = latido.mp3; sourceTree = "<group>"; };
 		C00083E926FB924D005B0748 /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
 		C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKToggleNode.swift; sourceTree = "<group>"; };
@@ -91,6 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				21BAEEF926FBA80500CA9A2D /* coin.mp3 */,
+				9D2E627526FE0A4100B05A9B /* footsteps.mp3 */,
+				9D2E627726FE0C2200B05A9B /* Pimenta 1.mp3 */,
+				9D2E627926FE190100B05A9B /* latido.mp3 */,
 				C0304C8926F3CD94004546C1 /* Assets */,
 				C0304C8826F3CD72004546C1 /* Classes */,
 				212EE77D26F136D90065FB03 /* ViewControllers */,
@@ -181,7 +190,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */,
+				9D2E627826FE0C2200B05A9B /* Pimenta 1.mp3 in Resources */,
 				2137064226EFC8270085794F /* Assets.xcassets in Resources */,
+				9D2E627A26FE190100B05A9B /* latido.mp3 in Resources */,
+				9D2E627626FE0A4100B05A9B /* footsteps.mp3 in Resources */,
 				21BAEEFA26FBA80500CA9A2D /* coin.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

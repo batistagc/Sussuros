@@ -2,12 +2,19 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    let background = SKSpriteNode(imageNamed: "DelegaciaDelegacia")
     let analogStick = AnalogStick(stick: "stick-1", outline: "outline-1")
-    let delegacia = SKNode()
-    let player = SKShapeNode(circleOfRadius: 30)
+    var singleTouch: UITouch?
     
-    private let steps = SKAudioNode(fileNamed: "coin.mp3")
+    let backgroundDelegacia = SKSpriteNode(imageNamed: "DelegaciaDelegacia")
+    let delegacia = SKNode()
+    let player = SKShapeNode(circleOfRadius: 20)
+    
+    private let steps = SKAudioNode(fileNamed: "footsteps.mp3")
+    private let pimenta1 = SKAudioNode(fileNamed: "Pimenta 1")
+    private var soundOn = SKAudioNode(fileNamed: "Pimenta 1")
+    private let oregano = SKAudioNode(fileNamed: "latido")
+    
+    var pausegame = false
     
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -16,20 +23,34 @@ class GameScene: SKScene {
         
         setUpCamera()
         
-        camera!.addChild(background)
+        camera!.addChild(backgroundDelegacia)
         camera!.addChild(analogStick.createStick(named: "AnalogStick"))
         addChild(player)
         addChild(delegacia)
         
-        player.zPosition = 1
-        player.position = .zero
-        player.fillColor = .yellow
-        player.lineWidth = 0
+        // Sons
+        addChild(steps)
+        steps.run(.stop())
         
-        delegacia.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 900, height: 660))
+        pimenta1.autoplayLooped = false
+        addChild(pimenta1)
+        pimenta1.run(.stop())
+        
+        soundOn.autoplayLooped = false
+        addChild(soundOn)
+        soundOn.run(.play())
+        
+        oregano.autoplayLooped = false
+        addChild(oregano)
+        oregano.run(.stop())
+        
+        player.physicsBody = SKPhysicsBody(circleOfRadius: 20)
+                
+        delegacia.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: -900/2, y: -660/2, width: 900, height: 660))
         delegacia.physicsBody?.isDynamic = false
         
         addPinchGestureRecognizer()
+        addTapGestureRecognizer()
     }
     
     func setUpCamera() {
@@ -44,7 +65,6 @@ class GameScene: SKScene {
     
     func addPinchGestureRecognizer() {
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch))
-        
         self.view?.addGestureRecognizer(pinch)
     }
     
@@ -60,28 +80,71 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if touches.count > 1 {
-            analogStick.resetStick()
+    func addTapGestureRecognizer() {
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.scene?.view?.addGestureRecognizer(singleTap)
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        doubleTap.numberOfTapsRequired = 2
+        self.scene?.view?.addGestureRecognizer(doubleTap)
+        
+        singleTap.require(toFail: doubleTap)
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        switch sender.numberOfTapsRequired {
+            case 1:
+                oregano.run(.play())
+            
+            case 2:
+                pausegame = !pausegame
+                if (pausegame){
+                    soundOn.run(.pause())
+                } else{
+                    soundOn.run(.play())
+                }
+            default:
+                break
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let location = touch.location(in: camera!)
-            analogStick.changeState(for: location)
+            if singleTouch == nil {
+                singleTouch = touch
+                let location = touch.location(in: camera!)
+                analogStick.changeState(for: location)
+            }
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if touches.count > 1 {
-            analogStick.resetStick()
-        }
         for touch in touches {
-            let location = touch.location(in: camera!)
-            analogStick.updateVector(for: location)
+            if touch == singleTouch {
+                steps.run(.play())
+                let location = touch.location(in: camera!)
+                analogStick.updateVector(for: location)
+            }
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        analogStick.resetStick()
+        steps.run(.stop())
+        for touch in touches {
+            if touch == singleTouch {
+                analogStick.resetStick()
+                singleTouch = nil
+            }
+        }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            if touch == singleTouch {
+                analogStick.resetStick()
+                singleTouch = nil
+            }
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {

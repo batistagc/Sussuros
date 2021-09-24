@@ -30,6 +30,7 @@ class MenuScene: SKScene {
     let defaults: UserDefaults
     
     override init(size: CGSize) {
+        
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
         
         continueGameButton = MenuNode(SKButtonNode(tts: "Continuar jogo."))
@@ -39,7 +40,7 @@ class MenuScene: SKScene {
         newGameButton.value.name = "newGame"
         
         settingsButton = MenuNode(SKButtonNode(tts: "Configurações."))
-        vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
+//        vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
         screenButton = MenuNode(SKToggleNode(tts: "Tela."))
         
         helpButton = MenuNode(SKButtonNode(tts: "Ajuda."))
@@ -58,7 +59,7 @@ class MenuScene: SKScene {
         mainMenu.add(child: continueGameButton)
         mainMenu.add(child: newGameButton)
         mainMenu.add(child: settingsButton)
-        settingsButton.add(child: vibrationsButton)
+//        settingsButton.add(child: vibrationsButton)
         settingsButton.add(child: screenButton)
         mainMenu.add(child: helpButton)
         helpButton.add(child: controlsMenu)
@@ -229,6 +230,19 @@ class MenuScene: SKScene {
             }
         default:
             break
+        }
+    }
+
+    func resetGame() {
+        SpeechSynthesizer.shared.speak("Tem certeza que quer iniciar um novo jogo? Todo o progresso do jogo anterior será perdido.")
+    }
+
+    func presentGame() {
+        if let view = self.view {
+            let newScene = GameScene(size: view.bounds.size)
+            newScene.scaleMode = .resizeFill
+            view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
+            view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
         }
     }
     
