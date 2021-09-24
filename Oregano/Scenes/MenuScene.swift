@@ -15,7 +15,9 @@ class MenuScene: SKScene {
     let settingsButton: MenuNode<SKButtonNode>
     let helpButton: MenuNode<SKButtonNode>
     
-//    let vibrationsButton: MenuNode<SKButtonNode>
+    let warningButton: MenuNode<SKButtonNode>
+    
+    let vibrationsButton: MenuNode<SKButtonNode>
     let screenButton: MenuNode<SKButtonNode>
     
     let controlsMenu: MenuNode<SKButtonNode>
@@ -51,6 +53,8 @@ class MenuScene: SKScene {
         controlsGame.value.action = {
             SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Com dois dedos, faça um gesto de pinça para coletar um item. Para pausar o jogo, toque duas vezes na tela com 3 dedos. Caso queira ouvir novamente os comandos, agite o celular.")
         }
+        warningButton = MenuNode(SKButtonNode(tts: "Atenção!"))
+        
         
         mainMenu.add(child: continueGameButton)
         mainMenu.add(child: newGameButton)
@@ -119,6 +123,13 @@ class MenuScene: SKScene {
         
     }
     
+    func resetGame() {
+        currentMenu = warningButton
+        currentMenu.value.announce()
+        SpeechSynthesizer.shared.speak("Tem certeza que quer iniciar um novo jogo? Todo o progresso do jogo anterior será perdido.")
+        
+    }
+    
     func addSwipeGestureRecognizer() {
         let gestureDirections: [UISwipeGestureRecognizer.Direction] = [.up, .right, .down, .left]
         for gestureDirection in gestureDirections{
@@ -140,7 +151,20 @@ class MenuScene: SKScene {
     }
     
     @objc func handleSwipe(_ sender: UISwipeGestureRecognizer) {
-        switch sender.direction {
+        if currentMenu.value.tts == "Atenção!"{
+            switch sender.direction {
+            case .up:
+                currentMenu = mainMenu
+                currentMenu.value.announce()
+                nextSpeech = { [self] in
+                    currentMenu.children[currentMenu.select].value.announce()
+                }
+            default:
+                break
+            }
+        } else {
+        
+            switch sender.direction {
             case .up:
                 if let parent = currentMenu.parent {
                     currentMenu = parent
@@ -157,39 +181,55 @@ class MenuScene: SKScene {
                 currentMenu.children[currentMenu.select].value.announce()
             default:
                 break
+            }
         }
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         
         switch sender.numberOfTapsRequired {
-            case 1:
-                currentMenu.children[currentMenu.select].value.announce()
-            case 2:
-                if currentMenu.children[currentMenu.select].children.count > 0 {
-                    currentMenu.children[currentMenu.select].value.announce()
-                    currentMenu = currentMenu.children[currentMenu.select]
-                    currentMenu.select = 0
-                    nextSpeech = { [self] in
-                        currentMenu.children[currentMenu.select].value.announce()
-                    }
-                } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
-                    toggle.toggle()
-                    currentMenu.children[currentMenu.select].value.announce()
-                } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
-                    presentGame()
-                } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
-                    if defaults.bool(forKey: "savedGame") {
-                        resetGame()
-                    } else {
-                        defaults.set(true, forKey: "savedGame")
-                        presentGame()
-                    }
-                } else {
-                    currentMenu.children[currentMenu.select].value.runAction()
+        case 1:
+            currentMenu.children[currentMenu.select].value.announce()
+        case 2:
+            if currentMenu.value.tts == "Atenção!" {
+                if let newView = self.view {
+                    let scene = GameScene(size: (self.view?.bounds.size)!)
+                    scene.scaleMode = .resizeFill
+                    newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
                 }
-            default:
-                break
+            }  else if currentMenu.children[currentMenu.select].children.count > 0 {
+                currentMenu.children[currentMenu.select].value.announce()
+                currentMenu = currentMenu.children[currentMenu.select]
+                currentMenu.select = 0
+                nextSpeech = { [self] in
+                    currentMenu.children[currentMenu.select].value.announce()
+                }
+            } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
+                toggle.toggle()
+                currentMenu.children[currentMenu.select].value.announce()
+            } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
+                if let newView = self.view {
+                    let scene = GameScene(size: (self.view?.bounds.size)!)
+                    scene.scaleMode = .resizeFill
+                    newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+                }
+            } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
+                if defaults.bool(forKey: "savedGame") == true {
+                    resetGame()
+                }else {
+                    defaults.set(true, forKey: "savedGame")
+                    if let newView = self.view {
+                        let scene = GameScene(size: (self.view?.bounds.size)!)
+                        scene.scaleMode = .resizeFill
+                        newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+                    }
+                }
+            } else {
+                let controls = currentMenu.children[currentMenu.select].value
+                controls.runAction()
+            }
+        default:
+            break
         }
     }
 
@@ -205,6 +245,7 @@ class MenuScene: SKScene {
             view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
         }
     }
+    
     
     func mod(_ a: Int, _ n: Int) -> Int {
         precondition(n > 0, "modulus must be positive")
