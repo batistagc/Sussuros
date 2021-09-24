@@ -5,7 +5,7 @@ class GameScene: SKScene {
     let analogStick = AnalogStick(stick: "stick-1", outline: "outline-1")
     var singleTouch: UITouch?
     
-    let backgroundDelegacia = SKSpriteNode(imageNamed: "DelegaciaDelegacia")
+    let backgroundDelegacia = SKSpriteNode(imageNamed: "Delegacia")
     let delegacia = SKNode()
     let player = SKShapeNode(rectOf: CGSize(width: 20, height: 30))
     
