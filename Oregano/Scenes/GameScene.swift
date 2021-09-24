@@ -7,7 +7,7 @@ class GameScene: SKScene {
     
     let backgroundDelegacia = SKSpriteNode(imageNamed: "DelegaciaDelegacia")
     let delegacia = SKNode()
-    let player = SKShapeNode(circleOfRadius: 20)
+    let player = SKShapeNode(rectOf: CGSize(width: 20, height: 30))
     
     private let steps = SKAudioNode(fileNamed: "footsteps.mp3")
     private let pimenta1 = SKAudioNode(fileNamed: "Pimenta 1")
@@ -44,7 +44,7 @@ class GameScene: SKScene {
         addChild(oregano)
         oregano.run(.stop())
         
-        player.physicsBody = SKPhysicsBody(circleOfRadius: 20)
+        player.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 20, height: 30))
                 
         delegacia.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: -900/2, y: -660/2, width: 900, height: 660))
         delegacia.physicsBody?.isDynamic = false
@@ -149,7 +149,11 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
-        player.position.x = (player.position.x + analogStick.getVelocity().dx)
-        player.position.y = (player.position.y + analogStick.getVelocity().dy)
+        let angle = player.zRotation
+        let radius: CGFloat = -analogStick.getVelocity().dy
+        player.position.x += radius*cos(angle - CGFloat.pi/2)
+        player.position.y += radius*sin(angle - CGFloat.pi/2)
+        player.zRotation -= (analogStick.getVelocity().dx*analogStick.getVelocity().dx*analogStick.getVelocity().dx) / 800
+        camera?.zRotation = player.zRotation
     }
 }
