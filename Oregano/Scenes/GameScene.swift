@@ -9,7 +9,12 @@ class GameScene: SKScene {
     let delegacia = SKNode()
     let player = SKShapeNode(circleOfRadius: 20)
     
-    private let steps = SKAudioNode(fileNamed: "coin.mp3")
+    private let steps = SKAudioNode(fileNamed: "footsteps.mp3")
+    private let pimenta1 = SKAudioNode(fileNamed: "Pimenta 1")
+    private var soundOn = SKAudioNode(fileNamed: "Pimenta 1")
+    private let oregano = SKAudioNode(fileNamed: "latido")
+    
+    var pausegame = false
     
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -23,12 +28,29 @@ class GameScene: SKScene {
         addChild(player)
         addChild(delegacia)
         
-        player.physicsBody = SKPhysicsBody(circleOfRadius: 20)
+        // Sons
+        addChild(steps)
+        steps.run(.stop())
         
+        pimenta1.autoplayLooped = false
+        addChild(pimenta1)
+        pimenta1.run(.stop())
+        
+        soundOn.autoplayLooped = false
+        addChild(soundOn)
+        soundOn.run(.play())
+        
+        oregano.autoplayLooped = false
+        addChild(oregano)
+        oregano.run(.stop())
+        
+        player.physicsBody = SKPhysicsBody(circleOfRadius: 20)
+                
         delegacia.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: -900/2, y: -660/2, width: 900, height: 660))
         delegacia.physicsBody?.isDynamic = false
         
         addPinchGestureRecognizer()
+        addTapGestureRecognizer()
     }
     
     func setUpCamera() {
@@ -58,6 +80,34 @@ class GameScene: SKScene {
         }
     }
     
+    func addTapGestureRecognizer() {
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.scene?.view?.addGestureRecognizer(singleTap)
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        doubleTap.numberOfTapsRequired = 2
+        self.scene?.view?.addGestureRecognizer(doubleTap)
+        
+        singleTap.require(toFail: doubleTap)
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        switch sender.numberOfTapsRequired {
+            case 1:
+                oregano.run(.play())
+            
+            case 2:
+                pausegame = !pausegame
+                if (pausegame){
+                    soundOn.run(.pause())
+                } else{
+                    soundOn.run(.play())
+                }
+            default:
+                break
+        }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             if singleTouch == nil {
@@ -71,6 +121,7 @@ class GameScene: SKScene {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             if touch == singleTouch {
+                steps.run(.play())
                 let location = touch.location(in: camera!)
                 analogStick.updateVector(for: location)
             }
@@ -78,6 +129,7 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        steps.run(.stop())
         for touch in touches {
             if touch == singleTouch {
                 analogStick.resetStick()
