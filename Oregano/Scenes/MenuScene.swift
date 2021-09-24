@@ -17,7 +17,7 @@ class MenuScene: SKScene {
     
     let warningButton: MenuNode<SKButtonNode>
     
-    let vibrationsButton: MenuNode<SKButtonNode>
+//    let vibrationsButton: MenuNode<SKButtonNode>
     let screenButton: MenuNode<SKButtonNode>
     
     let controlsMenu: MenuNode<SKButtonNode>
@@ -59,7 +59,6 @@ class MenuScene: SKScene {
         mainMenu.add(child: continueGameButton)
         mainMenu.add(child: newGameButton)
         mainMenu.add(child: settingsButton)
-//        settingsButton.add(child: vibrationsButton)
         settingsButton.add(child: screenButton)
         mainMenu.add(child: helpButton)
         helpButton.add(child: controlsMenu)
@@ -127,7 +126,6 @@ class MenuScene: SKScene {
         currentMenu = warningButton
         currentMenu.value.announce()
         SpeechSynthesizer.shared.speak("Tem certeza que quer iniciar um novo jogo? Todo o progresso do jogo anterior será perdido.")
-        
     }
     
     func addSwipeGestureRecognizer() {
@@ -233,9 +231,6 @@ class MenuScene: SKScene {
         }
     }
 
-    func resetGame() {
-        SpeechSynthesizer.shared.speak("Tem certeza que quer iniciar um novo jogo? Todo o progresso do jogo anterior será perdido.")
-    }
 
     func presentGame() {
         if let view = self.view {
