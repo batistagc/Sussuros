@@ -10,8 +10,7 @@ class GameScene: SKScene {
     let player = SKShapeNode(rectOf: CGSize(width: 20, height: 30))
     
     private let steps = SKAudioNode(fileNamed: "footsteps.mp3")
-    private let pimenta1 = SKAudioNode(fileNamed: "Pimenta 1")
-    private var soundOn = SKAudioNode(fileNamed: "Pimenta 1")
+    private var soundOn = SKAudioNode(fileNamed: "Pimenta1")
     private let oregano = SKAudioNode(fileNamed: "latido")
     
     var pausegame = false
@@ -31,10 +30,6 @@ class GameScene: SKScene {
         // Sons
         addChild(steps)
         steps.run(.stop())
-        
-        pimenta1.autoplayLooped = false
-        addChild(pimenta1)
-        pimenta1.run(.stop())
         
         soundOn.autoplayLooped = false
         addChild(soundOn)
