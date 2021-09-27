@@ -207,6 +207,7 @@ class MenuScene: SKScene {
             } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
                 toggle.toggle()
                 currentMenu.children[currentMenu.select].value.announce()
+<<<<<<< Updated upstream
             } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
                 if let newView = self.view {
                     let scene = GameScene(size: (self.view?.bounds.size)!)
@@ -223,6 +224,33 @@ class MenuScene: SKScene {
                         scene.scaleMode = .resizeFill
                         newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
                     }
+=======
+            case 2:
+                if currentMenu.value.tts == "Atenção!" {
+                    presentGame()
+                }  else if currentMenu.children[currentMenu.select].children.count > 0 {
+                    currentMenu.children[currentMenu.select].value.announce()
+                    currentMenu = currentMenu.children[currentMenu.select]
+                    currentMenu.select = 0
+                    nextSpeech = { [self] in
+                        currentMenu.children[currentMenu.select].value.announce()
+                    }
+                } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
+                    toggle.toggle()
+                    currentMenu.children[currentMenu.select].value.announce()
+                } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
+                    presentGame()
+                } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
+                    if defaults.bool(forKey: "savedGame") {
+                        resetGame()
+                    } else {
+                        defaults.set(true, forKey: "savedGame")
+                        presentGame()
+                    }
+                } else {
+                    let controls = currentMenu.children[currentMenu.select].value
+                    controls.runAction()
+>>>>>>> Stashed changes
                 }
             } else {
                 let controls = currentMenu.children[currentMenu.select].value
