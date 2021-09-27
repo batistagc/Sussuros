@@ -199,6 +199,7 @@ class MenuScene: SKScene {
                 }
             }  else if currentMenu.children[currentMenu.select].children.count > 0 {
                 currentMenu.children[currentMenu.select].value.announce()
+<<<<<<< Updated upstream
                 currentMenu = currentMenu.children[currentMenu.select]
                 currentMenu.select = 0
                 nextSpeech = { [self] in
@@ -225,6 +226,8 @@ class MenuScene: SKScene {
                         newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
                     }
 =======
+=======
+>>>>>>> Stashed changes
             case 2:
                 if currentMenu.value.tts == "Atenção!" {
                     presentGame()
