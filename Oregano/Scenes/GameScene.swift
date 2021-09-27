@@ -216,7 +216,12 @@ class GameScene: SKScene {
                 // TODO: Call Oregano
                 break
             case 2:
-                // TODO: Pause Game
+                if let view = self.view {
+                    let newScene = MenuScene(size: view.bounds.size)
+                    newScene.scaleMode = .resizeFill
+                    view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
+                    view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
+                }
                 break
             default:
                 break

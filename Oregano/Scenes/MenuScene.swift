@@ -51,7 +51,7 @@ class MenuScene: SKScene {
         
         controlsGame = MenuNode(SKButtonNode(tts: "Controles do jogo."))
         controlsGame.value.action = {
-            SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Com dois dedos, faça um gesto de pinça para coletar um item. Para pausar o jogo, toque duas vezes na tela com 3 dedos. Caso queira ouvir novamente os comandos, agite o celular.")
+            SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Com dois dedos, faça um gesto de pinça para coletar um item. Para voltar ao menu principal, toque duas vezes na tela. Caso queira ouvir novamente os comandos, agite o celular.")
         }
         warningButton = MenuNode(SKButtonNode(tts: "Atenção!"))
         
