@@ -17,7 +17,7 @@ class MenuScene: SKScene {
     
     let warningButton: MenuNode<SKButtonNode>
     
-    //    let vibrationsButton: MenuNode<SKButtonNode>
+//    let vibrationsButton: MenuNode<SKButtonNode>
     let screenButton: MenuNode<SKButtonNode>
     
     let controlsMenu: MenuNode<SKButtonNode>
@@ -40,7 +40,7 @@ class MenuScene: SKScene {
         newGameButton.value.name = "newGame"
         
         settingsButton = MenuNode(SKButtonNode(tts: "Configurações."))
-        //        vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
+//        vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
         screenButton = MenuNode(SKToggleNode(tts: "Tela."))
         
         helpButton = MenuNode(SKButtonNode(tts: "Ajuda."))
@@ -120,12 +120,6 @@ class MenuScene: SKScene {
         addSwipeGestureRecognizer()
         addTapGestureRecognizer()
         
-    }
-    
-    func resetGame() {
-        currentMenu = warningButton
-        currentMenu.value.announce()
-        SpeechSynthesizer.shared.speak("Tem certeza que quer iniciar um novo jogo? Todo o progresso do jogo anterior será perdido.")
     }
     
     func addSwipeGestureRecognizer() {
@@ -213,7 +207,7 @@ class MenuScene: SKScene {
                         view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
                     }
                 } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
-                    if defaults.bool(forKey: "savedGame") == true {
+                    if defaults.bool(forKey: "savedGame") {
                         resetGame()
                     } else {
                         defaults.set(true, forKey: "savedGame")
@@ -233,7 +227,6 @@ class MenuScene: SKScene {
         }
     }
     
-    
     func presentGame() {
         if let view = self.view {
             let newScene = GameScene(size: view.bounds.size)
@@ -243,6 +236,11 @@ class MenuScene: SKScene {
         }
     }
     
+    func resetGame() {
+        currentMenu = warningButton
+        currentMenu.value.announce()
+        SpeechSynthesizer.shared.speak("Tem certeza que quer iniciar um novo jogo? Todo o progresso do jogo anterior será perdido.")
+    }
     
     func mod(_ a: Int, _ n: Int) -> Int {
         precondition(n > 0, "modulus must be positive")
