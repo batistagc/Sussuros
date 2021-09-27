@@ -184,11 +184,7 @@ class MenuScene: SKScene {
                 currentMenu.children[currentMenu.select].value.announce()
             case 2:
                 if currentMenu.value.tts == "Atenção!" {
-                    if let newView = self.view {
-                        let scene = GameScene(size: (self.view?.bounds.size)!)
-                        scene.scaleMode = .resizeFill
-                        newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
-                    }
+                    presentGame()
                 }  else if currentMenu.children[currentMenu.select].children.count > 0 {
                     currentMenu.children[currentMenu.select].value.announce()
                     currentMenu = currentMenu.children[currentMenu.select]
@@ -200,23 +196,13 @@ class MenuScene: SKScene {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
                 } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
-                    if let view = self.view {
-                        let newScene = GameScene(size: (view.bounds.size))
-                        newScene.scaleMode = .aspectFill
-                        view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
-                        view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
-                    }
+                    presentGame()
                 } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
                     if defaults.bool(forKey: "savedGame") {
                         resetGame()
                     } else {
                         defaults.set(true, forKey: "savedGame")
-                        if let view = self.view {
-                            let newScene = GameScene(size: (view.bounds.size))
-                            newScene.scaleMode = .aspectFill
-                            view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
-                            view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
-                        }
+                        presentGame()
                     }
                 } else {
                     let controls = currentMenu.children[currentMenu.select].value
