@@ -55,8 +55,9 @@ class MenuScene: SKScene {
         }
         warningButton = MenuNode(SKButtonNode(tts: "Atenção!"))
         
-        
-        mainMenu.add(child: continueGameButton)
+        if UserDefaults.standard.bool(forKey: "savedGame") {
+            mainMenu.add(child: continueGameButton)
+        }
         mainMenu.add(child: newGameButton)
         mainMenu.add(child: settingsButton)
         settingsButton.add(child: screenButton)
