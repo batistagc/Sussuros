@@ -16,11 +16,13 @@
 		2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2137064326EFC8270085794F /* LaunchScreen.storyboard */; };
 		214859FD26F5332200BD193F /* HeadphonesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214859FC26F5332200BD193F /* HeadphonesScene.swift */; };
 		216A675D26F3D00C004F043C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216A675C26F3D00C004F043C /* GameScene.swift */; };
-		21BAEEFA26FBA80500CA9A2D /* coin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21BAEEF926FBA80500CA9A2D /* coin.mp3 */; };
-		9D2E627626FE0A4100B05A9B /* footsteps.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E627526FE0A4100B05A9B /* footsteps.mp3 */; };
-		9D2E627A26FE190100B05A9B /* latido.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E627926FE190100B05A9B /* latido.mp3 */; };
-		9D2E627C26FE6FEC00B05A9B /* Pimenta1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E627B26FE6FEC00B05A9B /* Pimenta1.mp3 */; };
 		C00083EA26FB924D005B0748 /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00083E926FB924D005B0748 /* AnalogStick.swift */; };
+		C09EDF2627023AFD00543C35 /* SFXCrowdTalking2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2027023AFC00543C35 /* SFXCrowdTalking2.mp3 */; };
+		C09EDF2827023AFD00543C35 /* SFXTypingKeyboard.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2227023AFC00543C35 /* SFXTypingKeyboard.mp3 */; };
+		C09EDF2927023AFD00543C35 /* Cap1PimentaIntrodução.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2327023AFC00543C35 /* Cap1PimentaIntrodução.mp3 */; };
+		C09EDF2A27023AFD00543C35 /* SFXCrowdTalking1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2427023AFD00543C35 /* SFXCrowdTalking1.mp3 */; };
+		C09EDF2B27023AFD00543C35 /* Cap1PimentaFinal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2527023AFD00543C35 /* Cap1PimentaFinal.mp3 */; };
+		C09EDF2D27023B3400543C35 /* SFXCrowdTalking0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2C27023B3400543C35 /* SFXCrowdTalking0.mp3 */; };
 		C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */; };
 		C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */; };
 		C0FD2C5B26FA4D83007C370A /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FD2C5A26FA4D83007C370A /* MenuNode.swift */; };
@@ -38,11 +40,13 @@
 		2137064626EFC8270085794F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214859FC26F5332200BD193F /* HeadphonesScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadphonesScene.swift; sourceTree = "<group>"; };
 		216A675C26F3D00C004F043C /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		21BAEEF926FBA80500CA9A2D /* coin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = coin.mp3; sourceTree = "<group>"; };
-		9D2E627526FE0A4100B05A9B /* footsteps.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = footsteps.mp3; sourceTree = "<group>"; };
-		9D2E627926FE190100B05A9B /* latido.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = latido.mp3; sourceTree = "<group>"; };
-		9D2E627B26FE6FEC00B05A9B /* Pimenta1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pimenta1.mp3; sourceTree = "<group>"; };
 		C00083E926FB924D005B0748 /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
+		C09EDF2027023AFC00543C35 /* SFXCrowdTalking2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXCrowdTalking2.mp3; sourceTree = "<group>"; };
+		C09EDF2227023AFC00543C35 /* SFXTypingKeyboard.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXTypingKeyboard.mp3; sourceTree = "<group>"; };
+		C09EDF2327023AFC00543C35 /* Cap1PimentaIntrodução.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Cap1PimentaIntrodução.mp3"; sourceTree = "<group>"; };
+		C09EDF2427023AFD00543C35 /* SFXCrowdTalking1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXCrowdTalking1.mp3; sourceTree = "<group>"; };
+		C09EDF2527023AFD00543C35 /* Cap1PimentaFinal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cap1PimentaFinal.mp3; sourceTree = "<group>"; };
+		C09EDF2C27023B3400543C35 /* SFXCrowdTalking0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXCrowdTalking0.mp3; sourceTree = "<group>"; };
 		C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKToggleNode.swift; sourceTree = "<group>"; };
 		C0FD2C5A26FA4D83007C370A /* MenuNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
@@ -96,10 +100,6 @@
 		2137063726EFC8240085794F /* Oregano */ = {
 			isa = PBXGroup;
 			children = (
-				21BAEEF926FBA80500CA9A2D /* coin.mp3 */,
-				9D2E627526FE0A4100B05A9B /* footsteps.mp3 */,
-				9D2E627926FE190100B05A9B /* latido.mp3 */,
-				9D2E627B26FE6FEC00B05A9B /* Pimenta1.mp3 */,
 				C0304C8926F3CD94004546C1 /* Assets */,
 				C0304C8826F3CD72004546C1 /* Classes */,
 				212EE77D26F136D90065FB03 /* ViewControllers */,
@@ -127,6 +127,12 @@
 		C0304C8926F3CD94004546C1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C09EDF2527023AFD00543C35 /* Cap1PimentaFinal.mp3 */,
+				C09EDF2327023AFC00543C35 /* Cap1PimentaIntrodução.mp3 */,
+				C09EDF2C27023B3400543C35 /* SFXCrowdTalking0.mp3 */,
+				C09EDF2427023AFD00543C35 /* SFXCrowdTalking1.mp3 */,
+				C09EDF2027023AFC00543C35 /* SFXCrowdTalking2.mp3 */,
+				C09EDF2227023AFC00543C35 /* SFXTypingKeyboard.mp3 */,
 				2137064126EFC8270085794F /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -189,12 +195,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C09EDF2627023AFD00543C35 /* SFXCrowdTalking2.mp3 in Resources */,
 				2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */,
 				2137064226EFC8270085794F /* Assets.xcassets in Resources */,
-				9D2E627A26FE190100B05A9B /* latido.mp3 in Resources */,
-				9D2E627626FE0A4100B05A9B /* footsteps.mp3 in Resources */,
-				21BAEEFA26FBA80500CA9A2D /* coin.mp3 in Resources */,
-				9D2E627C26FE6FEC00B05A9B /* Pimenta1.mp3 in Resources */,
+				C09EDF2827023AFD00543C35 /* SFXTypingKeyboard.mp3 in Resources */,
+				C09EDF2D27023B3400543C35 /* SFXCrowdTalking0.mp3 in Resources */,
+				C09EDF2927023AFD00543C35 /* Cap1PimentaIntrodução.mp3 in Resources */,
+				C09EDF2A27023AFD00543C35 /* SFXCrowdTalking1.mp3 in Resources */,
+				C09EDF2B27023AFD00543C35 /* Cap1PimentaFinal.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
