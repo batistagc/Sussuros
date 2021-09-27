@@ -10,10 +10,10 @@ class GameScene: SKScene {
     let delegacia = SKNode()
     let player = SKNode()
     
-    let soundNode = SKShapeNode(circleOfRadius: 30)
+//    let soundNode = SKShapeNode(circleOfRadius: 30)
     let sound = SKAudioNode(fileNamed: "Pimenta1")
-    var soundMix: AVAudioEnvironmentNode!
     
+    var soundMix = AVAudioEnvironmentNode()
     var soundMixAttenuationRefDistance: Float = 50
     var soundMixAttenuationMaxDistance: Float = 300
     
@@ -32,13 +32,9 @@ class GameScene: SKScene {
         delegacia.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: -900/2, y: -660/2, width: 900, height: 660))
         delegacia.physicsBody?.isDynamic = false
         
-        addChild(soundNode)
-        soundNode.position = CGPoint(x: 200, y: 200)
-        soundNode.zPosition = .infinity
-        
         sound.isPositional = true
-//        sound.autoplayLooped = false
-        soundNode.addChild(sound)
+        sound.position = CGPoint(x: 200, y: 200)
+        addChild(sound)
         sound.run(.play())
         
         addChild(player)
@@ -54,7 +50,8 @@ class GameScene: SKScene {
         soundMix.distanceAttenuationParameters.referenceDistance = soundMixAttenuationRefDistance
         soundMix.distanceAttenuationParameters.maximumDistance = soundMixAttenuationMaxDistance
         soundMix.outputType = .headphones
-        soundMix.renderingAlgorithm = .auto
+        soundMix.renderingAlgorithm = .HRTFHQ
+        soundMix.sourceMode = .spatializeIfMono
         
         addPinchGestureRecognizer()
 //        addTapGestureRecognizer()
