@@ -17,7 +17,15 @@ class GameScene: SKScene {
     var soundMixAttenuationRefDistance: Float = 50
     var soundMixAttenuationMaxDistance: Float = 300
     
-//    var pausegame = false
+    // 3D Sound Mixer
+    let audioMix = AVAudioEnvironmentNode()
+    let audioMixAttenuationRefDistance: Float = 50
+    let audioMixAttenuationMaxDistance: Float = 300
+    
+    var array: [SKAudioNode] = []
+    var nextSpeech:[String]  = []
+    
+    let defaults = UserDefaults.standard
     
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -31,6 +39,20 @@ class GameScene: SKScene {
         addChild(delegacia)
         delegacia.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: -900/2, y: -660/2, width: 900, height: 660))
         delegacia.physicsBody?.isDynamic = false
+        SpeechSynthesizer.shared.synthesizer.delegate = self
+        
+        addPhysicsBodies()
+        
+        speakInstructions()
+        
+        
+        //        defaults.set(1, forKey: "chapter")
+        //        if defaults.integer(forKey: "chapter") == 1 {
+        //            array[0].run(.play())
+        //        } else if defaults.integer(forKey: "chapter") == 2{
+        //            array[1].run(.play())
+        //        }
+        //
         
         sound.isPositional = true
         sound.position = CGPoint(x: 200, y: 200)
@@ -55,6 +77,21 @@ class GameScene: SKScene {
         
         addPinchGestureRecognizer()
 //        addTapGestureRecognizer()
+    }
+    
+    func speakInstructions() {
+        
+        let instructions: [String] = [
+            "Encoste na tela e deslize para cima para andar pra frente.",
+            "Deslize para os lados para virar para a esquerda e para a direita.",
+            "Deslize para baixo para andar para trás.",
+            "Toque uma vez na tela para o Orégano latir.",
+            "Para pausar o jogo, toque duas vezes na tela."
+        ]
+        
+        nextSpeech = instructions
+        SpeechSynthesizer.shared.speak("")
+
     }
     
     func setUpCamera() {
@@ -161,3 +198,13 @@ class GameScene: SKScene {
         print(player.zRotation)
     }
 }
+
+extension GameScene: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        if nextSpeech.count > 0 {
+            SpeechSynthesizer.shared.speak(nextSpeech[0])
+            nextSpeech.remove(at: 0)
+        }
+    }
+}
+
