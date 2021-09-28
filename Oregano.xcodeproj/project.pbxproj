@@ -16,13 +16,24 @@
 		2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2137064326EFC8270085794F /* LaunchScreen.storyboard */; };
 		214859FD26F5332200BD193F /* HeadphonesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214859FC26F5332200BD193F /* HeadphonesScene.swift */; };
 		216A675D26F3D00C004F043C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216A675C26F3D00C004F043C /* GameScene.swift */; };
-		21BAEEFA26FBA80500CA9A2D /* coin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21BAEEF926FBA80500CA9A2D /* coin.mp3 */; };
-		9D2E627626FE0A4100B05A9B /* footsteps.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E627526FE0A4100B05A9B /* footsteps.mp3 */; };
-		9D2E627A26FE190100B05A9B /* latido.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E627926FE190100B05A9B /* latido.mp3 */; };
-		9D2E627C26FE6FEC00B05A9B /* Pimenta1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E627B26FE6FEC00B05A9B /* Pimenta1.mp3 */; };
 		C00083EA26FB924D005B0748 /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00083E926FB924D005B0748 /* AnalogStick.swift */; };
+		C09EDF2627023AFD00543C35 /* SFXCrowdTalking2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2027023AFC00543C35 /* SFXCrowdTalking2.mp3 */; };
+		C09EDF2827023AFD00543C35 /* SFXTypingKeyboard.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2227023AFC00543C35 /* SFXTypingKeyboard.mp3 */; };
+		C09EDF2927023AFD00543C35 /* Cap1PimentaIntrodução.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2327023AFC00543C35 /* Cap1PimentaIntrodução.mp3 */; };
+		C09EDF2A27023AFD00543C35 /* SFXCrowdTalking1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2427023AFD00543C35 /* SFXCrowdTalking1.mp3 */; };
+		C09EDF2B27023AFD00543C35 /* Cap1PimentaFinal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2527023AFD00543C35 /* Cap1PimentaFinal.mp3 */; };
+		C09EDF2D27023B3400543C35 /* SFXCrowdTalking0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2C27023B3400543C35 /* SFXCrowdTalking0.mp3 */; };
 		C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */; };
 		C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */; };
+		C0B74AF52702654600A642FB /* SFXBark0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AED2702654600A642FB /* SFXBark0.mp3 */; };
+		C0B74AF62702654600A642FB /* SFXBark5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AEE2702654600A642FB /* SFXBark5.mp3 */; };
+		C0B74AF72702654600A642FB /* SFXBark2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AEF2702654600A642FB /* SFXBark2.mp3 */; };
+		C0B74AF82702654600A642FB /* SFXBark3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF02702654600A642FB /* SFXBark3.mp3 */; };
+		C0B74AF92702654600A642FB /* SFXBark4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF12702654600A642FB /* SFXBark4.mp3 */; };
+		C0B74AFA2702654600A642FB /* SFXBark6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF22702654600A642FB /* SFXBark6.mp3 */; };
+		C0B74AFB2702654600A642FB /* SFXBark1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF32702654600A642FB /* SFXBark1.mp3 */; };
+		C0B74AFC2702654600A642FB /* SFXBark7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF42702654600A642FB /* SFXBark7.mp3 */; };
+		C0B74AFE2702656700A642FB /* OreganoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B74AFD2702656700A642FB /* OreganoNode.swift */; };
 		C0FD2C5B26FA4D83007C370A /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FD2C5A26FA4D83007C370A /* MenuNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,13 +49,24 @@
 		2137064626EFC8270085794F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214859FC26F5332200BD193F /* HeadphonesScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadphonesScene.swift; sourceTree = "<group>"; };
 		216A675C26F3D00C004F043C /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		21BAEEF926FBA80500CA9A2D /* coin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = coin.mp3; sourceTree = "<group>"; };
-		9D2E627526FE0A4100B05A9B /* footsteps.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = footsteps.mp3; sourceTree = "<group>"; };
-		9D2E627926FE190100B05A9B /* latido.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = latido.mp3; sourceTree = "<group>"; };
-		9D2E627B26FE6FEC00B05A9B /* Pimenta1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pimenta1.mp3; sourceTree = "<group>"; };
 		C00083E926FB924D005B0748 /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
+		C09EDF2027023AFC00543C35 /* SFXCrowdTalking2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXCrowdTalking2.mp3; sourceTree = "<group>"; };
+		C09EDF2227023AFC00543C35 /* SFXTypingKeyboard.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXTypingKeyboard.mp3; sourceTree = "<group>"; };
+		C09EDF2327023AFC00543C35 /* Cap1PimentaIntrodução.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Cap1PimentaIntrodução.mp3"; sourceTree = "<group>"; };
+		C09EDF2427023AFD00543C35 /* SFXCrowdTalking1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXCrowdTalking1.mp3; sourceTree = "<group>"; };
+		C09EDF2527023AFD00543C35 /* Cap1PimentaFinal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cap1PimentaFinal.mp3; sourceTree = "<group>"; };
+		C09EDF2C27023B3400543C35 /* SFXCrowdTalking0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXCrowdTalking0.mp3; sourceTree = "<group>"; };
 		C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKToggleNode.swift; sourceTree = "<group>"; };
+		C0B74AED2702654600A642FB /* SFXBark0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark0.mp3; sourceTree = "<group>"; };
+		C0B74AEE2702654600A642FB /* SFXBark5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark5.mp3; sourceTree = "<group>"; };
+		C0B74AEF2702654600A642FB /* SFXBark2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark2.mp3; sourceTree = "<group>"; };
+		C0B74AF02702654600A642FB /* SFXBark3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark3.mp3; sourceTree = "<group>"; };
+		C0B74AF12702654600A642FB /* SFXBark4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark4.mp3; sourceTree = "<group>"; };
+		C0B74AF22702654600A642FB /* SFXBark6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark6.mp3; sourceTree = "<group>"; };
+		C0B74AF32702654600A642FB /* SFXBark1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark1.mp3; sourceTree = "<group>"; };
+		C0B74AF42702654600A642FB /* SFXBark7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark7.mp3; sourceTree = "<group>"; };
+		C0B74AFD2702656700A642FB /* OreganoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OreganoNode.swift; sourceTree = "<group>"; };
 		C0FD2C5A26FA4D83007C370A /* MenuNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,10 +118,6 @@
 		2137063726EFC8240085794F /* Oregano */ = {
 			isa = PBXGroup;
 			children = (
-				21BAEEF926FBA80500CA9A2D /* coin.mp3 */,
-				9D2E627526FE0A4100B05A9B /* footsteps.mp3 */,
-				9D2E627926FE190100B05A9B /* latido.mp3 */,
-				9D2E627B26FE6FEC00B05A9B /* Pimenta1.mp3 */,
 				C0304C8926F3CD94004546C1 /* Assets */,
 				C0304C8826F3CD72004546C1 /* Classes */,
 				212EE77D26F136D90065FB03 /* ViewControllers */,
@@ -120,6 +138,7 @@
 				C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */,
 				C0FD2C5A26FA4D83007C370A /* MenuNode.swift */,
 				C00083E926FB924D005B0748 /* AnalogStick.swift */,
+				C0B74AFD2702656700A642FB /* OreganoNode.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -127,6 +146,20 @@
 		C0304C8926F3CD94004546C1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C09EDF2527023AFD00543C35 /* Cap1PimentaFinal.mp3 */,
+				C09EDF2327023AFC00543C35 /* Cap1PimentaIntrodução.mp3 */,
+				C09EDF2C27023B3400543C35 /* SFXCrowdTalking0.mp3 */,
+				C09EDF2427023AFD00543C35 /* SFXCrowdTalking1.mp3 */,
+				C09EDF2027023AFC00543C35 /* SFXCrowdTalking2.mp3 */,
+				C09EDF2227023AFC00543C35 /* SFXTypingKeyboard.mp3 */,
+				C0B74AED2702654600A642FB /* SFXBark0.mp3 */,
+				C0B74AF32702654600A642FB /* SFXBark1.mp3 */,
+				C0B74AEF2702654600A642FB /* SFXBark2.mp3 */,
+				C0B74AF02702654600A642FB /* SFXBark3.mp3 */,
+				C0B74AF12702654600A642FB /* SFXBark4.mp3 */,
+				C0B74AEE2702654600A642FB /* SFXBark5.mp3 */,
+				C0B74AF22702654600A642FB /* SFXBark6.mp3 */,
+				C0B74AF42702654600A642FB /* SFXBark7.mp3 */,
 				2137064126EFC8270085794F /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -189,12 +222,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C09EDF2627023AFD00543C35 /* SFXCrowdTalking2.mp3 in Resources */,
 				2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */,
+				C0B74AFC2702654600A642FB /* SFXBark7.mp3 in Resources */,
+				C0B74AF72702654600A642FB /* SFXBark2.mp3 in Resources */,
+				C0B74AF92702654600A642FB /* SFXBark4.mp3 in Resources */,
 				2137064226EFC8270085794F /* Assets.xcassets in Resources */,
-				9D2E627A26FE190100B05A9B /* latido.mp3 in Resources */,
-				9D2E627626FE0A4100B05A9B /* footsteps.mp3 in Resources */,
-				21BAEEFA26FBA80500CA9A2D /* coin.mp3 in Resources */,
-				9D2E627C26FE6FEC00B05A9B /* Pimenta1.mp3 in Resources */,
+				C09EDF2827023AFD00543C35 /* SFXTypingKeyboard.mp3 in Resources */,
+				C09EDF2D27023B3400543C35 /* SFXCrowdTalking0.mp3 in Resources */,
+				C09EDF2927023AFD00543C35 /* Cap1PimentaIntrodução.mp3 in Resources */,
+				C09EDF2A27023AFD00543C35 /* SFXCrowdTalking1.mp3 in Resources */,
+				C0B74AF52702654600A642FB /* SFXBark0.mp3 in Resources */,
+				C0B74AF62702654600A642FB /* SFXBark5.mp3 in Resources */,
+				C0B74AF82702654600A642FB /* SFXBark3.mp3 in Resources */,
+				C09EDF2B27023AFD00543C35 /* Cap1PimentaFinal.mp3 in Resources */,
+				C0B74AFB2702654600A642FB /* SFXBark1.mp3 in Resources */,
+				C0B74AFA2702654600A642FB /* SFXBark6.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +259,7 @@
 				212EE77C26F136CE0065FB03 /* ViewController.swift in Sources */,
 				C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */,
 				C00083EA26FB924D005B0748 /* AnalogStick.swift in Sources */,
+				C0B74AFE2702656700A642FB /* OreganoNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,13 +399,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 337G99FP8D;
 				INFOPLIST_FILE = Oregano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Gabriel.Oregano;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cookies.Sussurros;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -374,13 +420,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 337G99FP8D;
 				INFOPLIST_FILE = Oregano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Gabriel.Oregano;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cookies.Sussurros;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

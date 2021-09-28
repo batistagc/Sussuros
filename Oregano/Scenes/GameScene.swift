@@ -3,19 +3,26 @@ import AVFoundation
 
 class GameScene: SKScene {
     
+    // Graphics
     let analogStick = AnalogStick(stick: "stick-1", outline: "outline-1")
+    let backgroundDelegacia = SKSpriteNode(imageNamed: "Delegacia")
+    
+    // System
     var singleTouch: UITouch?
     
-    let backgroundDelegacia = SKSpriteNode(imageNamed: "Delegacia")
     let delegacia = SKNode()
+    let oregano = OreganoNode()
     let player = SKNode()
     
-//    let soundNode = SKShapeNode(circleOfRadius: 30)
-    let sound = SKAudioNode(fileNamed: "Pimenta1")
+    // Narration
+    let cap1PimentaIntrodução = SKAudioNode(fileNamed: "Cap1PimentaIntrodução")
+    let cap1PimentaFinal = SKAudioNode(fileNamed: "Cap1PimentaFinal")
     
-    var soundMix = AVAudioEnvironmentNode()
-    var soundMixAttenuationRefDistance: Float = 50
-    var soundMixAttenuationMaxDistance: Float = 300
+    // Sounds
+    let sfxCrowdTalking0 = SKAudioNode(fileNamed: "SFXCrowdTalking0")
+    let sfxCrowdTalking1 = SKAudioNode(fileNamed: "SFXCrowdTalking1")
+    let sfxCrowdTalking2 = SKAudioNode(fileNamed: "SFXCrowdTalking2")
+    let sfxTypingKeyboard = SKAudioNode(fileNamed: "SFXTypingKeyboard")
     
     // 3D Sound Mixer
     let audioMix = AVAudioEnvironmentNode()
@@ -28,7 +35,7 @@ class GameScene: SKScene {
     let defaults = UserDefaults.standard
     
     override func didMove(to view: SKView) {
-        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         physicsWorld.gravity = .zero
         
@@ -44,7 +51,9 @@ class GameScene: SKScene {
         addPhysicsBodies()
         
         speakInstructions()
+ 
         
+        array = [cap1PimentaIntrodução, cap1PimentaFinal]
         
         //        defaults.set(1, forKey: "chapter")
         //        if defaults.integer(forKey: "chapter") == 1 {
@@ -54,29 +63,52 @@ class GameScene: SKScene {
         //        }
         //
         
-        sound.isPositional = true
-        sound.position = CGPoint(x: 200, y: 200)
-        addChild(sound)
-        sound.run(.play())
+        addChild(oregano)
         
+        player.position = CGPoint(x: 400, y: -20)
+        player.zRotation = .pi
+        player.physicsBody = SKPhysicsBody(circleOfRadius: 10)
         addChild(player)
-        player.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 20))
         
-        soundMix = AVAudioEnvironmentNode()
-        audioEngine.attach(soundMix)
+        
+        //        player.addChild(cap1PimentaIntrodução)
+        //        player.addChild(cap1PimentaFinal)
+        //        cap1PimentaIntrodução.run(.play())
+        //
+        //        sfxCrowdTalking0.position = CGPoint(x: 200, y: 200)
+        //        addChild(sfxCrowdTalking0)
+        //        sfxCrowdTalking0.run(.play())
+        //
+        //        sfxCrowdTalking1.position = CGPoint(x: -200, y: 200)
+        //        addChild(sfxCrowdTalking1)
+        //        sfxCrowdTalking1.run(.play())
+        //
+        //        sfxCrowdTalking2.position = CGPoint(x: 0, y: -200)
+        //        addChild(sfxCrowdTalking2)
+        //        sfxCrowdTalking2.run(.play())
+        
+        sfxTypingKeyboard.position = CGPoint(x: 392, y: -261)
+        addChild(sfxTypingKeyboard)
+        sfxTypingKeyboard.run(.play())
+        
         let mainMixer = audioEngine.mainMixerNode
-        audioEngine.connect(sound.avAudioNode!, to: soundMix, format: nil)
-        audioEngine.connect(soundMix, to: mainMixer, format: nil)
+        audioEngine.attach(audioMix)
+        //        audioEngine.connect(sfxCrowdTalking0.avAudioNode!, to: audioMix, format: nil)
+        //        audioEngine.connect(sfxCrowdTalking1.avAudioNode!, to: audioMix, format: nil)
+        //        audioEngine.connect(sfxCrowdTalking2.avAudioNode!, to: audioMix, format: nil)
+        audioEngine.connect(sfxTypingKeyboard.avAudioNode!, to: audioMix, format: nil)
+        oregano.connectAudio(audioEngine: audioEngine, node: audioMix)
+        audioEngine.connect(audioMix, to: mainMixer, format: nil)
         
-        soundMix.distanceAttenuationParameters.distanceAttenuationModel = .linear
-        soundMix.distanceAttenuationParameters.referenceDistance = soundMixAttenuationRefDistance
-        soundMix.distanceAttenuationParameters.maximumDistance = soundMixAttenuationMaxDistance
-        soundMix.outputType = .headphones
-        soundMix.renderingAlgorithm = .HRTFHQ
-        soundMix.sourceMode = .spatializeIfMono
+        audioMix.distanceAttenuationParameters.distanceAttenuationModel = .linear
+        audioMix.distanceAttenuationParameters.referenceDistance = audioMixAttenuationRefDistance
+        audioMix.distanceAttenuationParameters.maximumDistance = audioMixAttenuationMaxDistance
+        audioMix.outputType = .headphones
+        audioMix.renderingAlgorithm = .HRTFHQ
+        audioMix.sourceMode = .spatializeIfMono
         
         addPinchGestureRecognizer()
-//        addTapGestureRecognizer()
+        addTapGestureRecognizer()
     }
     
     func speakInstructions() {
@@ -98,10 +130,99 @@ class GameScene: SKScene {
         let cameraNode = SKCameraNode()
         camera = cameraNode
         guard let camera = camera else { return }
-        camera.zPosition = .infinity
         let playerConstraint = SKConstraint.distance(SKRange(constantValue: 0), to: player)
         camera.constraints = [playerConstraint]
+        camera.zPosition = .infinity
         addChild(camera)
+    }
+    
+    // MARK: Map Physics
+    func addPhysicsBodies() {
+        delegacia.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: -660, width: 900, height: 660))
+        delegacia.physicsBody?.isDynamic = false
+        addChild(delegacia)
+        
+        // MARK: Cells
+        let cellsWall0 = SKNode()
+        cellsWall0.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 0, y: -245, width: 230, height: 8), transform: nil))
+        cellsWall0.physicsBody?.isDynamic = false
+        delegacia.addChild(cellsWall0)
+        let cellsWall1 = SKNode()
+        cellsWall1.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 222, y: -600, width: 8, height: 355), transform: nil))
+        cellsWall1.physicsBody?.isDynamic = false
+        delegacia.addChild(cellsWall1)
+        let cellsWall2 = SKNode()
+        cellsWall2.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 0, y: -328, width: 140, height: 8), transform: nil))
+        cellsWall2.physicsBody?.isDynamic = false
+        delegacia.addChild(cellsWall2)
+        let cellsWall3 = SKNode()
+        cellsWall3.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 0, y: -411, width: 140, height: 8), transform: nil))
+        cellsWall3.physicsBody?.isDynamic = false
+        delegacia.addChild(cellsWall3)
+        let cellsWall4 = SKNode()
+        cellsWall4.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 0, y: -494, width: 140, height: 8), transform: nil))
+        cellsWall4.physicsBody?.isDynamic = false
+        delegacia.addChild(cellsWall4)
+        let cellsWall5 = SKNode()
+        cellsWall5.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 0, y: -577, width: 140, height: 8), transform: nil))
+        cellsWall5.physicsBody?.isDynamic = false
+        delegacia.addChild(cellsWall5)
+        
+        // MARK: Equipment Room
+        let equipmentRoomWall0 = SKNode()
+        equipmentRoomWall0.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 652, y: -221, width: 8, height: 221), transform: nil))
+        equipmentRoomWall0.physicsBody?.isDynamic = false
+        delegacia.addChild(equipmentRoomWall0)
+        let equipmentRoomWall1 = SKNode()
+        equipmentRoomWall1.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 660, y: -196, width: 90, height: 8), transform: nil))
+        equipmentRoomWall1.physicsBody?.isDynamic = false
+        delegacia.addChild(equipmentRoomWall1)
+        let equipmentRoomWall2 = SKNode()
+        equipmentRoomWall2.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 810, y: -196, width: 90, height: 8), transform: nil))
+        equipmentRoomWall2.physicsBody?.isDynamic = false
+        delegacia.addChild(equipmentRoomWall2)
+        
+        // MARK: Investigator Room
+        let investigatorRoomWall0 = SKNode()
+        investigatorRoomWall0.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 652, y: -660, width: 8, height: 379), transform: nil))
+        investigatorRoomWall0.physicsBody?.isDynamic = false
+        delegacia.addChild(investigatorRoomWall0)
+        let investigatorRoomWall1 = SKNode()
+        investigatorRoomWall1.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 660, y: -314, width: 90, height: 8), transform: nil))
+        investigatorRoomWall1.physicsBody?.isDynamic = false
+        delegacia.addChild(investigatorRoomWall1)
+        let investigatorRoomWall2 = SKNode()
+        investigatorRoomWall2.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 810, y: -314, width: 90, height: 8), transform: nil))
+        investigatorRoomWall2.physicsBody?.isDynamic = false
+        delegacia.addChild(investigatorRoomWall2)
+        
+        // MARK: Police Cheif Room
+        let policeChiefRoomWall0 = SKNode()
+        policeChiefRoomWall0.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 411, y: -660, width: 8, height: 220), transform: nil))
+        policeChiefRoomWall0.physicsBody?.isDynamic = false
+        delegacia.addChild(policeChiefRoomWall0)
+        let policeChiefRoomWall1 = SKNode()
+        policeChiefRoomWall1.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 411, y: -448, width: 181, height: 8), transform: nil))
+        policeChiefRoomWall1.physicsBody?.isDynamic = false
+        delegacia.addChild(policeChiefRoomWall1)
+        
+        // MARK: Communication Area
+        let communicationAreaWall0 = SKNode()
+        communicationAreaWall0.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 351, y: -204, width: 200, height: 8), transform: nil))
+        communicationAreaWall0.physicsBody?.isDynamic = false
+        delegacia.addChild(communicationAreaWall0)
+        let communicationAreaWall1 = SKNode()
+        communicationAreaWall1.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 447, y: -246, width: 8, height: 50), transform: nil))
+        communicationAreaWall1.physicsBody?.isDynamic = false
+        delegacia.addChild(communicationAreaWall1)
+        let communicationAreaWall2 = SKNode()
+        communicationAreaWall2.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 447, y: -344, width: 8, height: 50), transform: nil))
+        communicationAreaWall2.physicsBody?.isDynamic = false
+        delegacia.addChild(communicationAreaWall2)
+        let communicationAreaWall3 = SKNode()
+        communicationAreaWall3.physicsBody = SKPhysicsBody(polygonFrom: CGPath(rect: CGRect(x: 351, y: -344, width: 200, height: 8), transform: nil))
+        communicationAreaWall3.physicsBody?.isDynamic = false
+        delegacia.addChild(communicationAreaWall3)
     }
     
     func addPinchGestureRecognizer() {
@@ -109,44 +230,48 @@ class GameScene: SKScene {
         self.view?.addGestureRecognizer(pinch)
     }
     
+    func addTapGestureRecognizer() {
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.scene?.view?.addGestureRecognizer(singleTap)
+
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        doubleTap.numberOfTapsRequired = 2
+        self.scene?.view?.addGestureRecognizer(doubleTap)
+
+        singleTap.require(toFail: doubleTap)
+    }
+    
     @objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
         switch sender.state {
-            case .recognized:
-                if sender.scale < 1.0 {
-                    print("Item coletado!")
-                    // TODO: Coletar item
-                }
-            default:
-                break
+        case .recognized:
+            if sender.scale < 1.0 {
+                print("Item coletado!")
+                // TODO: Coletar item
+            }
+        default:
+            break
         }
     }
     
-//    func addTapGestureRecognizer() {
-//        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-//        self.scene?.view?.addGestureRecognizer(singleTap)
-//
-//        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-//        doubleTap.numberOfTapsRequired = 2
-//        self.scene?.view?.addGestureRecognizer(doubleTap)
-//
-//        singleTap.require(toFail: doubleTap)
-//    }
-//
-//    @objc func handleTap(_ sender: UITapGestureRecognizer) {
-//        switch sender.numberOfTapsRequired {
-//            case 1:
-//                oregano.run(.play())
-//            case 2:
-//                pausegame = !pausegame
-//                if (pausegame){
-//                    soundOn.run(.pause())
-//                } else{
-//                    soundOn.run(.play())
-//                }
-//            default:
-//                break
-//        }
-//    }
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        switch sender.numberOfTapsRequired {
+        case 1:
+            oregano.bark()
+        case 2:
+            if defaults.bool(forKey: "isPaused") != true {
+                defaults.set(true, forKey: "isPaused")
+                if let view = self.view {
+                    let newScene = MenuScene(size: view.bounds.size)
+                    newScene.scaleMode = .resizeFill
+                    view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
+                    view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
+                }
+            }
+            
+        default:
+            break
+        }
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -185,17 +310,28 @@ class GameScene: SKScene {
         }
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        super.update(currentTime)
+    func updatePlayer() {
         let angle = player.zRotation
         let radius: CGFloat = -analogStick.getVelocity().dy
         player.position.x += cos(angle - CGFloat.pi / 2) * radius
         player.position.y += sin(angle - CGFloat.pi / 2) * radius
         player.zRotation -= (analogStick.getVelocity().dx*analogStick.getVelocity().dx*analogStick.getVelocity().dx) / 400
+    }
+    
+    func updateCamera() {
         camera?.zRotation = player.zRotation
-        soundMix.listenerPosition = AVAudio3DPoint(x: Float(player.position.x), y: Float(player.position.y), z: 0)
-        soundMix.listenerAngularOrientation.roll = -Float(player.zRotation) * 180 / Float.pi
-        print(player.zRotation)
+    }
+    
+    func updateListener() {
+        audioMix.listenerPosition = AVAudio3DPoint(x: Float(player.position.x), y: Float(player.position.y), z: 0)
+        audioMix.listenerAngularOrientation.roll = -Float(player.zRotation) * 180 / Float.pi
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
+        updatePlayer()
+        updateCamera()
+        updateListener()
     }
 }
 

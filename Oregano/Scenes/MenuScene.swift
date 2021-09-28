@@ -51,12 +51,13 @@ class MenuScene: SKScene {
         
         controlsGame = MenuNode(SKButtonNode(tts: "Controles do jogo."))
         controlsGame.value.action = {
-            SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Com dois dedos, faça um gesto de pinça para coletar um item. Para pausar o jogo, toque duas vezes na tela com 3 dedos. Caso queira ouvir novamente os comandos, agite o celular.")
+            SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Com dois dedos, faça um gesto de pinça para coletar um item. Para voltar ao menu principal, toque duas vezes na tela. Caso queira ouvir novamente os comandos, agite o celular.")
         }
         warningButton = MenuNode(SKButtonNode(tts: "Atenção!"))
         
-        
-        mainMenu.add(child: continueGameButton)
+        if UserDefaults.standard.bool(forKey: "savedGame") {
+            mainMenu.add(child: continueGameButton)
+        }
         mainMenu.add(child: newGameButton)
         mainMenu.add(child: settingsButton)
         settingsButton.add(child: screenButton)
@@ -196,7 +197,11 @@ class MenuScene: SKScene {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
                 } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
-                    presentGame()
+                    if defaults.bool(forKey: "isPaused") {
+                        defaults.set(false, forKey: "isPaused")
+                        presentGame()
+                    }
+                    
                 } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
                     if defaults.bool(forKey: "savedGame") {
                         resetGame()
