@@ -25,6 +25,15 @@
 		C09EDF2D27023B3400543C35 /* SFXCrowdTalking0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2C27023B3400543C35 /* SFXCrowdTalking0.mp3 */; };
 		C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */; };
 		C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */; };
+		C0B74AF52702654600A642FB /* SFXBark0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AED2702654600A642FB /* SFXBark0.mp3 */; };
+		C0B74AF62702654600A642FB /* SFXBark5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AEE2702654600A642FB /* SFXBark5.mp3 */; };
+		C0B74AF72702654600A642FB /* SFXBark2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AEF2702654600A642FB /* SFXBark2.mp3 */; };
+		C0B74AF82702654600A642FB /* SFXBark3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF02702654600A642FB /* SFXBark3.mp3 */; };
+		C0B74AF92702654600A642FB /* SFXBark4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF12702654600A642FB /* SFXBark4.mp3 */; };
+		C0B74AFA2702654600A642FB /* SFXBark6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF22702654600A642FB /* SFXBark6.mp3 */; };
+		C0B74AFB2702654600A642FB /* SFXBark1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF32702654600A642FB /* SFXBark1.mp3 */; };
+		C0B74AFC2702654600A642FB /* SFXBark7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF42702654600A642FB /* SFXBark7.mp3 */; };
+		C0B74AFE2702656700A642FB /* OreganoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B74AFD2702656700A642FB /* OreganoNode.swift */; };
 		C0FD2C5B26FA4D83007C370A /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FD2C5A26FA4D83007C370A /* MenuNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +58,15 @@
 		C09EDF2C27023B3400543C35 /* SFXCrowdTalking0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXCrowdTalking0.mp3; sourceTree = "<group>"; };
 		C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKToggleNode.swift; sourceTree = "<group>"; };
+		C0B74AED2702654600A642FB /* SFXBark0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark0.mp3; sourceTree = "<group>"; };
+		C0B74AEE2702654600A642FB /* SFXBark5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark5.mp3; sourceTree = "<group>"; };
+		C0B74AEF2702654600A642FB /* SFXBark2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark2.mp3; sourceTree = "<group>"; };
+		C0B74AF02702654600A642FB /* SFXBark3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark3.mp3; sourceTree = "<group>"; };
+		C0B74AF12702654600A642FB /* SFXBark4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark4.mp3; sourceTree = "<group>"; };
+		C0B74AF22702654600A642FB /* SFXBark6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark6.mp3; sourceTree = "<group>"; };
+		C0B74AF32702654600A642FB /* SFXBark1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark1.mp3; sourceTree = "<group>"; };
+		C0B74AF42702654600A642FB /* SFXBark7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark7.mp3; sourceTree = "<group>"; };
+		C0B74AFD2702656700A642FB /* OreganoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OreganoNode.swift; sourceTree = "<group>"; };
 		C0FD2C5A26FA4D83007C370A /* MenuNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +138,7 @@
 				C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */,
 				C0FD2C5A26FA4D83007C370A /* MenuNode.swift */,
 				C00083E926FB924D005B0748 /* AnalogStick.swift */,
+				C0B74AFD2702656700A642FB /* OreganoNode.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -133,6 +152,14 @@
 				C09EDF2427023AFD00543C35 /* SFXCrowdTalking1.mp3 */,
 				C09EDF2027023AFC00543C35 /* SFXCrowdTalking2.mp3 */,
 				C09EDF2227023AFC00543C35 /* SFXTypingKeyboard.mp3 */,
+				C0B74AED2702654600A642FB /* SFXBark0.mp3 */,
+				C0B74AF32702654600A642FB /* SFXBark1.mp3 */,
+				C0B74AEF2702654600A642FB /* SFXBark2.mp3 */,
+				C0B74AF02702654600A642FB /* SFXBark3.mp3 */,
+				C0B74AF12702654600A642FB /* SFXBark4.mp3 */,
+				C0B74AEE2702654600A642FB /* SFXBark5.mp3 */,
+				C0B74AF22702654600A642FB /* SFXBark6.mp3 */,
+				C0B74AF42702654600A642FB /* SFXBark7.mp3 */,
 				2137064126EFC8270085794F /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -197,12 +224,20 @@
 			files = (
 				C09EDF2627023AFD00543C35 /* SFXCrowdTalking2.mp3 in Resources */,
 				2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */,
+				C0B74AFC2702654600A642FB /* SFXBark7.mp3 in Resources */,
+				C0B74AF72702654600A642FB /* SFXBark2.mp3 in Resources */,
+				C0B74AF92702654600A642FB /* SFXBark4.mp3 in Resources */,
 				2137064226EFC8270085794F /* Assets.xcassets in Resources */,
 				C09EDF2827023AFD00543C35 /* SFXTypingKeyboard.mp3 in Resources */,
 				C09EDF2D27023B3400543C35 /* SFXCrowdTalking0.mp3 in Resources */,
 				C09EDF2927023AFD00543C35 /* Cap1PimentaIntrodução.mp3 in Resources */,
 				C09EDF2A27023AFD00543C35 /* SFXCrowdTalking1.mp3 in Resources */,
+				C0B74AF52702654600A642FB /* SFXBark0.mp3 in Resources */,
+				C0B74AF62702654600A642FB /* SFXBark5.mp3 in Resources */,
+				C0B74AF82702654600A642FB /* SFXBark3.mp3 in Resources */,
 				C09EDF2B27023AFD00543C35 /* Cap1PimentaFinal.mp3 in Resources */,
+				C0B74AFB2702654600A642FB /* SFXBark1.mp3 in Resources */,
+				C0B74AFA2702654600A642FB /* SFXBark6.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +259,7 @@
 				212EE77C26F136CE0065FB03 /* ViewController.swift in Sources */,
 				C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */,
 				C00083EA26FB924D005B0748 /* AnalogStick.swift in Sources */,
+				C0B74AFE2702656700A642FB /* OreganoNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
