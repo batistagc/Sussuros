@@ -30,6 +30,7 @@ class GameScene: SKScene {
     let audioMixAttenuationMaxDistance: Float = 300
     
     var array: [SKAudioNode] = []
+    var nextSpeech:[String]  = []
     
     let defaults = UserDefaults.standard
     
@@ -42,7 +43,15 @@ class GameScene: SKScene {
         camera!.addChild(backgroundDelegacia)
         camera!.addChild(analogStick.createStick(named: "AnalogStick"))
         
+        addChild(delegacia)
+        delegacia.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: -900/2, y: -660/2, width: 900, height: 660))
+        delegacia.physicsBody?.isDynamic = false
+        SpeechSynthesizer.shared.synthesizer.delegate = self
+        
         addPhysicsBodies()
+        
+        speakInstructions()
+ 
         
         array = [cap1PimentaIntrodução, cap1PimentaFinal]
         
@@ -100,6 +109,21 @@ class GameScene: SKScene {
         
         addPinchGestureRecognizer()
         addTapGestureRecognizer()
+    }
+    
+    func speakInstructions() {
+        
+        let instructions: [String] = [
+            "Encoste na tela e deslize para cima para andar pra frente.",
+            "Deslize para os lados para virar para a esquerda e para a direita.",
+            "Deslize para baixo para andar para trás.",
+            "Toque uma vez na tela para o Orégano latir.",
+            "Para pausar o jogo, toque duas vezes na tela."
+        ]
+        
+        nextSpeech = instructions
+        SpeechSynthesizer.shared.speak("")
+
     }
     
     func setUpCamera() {
@@ -310,3 +334,13 @@ class GameScene: SKScene {
         updateListener()
     }
 }
+
+extension GameScene: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        if nextSpeech.count > 0 {
+            SpeechSynthesizer.shared.speak(nextSpeech[0])
+            nextSpeech.remove(at: 0)
+        }
+    }
+}
+
