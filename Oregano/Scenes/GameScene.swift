@@ -11,6 +11,7 @@ class GameScene: SKScene {
     var singleTouch: UITouch?
     
     let delegacia = SKNode()
+    let oregano = OreganoNode()
     let player = SKNode()
     
     // Narration
@@ -53,6 +54,8 @@ class GameScene: SKScene {
         //        }
         //
         
+        addChild(oregano)
+        
         player.position = CGPoint(x: 400, y: -20)
         player.zRotation = .pi
         player.physicsBody = SKPhysicsBody(circleOfRadius: 10)
@@ -85,6 +88,7 @@ class GameScene: SKScene {
         //        audioEngine.connect(sfxCrowdTalking1.avAudioNode!, to: audioMix, format: nil)
         //        audioEngine.connect(sfxCrowdTalking2.avAudioNode!, to: audioMix, format: nil)
         audioEngine.connect(sfxTypingKeyboard.avAudioNode!, to: audioMix, format: nil)
+        oregano.connectAudio(audioEngine: audioEngine, node: audioMix)
         audioEngine.connect(audioMix, to: mainMixer, format: nil)
         
         audioMix.distanceAttenuationParameters.distanceAttenuationModel = .linear
@@ -202,6 +206,17 @@ class GameScene: SKScene {
         self.view?.addGestureRecognizer(pinch)
     }
     
+    func addTapGestureRecognizer() {
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.scene?.view?.addGestureRecognizer(singleTap)
+
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        doubleTap.numberOfTapsRequired = 2
+        self.scene?.view?.addGestureRecognizer(doubleTap)
+
+        singleTap.require(toFail: doubleTap)
+    }
+    
     @objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
         switch sender.state {
         case .recognized:
@@ -214,22 +229,10 @@ class GameScene: SKScene {
         }
     }
     
-    func addTapGestureRecognizer() {
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        self.scene?.view?.addGestureRecognizer(singleTap)
-        
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        doubleTap.numberOfTapsRequired = 2
-        self.scene?.view?.addGestureRecognizer(doubleTap)
-        
-        singleTap.require(toFail: doubleTap)
-    }
-    
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         switch sender.numberOfTapsRequired {
         case 1:
-            // TODO: Call Oregano
-            break
+            oregano.bark()
         case 2:
             if defaults.bool(forKey: "isPaused") != true {
                 defaults.set(true, forKey: "isPaused")
