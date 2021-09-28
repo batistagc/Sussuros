@@ -28,6 +28,10 @@ class GameScene: SKScene {
     let audioMixAttenuationRefDistance: Float = 50
     let audioMixAttenuationMaxDistance: Float = 300
     
+    var array: [SKAudioNode] = []
+    
+    let defaults = UserDefaults.standard
+    
     override func didMove(to view: SKView) {
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
@@ -39,26 +43,37 @@ class GameScene: SKScene {
         
         addPhysicsBodies()
         
+        array = [cap1PimentaIntrodução, cap1PimentaFinal]
+        
+        //        defaults.set(1, forKey: "chapter")
+        //        if defaults.integer(forKey: "chapter") == 1 {
+        //            array[0].run(.play())
+        //        } else if defaults.integer(forKey: "chapter") == 2{
+        //            array[1].run(.play())
+        //        }
+        //
+        
         player.position = CGPoint(x: 400, y: -20)
         player.zRotation = .pi
         player.physicsBody = SKPhysicsBody(circleOfRadius: 10)
         addChild(player)
         
-//        player.addChild(cap1PimentaIntrodução)
-//        player.addChild(cap1PimentaFinal)
-//        cap1PimentaIntrodução.run(.play())
-//
-//        sfxCrowdTalking0.position = CGPoint(x: 200, y: 200)
-//        addChild(sfxCrowdTalking0)
-//        sfxCrowdTalking0.run(.play())
-//
-//        sfxCrowdTalking1.position = CGPoint(x: -200, y: 200)
-//        addChild(sfxCrowdTalking1)
-//        sfxCrowdTalking1.run(.play())
-//
-//        sfxCrowdTalking2.position = CGPoint(x: 0, y: -200)
-//        addChild(sfxCrowdTalking2)
-//        sfxCrowdTalking2.run(.play())
+        
+        //        player.addChild(cap1PimentaIntrodução)
+        //        player.addChild(cap1PimentaFinal)
+        //        cap1PimentaIntrodução.run(.play())
+        //
+        //        sfxCrowdTalking0.position = CGPoint(x: 200, y: 200)
+        //        addChild(sfxCrowdTalking0)
+        //        sfxCrowdTalking0.run(.play())
+        //
+        //        sfxCrowdTalking1.position = CGPoint(x: -200, y: 200)
+        //        addChild(sfxCrowdTalking1)
+        //        sfxCrowdTalking1.run(.play())
+        //
+        //        sfxCrowdTalking2.position = CGPoint(x: 0, y: -200)
+        //        addChild(sfxCrowdTalking2)
+        //        sfxCrowdTalking2.run(.play())
         
         sfxTypingKeyboard.position = CGPoint(x: 392, y: -261)
         addChild(sfxTypingKeyboard)
@@ -66,9 +81,9 @@ class GameScene: SKScene {
         
         let mainMixer = audioEngine.mainMixerNode
         audioEngine.attach(audioMix)
-//        audioEngine.connect(sfxCrowdTalking0.avAudioNode!, to: audioMix, format: nil)
-//        audioEngine.connect(sfxCrowdTalking1.avAudioNode!, to: audioMix, format: nil)
-//        audioEngine.connect(sfxCrowdTalking2.avAudioNode!, to: audioMix, format: nil)
+        //        audioEngine.connect(sfxCrowdTalking0.avAudioNode!, to: audioMix, format: nil)
+        //        audioEngine.connect(sfxCrowdTalking1.avAudioNode!, to: audioMix, format: nil)
+        //        audioEngine.connect(sfxCrowdTalking2.avAudioNode!, to: audioMix, format: nil)
         audioEngine.connect(sfxTypingKeyboard.avAudioNode!, to: audioMix, format: nil)
         audioEngine.connect(audioMix, to: mainMixer, format: nil)
         
@@ -189,42 +204,45 @@ class GameScene: SKScene {
     
     @objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
         switch sender.state {
-            case .recognized:
-                if sender.scale < 1.0 {
-                    print("Item coletado!")
-                    // TODO: Coletar item
-                }
-            default:
-                break
+        case .recognized:
+            if sender.scale < 1.0 {
+                print("Item coletado!")
+                // TODO: Coletar item
+            }
+        default:
+            break
         }
     }
     
     func addTapGestureRecognizer() {
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.scene?.view?.addGestureRecognizer(singleTap)
-
+        
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         doubleTap.numberOfTapsRequired = 2
         self.scene?.view?.addGestureRecognizer(doubleTap)
-
+        
         singleTap.require(toFail: doubleTap)
     }
-
+    
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         switch sender.numberOfTapsRequired {
-            case 1:
-                // TODO: Call Oregano
-                break
-            case 2:
+        case 1:
+            // TODO: Call Oregano
+            break
+        case 2:
+            if defaults.bool(forKey: "isPaused") != true {
+                defaults.set(true, forKey: "isPaused")
                 if let view = self.view {
                     let newScene = MenuScene(size: view.bounds.size)
                     newScene.scaleMode = .resizeFill
                     view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
                     view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
                 }
-                break
-            default:
-                break
+            }
+            
+        default:
+            break
         }
     }
     

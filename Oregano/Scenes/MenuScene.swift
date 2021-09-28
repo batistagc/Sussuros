@@ -197,7 +197,11 @@ class MenuScene: SKScene {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
                 } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
-                    presentGame()
+                    if defaults.bool(forKey: "isPaused") {
+                        defaults.set(false, forKey: "isPaused")
+                        presentGame()
+                    }
+                    
                 } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
                     if defaults.bool(forKey: "savedGame") {
                         resetGame()
