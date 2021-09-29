@@ -3,20 +3,32 @@ import AVFoundation
 
 class GameScene: SKScene {
     
+    let defaults = UserDefaults.standard
+    
     // Graphics
     let analogStick = AnalogStick(stick: "stick-1", outline: "outline-1")
     let backgroundDelegacia = SKSpriteNode(imageNamed: "Delegacia")
     
     // System
     var singleTouch: UITouch?
+    var gameStarted = false
     
     let delegacia = SKNode()
     let oregano = OreganoNode()
     let player = SKNode()
     
+    // Speech Synthesizer
+    let instructions: [String] = [
+        "Encoste na tela e deslize para cima para andar pra frente.",
+        "Deslize para os lados para virar para a esquerda e para a direita.",
+        "Deslize para baixo para andar para trás.",
+        "Toque uma vez na tela para o Orégano latir.",
+        "Para pausar o jogo, toque duas vezes na tela."
+    ]
+    
     // Narration
-    let cap1PimentaIntrodução = SKAudioNode(fileNamed: "Cap1PimentaIntrodução")
-    let cap1PimentaFinal = SKAudioNode(fileNamed: "Cap1PimentaFinal")
+    let cap1Narracao01Pimenta = SKAudioNode(fileNamed: "Cap1Narracao01Pimenta")
+    let cap1Narracao02Pimenta = SKAudioNode(fileNamed: "Cap1Narracao02Pimenta")
     
     // Sounds
     let sfxCrowdTalking0 = SKAudioNode(fileNamed: "SFXCrowdTalking0")
@@ -29,77 +41,58 @@ class GameScene: SKScene {
     let audioMixAttenuationRefDistance: Float = 50
     let audioMixAttenuationMaxDistance: Float = 300
     
-    var array: [SKAudioNode] = []
-    var nextSpeech:[String]  = []
-    
-    let defaults = UserDefaults.standard
+//    var array: [SKAudioNode] = []
+//    var nextSpeech: [String] = []
     
     override func didMove(to view: SKView) {
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         physicsWorld.gravity = .zero
         
-        setUpCamera()
-        camera!.addChild(backgroundDelegacia)
-        camera!.addChild(analogStick.createStick(named: "AnalogStick"))
-        
-        addChild(delegacia)
-        delegacia.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: -900/2, y: -660/2, width: 900, height: 660))
-        delegacia.physicsBody?.isDynamic = false
         SpeechSynthesizer.shared.synthesizer.delegate = self
         
-        addPhysicsBodies()
+//        array = [cap1PimentaIntrodução, cap1PimentaFinal]
+//        defaults.set(1, forKey: "chapter")
+//        if defaults.integer(forKey: "chapter") == 1 {
+//            array[0].run(.play())
+//        } else if defaults.integer(forKey: "chapter") == 2{
+//            array[1].run(.play())
+//        }
         
-        speakInstructions()
- 
-        
-        array = [cap1PimentaIntrodução, cap1PimentaFinal]
-        
-        //        defaults.set(1, forKey: "chapter")
-        //        if defaults.integer(forKey: "chapter") == 1 {
-        //            array[0].run(.play())
-        //        } else if defaults.integer(forKey: "chapter") == 2{
-        //            array[1].run(.play())
-        //        }
-        //
-        
-        addChild(oregano)
+        let mainMixer = audioEngine.mainMixerNode
+        audioEngine.attach(audioMix)
         
         player.position = CGPoint(x: 400, y: -20)
         player.zRotation = .pi
         player.physicsBody = SKPhysicsBody(circleOfRadius: 10)
         addChild(player)
         
+        cap1Narracao01Pimenta.autoplayLooped = false
+        player.addChild(cap1Narracao01Pimenta)
+        audioEngine.connect(cap1Narracao01Pimenta.avAudioNode!, to: audioMix, format: nil)
+        cap1Narracao01Pimenta.run(.play())
+        run(.wait(forDuration: 85)) { [self] in
+            SpeechSynthesizer.shared.speak(instructions[0])
+            
+            setUpCamera()
+            camera!.addChild(backgroundDelegacia)
+            camera!.addChild(analogStick.createStick(named: "AnalogStick"))
+            
+            addPhysicsBodies()
+            
+            addChild(oregano)
+            oregano.connectAudio(audioEngine: audioEngine, node: audioMix)
+            
+            sfxTypingKeyboard.position = CGPoint(x: 392, y: -261)
+            addChild(sfxTypingKeyboard)
+            audioEngine.connect(sfxTypingKeyboard.avAudioNode!, to: audioMix, format: nil)
+            sfxTypingKeyboard.run(.play())
+            
+            gameStarted = true
+        }
         
-        //        player.addChild(cap1PimentaIntrodução)
-        //        player.addChild(cap1PimentaFinal)
-        //        cap1PimentaIntrodução.run(.play())
-        //
-        //        sfxCrowdTalking0.position = CGPoint(x: 200, y: 200)
-        //        addChild(sfxCrowdTalking0)
-        //        sfxCrowdTalking0.run(.play())
-        //
-        //        sfxCrowdTalking1.position = CGPoint(x: -200, y: 200)
-        //        addChild(sfxCrowdTalking1)
-        //        sfxCrowdTalking1.run(.play())
-        //
-        //        sfxCrowdTalking2.position = CGPoint(x: 0, y: -200)
-        //        addChild(sfxCrowdTalking2)
-        //        sfxCrowdTalking2.run(.play())
-        
-        sfxTypingKeyboard.position = CGPoint(x: 392, y: -261)
-        addChild(sfxTypingKeyboard)
-        sfxTypingKeyboard.run(.play())
-        
-        let mainMixer = audioEngine.mainMixerNode
-        audioEngine.attach(audioMix)
-        //        audioEngine.connect(sfxCrowdTalking0.avAudioNode!, to: audioMix, format: nil)
-        //        audioEngine.connect(sfxCrowdTalking1.avAudioNode!, to: audioMix, format: nil)
-        //        audioEngine.connect(sfxCrowdTalking2.avAudioNode!, to: audioMix, format: nil)
-        audioEngine.connect(sfxTypingKeyboard.avAudioNode!, to: audioMix, format: nil)
-        oregano.connectAudio(audioEngine: audioEngine, node: audioMix)
+        // MARK: AVAudioEnvironmentNode
         audioEngine.connect(audioMix, to: mainMixer, format: nil)
-        
         audioMix.distanceAttenuationParameters.distanceAttenuationModel = .linear
         audioMix.distanceAttenuationParameters.referenceDistance = audioMixAttenuationRefDistance
         audioMix.distanceAttenuationParameters.maximumDistance = audioMixAttenuationMaxDistance
@@ -109,21 +102,6 @@ class GameScene: SKScene {
         
         addPinchGestureRecognizer()
         addTapGestureRecognizer()
-    }
-    
-    func speakInstructions() {
-        
-        let instructions: [String] = [
-            "Encoste na tela e deslize para cima para andar pra frente.",
-            "Deslize para os lados para virar para a esquerda e para a direita.",
-            "Deslize para baixo para andar para trás.",
-            "Toque uma vez na tela para o Orégano latir.",
-            "Para pausar o jogo, toque duas vezes na tela."
-        ]
-        
-        nextSpeech = instructions
-        SpeechSynthesizer.shared.speak("")
-
     }
     
     func setUpCamera() {
@@ -233,79 +211,83 @@ class GameScene: SKScene {
     func addTapGestureRecognizer() {
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.scene?.view?.addGestureRecognizer(singleTap)
-
+        
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         doubleTap.numberOfTapsRequired = 2
         self.scene?.view?.addGestureRecognizer(doubleTap)
-
+        
         singleTap.require(toFail: doubleTap)
     }
     
     @objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
         switch sender.state {
-        case .recognized:
-            if sender.scale < 1.0 {
-                print("Item coletado!")
-                // TODO: Coletar item
-            }
-        default:
-            break
+            case .recognized:
+                if sender.scale < 1.0 {
+                    print("Item coletado!")
+                    // TODO: Coletar item
+                }
+            default:
+                break
         }
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         switch sender.numberOfTapsRequired {
-        case 1:
-            oregano.bark()
-        case 2:
-            if defaults.bool(forKey: "isPaused") != true {
-                defaults.set(true, forKey: "isPaused")
+            case 1:
+                oregano.bark()
+            case 2:
                 if let view = self.view {
                     let newScene = MenuScene(size: view.bounds.size)
-                    newScene.scaleMode = .resizeFill
+                    newScene.scaleMode = .aspectFill
                     view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
                     view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
                 }
-            }
-            
-        default:
-            break
+            default:
+                break
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            if singleTouch == nil {
-                singleTouch = touch
-                let location = touch.location(in: camera!)
-                analogStick.changeState(for: location)
+        if gameStarted {
+            for touch in touches {
+                if singleTouch == nil {
+                    singleTouch = touch
+                    let location = touch.location(in: camera!)
+                    analogStick.changeState(for: location)
+                }
             }
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            if touch == singleTouch {
-                let location = touch.location(in: camera!)
-                analogStick.updateVector(for: location)
+        if gameStarted {
+            for touch in touches {
+                if touch == singleTouch {
+                    let location = touch.location(in: camera!)
+                    analogStick.updateVector(for: location)
+                }
             }
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            if touch == singleTouch {
-                analogStick.resetStick()
-                singleTouch = nil
+        if gameStarted {
+            for touch in touches {
+                if touch == singleTouch {
+                    analogStick.resetStick()
+                    singleTouch = nil
+                }
             }
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            if touch == singleTouch {
-                analogStick.resetStick()
-                singleTouch = nil
+        if gameStarted {
+            for touch in touches {
+                if touch == singleTouch {
+                    analogStick.resetStick()
+                    singleTouch = nil
+                }
             }
         }
     }
@@ -337,10 +319,9 @@ class GameScene: SKScene {
 
 extension GameScene: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        if nextSpeech.count > 0 {
-            SpeechSynthesizer.shared.speak(nextSpeech[0])
-            nextSpeech.remove(at: 0)
-        }
+//        if nextSpeech.count > 0 {
+//            SpeechSynthesizer.shared.speak(nextSpeech[0])
+//            nextSpeech.remove(at: 0)
+//        }
     }
 }
-

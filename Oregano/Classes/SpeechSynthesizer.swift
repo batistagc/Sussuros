@@ -1,14 +1,14 @@
 import AVFoundation
 
 class SpeechSynthesizer {
-    public static let shared = SpeechSynthesizer()
+    static let shared = SpeechSynthesizer()
     private init() {}
     
-    public let synthesizer = AVSpeechSynthesizer()
-    public var volume: Float = 0.8
-    public var language: String = "pt-BR"
+    let synthesizer = AVSpeechSynthesizer()
+    var volume: Float = 0.8
+    var language: String = "pt-BR"
     
-    public func speak(_ string: String) {
+    func speak(_ string: String) {
         // Create an utterance.
         let utterance = AVSpeechUtterance(string: string)
         

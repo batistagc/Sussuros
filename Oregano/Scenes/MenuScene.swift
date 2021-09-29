@@ -3,6 +3,8 @@ import AVFAudio
 
 class MenuScene: SKScene {
     
+    let defaults = UserDefaults.standard
+    
     let lilypadFlower = SKSpriteNode(imageNamed: "vitoriaRegiaFlor")
     let lilypadRight = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
     let lilypadLeft = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
@@ -27,7 +29,6 @@ class MenuScene: SKScene {
     var currentMenu: MenuNode<SKButtonNode>
     
     var nextSpeech: (() -> Void)?
-    let defaults: UserDefaults
     
     override init(size: CGSize) {
         
@@ -67,7 +68,7 @@ class MenuScene: SKScene {
         
         currentMenu = mainMenu
         
-        defaults = UserDefaults.standard
+        
         
         super.init(size: size)
         
@@ -197,11 +198,7 @@ class MenuScene: SKScene {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
                 } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
-                    if defaults.bool(forKey: "isPaused") {
-                        defaults.set(false, forKey: "isPaused")
-                        presentGame()
-                    }
-                    
+                    presentGame()
                 } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
                     if defaults.bool(forKey: "savedGame") {
                         resetGame()
