@@ -127,7 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameStarted = true
         isNarrating = false
         isTutorial = true
-        SpeechSynthesizer.shared.speak("Encoste na tela e deslize para cima para andar pra frente.")
+        SpeechSynthesizer.shared.speak("Para andar para frente, toque na tela e arraste para cima. Você continuará andando enquanto mantiver pressionado.")
         objectiveComplete = false
         nextAction = gamePart02
     }
@@ -137,7 +137,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         singleTouch = nil
         playerNode.position = CGPoint(x: 400, y: -20)
         playerNode.zRotation = 0
-        SpeechSynthesizer.shared.speak("Deslize para os lados para virar para a esquerda e para a direita.")
+        SpeechSynthesizer.shared.speak("Deslize para os lados para virar para a esquerda e direita.")
         isTutorialRotation = true
         objectiveComplete = false
         nextAction = gamePart03
