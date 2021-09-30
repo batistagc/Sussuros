@@ -104,9 +104,9 @@
 		212EE77F26F225040065FB03 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				214859FC26F5332200BD193F /* HeadphonesScene.swift */,
 				212EE78026F2251F0065FB03 /* MenuScene.swift */,
 				216A675C26F3D00C004F043C /* GameScene.swift */,
-				214859FC26F5332200BD193F /* HeadphonesScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -432,7 +432,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R36LU3NVAA;
+				DEVELOPMENT_TEAM = 337G99FP8D;
 				INFOPLIST_FILE = Oregano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -453,7 +453,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R36LU3NVAA;
+				DEVELOPMENT_TEAM = 337G99FP8D;
 				INFOPLIST_FILE = Oregano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
