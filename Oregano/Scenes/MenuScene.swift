@@ -27,7 +27,7 @@ class MenuScene: SKScene {
     
     // System
     var currentMenu: MenuNode<SKButtonNode>
-    var nextSpeech: (() -> Void)?
+    var nextSpeech: [() -> Void] = []
     
     override init(size: CGSize) {
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
@@ -108,17 +108,17 @@ class MenuScene: SKScene {
         if !defaults.bool(forKey: "firstStart") {
             controlsMenu.value.runAction()
             defaults.set(true, forKey: "firstStart")
-            nextSpeech = { [self] in
+            nextSpeech.append { [self] in
                 currentMenu.value.announce()
-                nextSpeech = {
+                nextSpeech.insert({
                     mainMenu.children[mainMenu.select].value.announce()
-                }
+                }, at: 0)
             }
         } else {
             currentMenu.value.announce()
-            nextSpeech = { [self] in
+            nextSpeech.insert({ [self] in
                 mainMenu.children[mainMenu.select].value.announce()
-            }
+            }, at: 0)
         }
         
         // Gestures Recognizers
@@ -152,9 +152,9 @@ class MenuScene: SKScene {
                 case .up:
                     currentMenu = mainMenu
                     currentMenu.value.announce()
-                    nextSpeech = { [self] in
+                    nextSpeech.insert({ [self] in
                         currentMenu.children[currentMenu.select].value.announce()
-                    }
+                    }, at: 0)
                 default:
                     break
             }
@@ -164,9 +164,9 @@ class MenuScene: SKScene {
                     if let parent = currentMenu.parent {
                         currentMenu = parent
                         currentMenu.value.announce()
-                        nextSpeech = { [self] in
+                        nextSpeech.insert({ [self] in
                             currentMenu.children[currentMenu.select].value.announce()
-                        }
+                        }, at: 0)
                     }
                 case .left:
                     currentMenu.select = mod(currentMenu.select - 1, currentMenu.children.count)
@@ -191,9 +191,9 @@ class MenuScene: SKScene {
                     currentMenu.children[currentMenu.select].value.announce()
                     currentMenu = currentMenu.children[currentMenu.select]
                     currentMenu.select = 0
-                    nextSpeech = { [self] in
+                    nextSpeech.insert({ [self] in
                         currentMenu.children[currentMenu.select].value.announce()
-                    }
+                    }, at: 0)
                 } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
                     toggle.toggle()
                     currentMenu.children[currentMenu.select].value.announce()
@@ -239,9 +239,7 @@ class MenuScene: SKScene {
 
 extension MenuScene: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        if let nextSpeech = nextSpeech {
-            nextSpeech()
-            self.nextSpeech = nil
-        }
+        guard let nextSpeech = nextSpeech.popLast() else { return }
+        nextSpeech()
     }
 }
