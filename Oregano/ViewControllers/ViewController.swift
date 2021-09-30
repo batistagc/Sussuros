@@ -27,16 +27,16 @@ class ViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             var scene: SKScene
-//            if isHeadsetPluggedIn() {
-//                scene = MenuScene(size: view.bounds.size)
-//            } else {
-//                scene = HeadphonesScene(size: view.bounds.size)
-//            }
-            scene = GameScene(size: view.bounds.size)
+            if isHeadsetPluggedIn() {
+                scene = MenuScene(size: view.bounds.size)
+            } else {
+                scene = HeadphonesScene(size: view.bounds.size)
+            }
+//            scene = GameScene(size: view.bounds.size)
             scene.scaleMode = .aspectFill
             view.presentScene(scene)
             view.ignoresSiblingOrder = true
-            view.showsPhysics = true
+//            view.showsPhysics = true
             view.isMultipleTouchEnabled = true
         }
     }
