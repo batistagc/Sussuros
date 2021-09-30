@@ -14,6 +14,7 @@ class MenuScene: SKScene {
     let lilypadBottom = SKSpriteNode(imageNamed: "halfVitoriaRegia")
     
     // Menu Options
+    let welcome: MenuNode<SKButtonNode>
     let mainMenu: MenuNode<SKButtonNode>
     let continueGameButton: MenuNode<SKButtonNode>
     let newGameButton: MenuNode<SKButtonNode>
@@ -32,6 +33,7 @@ class MenuScene: SKScene {
     override init(size: CGSize) {
         UIApplication.shared.isIdleTimerDisabled = true
         
+        welcome = MenuNode(SKButtonNode(tts: "Bem vindo ao jogo Sussurros."))
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
         continueGameButton = MenuNode(SKButtonNode(tts: "Continuar jogo."))
         continueGameButton.value.name = "continueGame"
@@ -43,11 +45,11 @@ class MenuScene: SKScene {
         helpButton = MenuNode(SKButtonNode(tts: "Ajuda."))
         controlsMenu = MenuNode(SKButtonNode(tts: "Controles do menu."))
         controlsMenu.value.action = {
-            SpeechSynthesizer.shared.speak("Para selecionar uma opção, dê dois toques na tela. Para voltar para as opções anteriores, deslize para cima. Para ir para a próxima opção, deslize para a direita. Para voltar para a opção anterior, deslize para a esquerda.")
+            SpeechSynthesizer.shared.speak("Para selecionar uma opção, dê dois toques na tela. Para ver as opções do menu, deslize para cima. Para ver as outras opções do menu, deslize para os lados. Se quiser voltar ao menu principal a partir do jogo, dê dois toques na tela com dois dedos.")
         }
         controlsGame = MenuNode(SKButtonNode(tts: "Controles do jogo."))
         controlsGame.value.action = {
-            SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Com dois dedos, faça um gesto de pinça para coletar um item. Toque uma vez na tela para o Orégano latir. Para voltar ao menu principal, toque duas vezes na tela. Caso queira ouvir novamente os comandos, agite o celular.")
+            SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Toque uma vez na tela para o Orégano latir. Para voltar ao menu principal, toque duas vezes na tela com dois dedos. Caso queira ouvir novamente os comandos, agite o celular.")
         }
         warningButton = MenuNode(SKButtonNode(tts: "Atenção!"))
         
