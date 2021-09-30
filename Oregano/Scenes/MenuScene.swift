@@ -53,9 +53,9 @@ class MenuScene: SKScene {
             mainMenu.add(child: continueGameButton)
         }
         mainMenu.add(child: newGameButton)
-        if UserDefaults.standard.bool(forKey: "savedGame") {
-            newGameButton.add(child: warningButton)
-        }
+//        if UserDefaults.standard.bool(forKey: "savedGame") {
+//            mainMenu.add(child: warningButton)
+//        }
         mainMenu.add(child: settingsButton)
         settingsButton.add(child: screenButton)
         mainMenu.add(child: helpButton)
@@ -110,7 +110,7 @@ class MenuScene: SKScene {
             defaults.set(true, forKey: "firstStart")
             nextSpeech = { [self] in
                 currentMenu.value.announce()
-                nextSpeech = { [self] in
+                nextSpeech = {
                     mainMenu.children[mainMenu.select].value.announce()
                 }
             }
@@ -159,7 +159,6 @@ class MenuScene: SKScene {
                     break
             }
         } else {
-            
             switch sender.direction {
                 case .up:
                     if let parent = currentMenu.parent {

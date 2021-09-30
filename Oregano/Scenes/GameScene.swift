@@ -312,12 +312,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         doubleTap.numberOfTapsRequired = 2
         self.scene?.view?.addGestureRecognizer(doubleTap)
         
+        let twoSingleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        twoSingleTap.numberOfTouchesRequired = 2
+        self.scene?.view?.addGestureRecognizer(twoSingleTap)
+        
         let twoDoubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         twoDoubleTap.numberOfTouchesRequired = 2
-        twoDoubleTap.numberOfTouchesRequired = 2
+        twoDoubleTap.numberOfTapsRequired = 2
         self.scene?.view?.addGestureRecognizer(twoDoubleTap)
         
         singleTap.require(toFail: doubleTap)
+        twoSingleTap.require(toFail: twoDoubleTap)
     }
     
     func addLongPressGestureRecognizer() {
@@ -339,21 +344,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        switch sender.numberOfTapsRequired {
+        switch sender.numberOfTouchesRequired {
             case 1:
-                if gameStarted && !isTutorial {
-                    oreganoNode.bark()
-                }
-                if isTutorialSingleTap {
-                    oreganoNode.bark()
-                    objectiveComplete = true
-                    isTutorialSingleTap = false
+                switch sender.numberOfTapsRequired {
+                    case 1:
+                        print("oneSingleTap")
+                        if gameStarted && !isTutorial {
+                            oreganoNode.bark()
+                        }
+                        if isTutorialSingleTap {
+                            oreganoNode.bark()
+                            objectiveComplete = true
+                            isTutorialSingleTap = false
+                        }
+                    case 2:
+                        print("oneDoubleTap")
+                    default:
+                        break
                 }
             case 2:
-                switch sender.numberOfTouchesRequired {
+                switch sender.numberOfTapsRequired {
                     case 1:
-                        print("Player did interact!")
+                        print("twoSingleTap")
                     case 2:
+                        print("twoDoubleTap")
                         if let view = self.view {
                             let newScene = MenuScene(size: view.bounds.size)
                             newScene.scaleMode = .aspectFill
@@ -373,7 +387,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             guard let currentAudio = currentAudio else { return }
             currentAudio.run(.stop())
             self.currentAudio = nil
-            playerNode.removeAllActions()
+            removeAllActions()
             guard let nextAction = nextAction else { return }
             nextAction()
         }
