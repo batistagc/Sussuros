@@ -34,10 +34,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }()
     
     // Sounds
-    let sfxCrowdTalking0 = SKAudioNode(fileNamed: "SFXCrowdTalking0")
-    let sfxCrowdTalking1 = SKAudioNode(fileNamed: "SFXCrowdTalking1")
-    let sfxCrowdTalking2 = SKAudioNode(fileNamed: "SFXCrowdTalking2")
-    let sfxTypingKeyboard = SKAudioNode(fileNamed: "SFXTypingKeyboard")
+    let sfxCrowdTalking0: SKAudioNode = {
+        let skAudioNode = SKAudioNode(fileNamed: "SFXCrowdTalking0")
+        skAudioNode.autoplayLooped = false
+        return skAudioNode
+    }()
+    let sfxCrowdTalking1: SKAudioNode = {
+        let skAudioNode = SKAudioNode(fileNamed: "SFXCrowdTalking1")
+        skAudioNode.autoplayLooped = false
+        return skAudioNode
+    }()
+    let sfxCrowdTalking2: SKAudioNode = {
+        let skAudioNode = SKAudioNode(fileNamed: "SFXCrowdTalking2")
+        skAudioNode.autoplayLooped = false
+        return skAudioNode
+    }()
+    let sfxTypingKeyboard: SKAudioNode = {
+        let skAudioNode = SKAudioNode(fileNamed: "SFXTypingKeyboard")
+        skAudioNode.autoplayLooped = false
+        return skAudioNode
+    }()
     
     // 3D Sound Mixer
     let audioMix = AVAudioEnvironmentNode()
@@ -71,7 +87,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playerNode.addChild(cap1Narracao02Pimenta)
         
         setUpPhysicsBodies()
-        
         setUp3dAudio()
         
         nextAction = gamePart01
@@ -152,6 +167,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             SpeechSynthesizer.shared.speak("O latido do Orégano irá indicar para qual direção você deve seguir. Assim que você chegar lá, o Orégano irá para a próxima direção até que se chegue no objetivo final.")
         }
         isTutorial = false
+        objectiveComplete = false
         nextAction = gamePart06
     }
     
@@ -296,6 +312,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         doubleTap.numberOfTapsRequired = 2
         self.scene?.view?.addGestureRecognizer(doubleTap)
         
+        let twoDoubleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        twoDoubleTap.numberOfTouchesRequired = 2
+        twoDoubleTap.numberOfTouchesRequired = 2
+        self.scene?.view?.addGestureRecognizer(twoDoubleTap)
+        
         singleTap.require(toFail: doubleTap)
     }
     
@@ -309,7 +330,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch sender.state {
             case .recognized:
                 if sender.scale < 1.0 {
-                    print("Item coletado!")
+                    print("Item collected!")
                     // TODO: Coletar item
                 }
             default:
@@ -329,11 +350,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     isTutorialSingleTap = false
                 }
             case 2:
-                if let view = self.view {
-                    let newScene = MenuScene(size: view.bounds.size)
-                    newScene.scaleMode = .aspectFill
-                    view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
-                    view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
+                switch sender.numberOfTouchesRequired {
+                    case 1:
+                        print("Player did interact!")
+                    case 2:
+                        if let view = self.view {
+                            let newScene = MenuScene(size: view.bounds.size)
+                            newScene.scaleMode = .aspectFill
+                            view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
+                            view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
+                        }
+                    default:
+                        break
                 }
             default:
                 break

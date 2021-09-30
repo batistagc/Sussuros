@@ -6,7 +6,7 @@ class HeadphonesScene: SKScene {
     let headphonesImage = SKSpriteNode(texture: SKTexture(imageNamed: "􀑈"))
     let warningLabel = SKLabelNode()
     
-    let loopSpeech: String = "Sussurros é um audio game. Utilize fones de ouvido para que tenha uma melhor experiência."
+    let loopSpeech: String = "Sussurros é um audio game. Utilize fones de ouvido para que tenha uma melhor experiência. Toque duas vezes na tela para continuar."
 
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -79,7 +79,7 @@ class HeadphonesScene: SKScene {
 
 extension HeadphonesScene: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        run(.wait(forDuration: 4)) { [self] in
+        run(.wait(forDuration: 5)) { [self] in
             SpeechSynthesizer.shared.speak(loopSpeech)
         }
     }

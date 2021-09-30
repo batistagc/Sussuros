@@ -2,9 +2,10 @@ import SpriteKit
 import AVFAudio
 
 class MenuScene: SKScene {
-    
+    // User Defaults
     let defaults = UserDefaults.standard
     
+    // Background
     let lilypadFlower = SKSpriteNode(imageNamed: "vitoriaRegiaFlor")
     let lilypadRight = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
     let lilypadLeft = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
@@ -12,44 +13,36 @@ class MenuScene: SKScene {
     let lilypadSmallBottom = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
     let lilypadBottom = SKSpriteNode(imageNamed: "halfVitoriaRegia")
     
+    // Menu Options
+    let mainMenu: MenuNode<SKButtonNode>
     let continueGameButton: MenuNode<SKButtonNode>
     let newGameButton: MenuNode<SKButtonNode>
-    let settingsButton: MenuNode<SKButtonNode>
-    let helpButton: MenuNode<SKButtonNode>
-    
     let warningButton: MenuNode<SKButtonNode>
-    
+    let settingsButton: MenuNode<SKButtonNode>
 //    let vibrationsButton: MenuNode<SKButtonNode>
     let screenButton: MenuNode<SKButtonNode>
-    
+    let helpButton: MenuNode<SKButtonNode>
     let controlsMenu: MenuNode<SKButtonNode>
     let controlsGame: MenuNode<SKButtonNode>
     
-    let mainMenu: MenuNode<SKButtonNode>
+    // System
     var currentMenu: MenuNode<SKButtonNode>
-    
     var nextSpeech: (() -> Void)?
     
     override init(size: CGSize) {
-        
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
-        
         continueGameButton = MenuNode(SKButtonNode(tts: "Continuar jogo."))
         continueGameButton.value.name = "continueGame"
-        
         newGameButton = MenuNode(SKButtonNode(tts: "Novo jogo."))
         newGameButton.value.name = "newGame"
-        
         settingsButton = MenuNode(SKButtonNode(tts: "Configurações."))
 //        vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
         screenButton = MenuNode(SKToggleNode(tts: "Tela."))
-        
         helpButton = MenuNode(SKButtonNode(tts: "Ajuda."))
         controlsMenu = MenuNode(SKButtonNode(tts: "Controles do menu."))
         controlsMenu.value.action = {
-            SpeechSynthesizer.shared.speak("Para ir para a próxima opção, deslize para a direita. Para voltar à opção anterior, deslize para a esquerda. Para ir ao menu principal, deslize para cima. Caso queira ouvir novamente os comandos, dê um toque na tela. Para selecionar a opção, dê dois toques.")
+            SpeechSynthesizer.shared.speak("Para selecionar uma opção, dê dois toques na tela. Para voltar para as opções anteriores, deslize para cima. Para ir para a próxima opção, deslize para a direita. Para voltar para a opção anterior, deslize para a esquerda.")
         }
-        
         controlsGame = MenuNode(SKButtonNode(tts: "Controles do jogo."))
         controlsGame.value.action = {
             SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Com dois dedos, faça um gesto de pinça para coletar um item. Toque uma vez na tela para o Orégano latir. Para voltar ao menu principal, toque duas vezes na tela. Caso queira ouvir novamente os comandos, agite o celular.")
@@ -60,6 +53,9 @@ class MenuScene: SKScene {
             mainMenu.add(child: continueGameButton)
         }
         mainMenu.add(child: newGameButton)
+        if UserDefaults.standard.bool(forKey: "savedGame") {
+            newGameButton.add(child: warningButton)
+        }
         mainMenu.add(child: settingsButton)
         settingsButton.add(child: screenButton)
         mainMenu.add(child: helpButton)
@@ -67,8 +63,6 @@ class MenuScene: SKScene {
         helpButton.add(child: controlsGame)
         
         currentMenu = mainMenu
-        
-        
         
         super.init(size: size)
         
@@ -95,7 +89,6 @@ class MenuScene: SKScene {
         SpeechSynthesizer.shared.synthesizer.delegate = self
         
         // Background
-        
         addChild(lilypadFlower)
         addChild(lilypadRight)
         addChild(lilypadLeft)
@@ -112,16 +105,25 @@ class MenuScene: SKScene {
         lilypadSmallBottom.position = CGPoint(x: 60.0, y: -260.0)
         lilypadBottom.position = CGPoint(x: 70.0, y: -340.0)
         
-        currentMenu.value.announce()
-        nextSpeech = { [self] in
-            mainMenu.children[mainMenu.select].value.announce()
+        if !defaults.bool(forKey: "firstStart") {
+            controlsMenu.value.runAction()
+            defaults.set(true, forKey: "firstStart")
+            nextSpeech = { [self] in
+                currentMenu.value.announce()
+                nextSpeech = { [self] in
+                    mainMenu.children[mainMenu.select].value.announce()
+                }
+            }
+        } else {
+            currentMenu.value.announce()
+            nextSpeech = { [self] in
+                mainMenu.children[mainMenu.select].value.announce()
+            }
         }
         
         // Gestures Recognizers
-        
         addSwipeGestureRecognizer()
         addTapGestureRecognizer()
-        
     }
     
     func addSwipeGestureRecognizer() {
@@ -180,7 +182,6 @@ class MenuScene: SKScene {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        
         switch sender.numberOfTapsRequired {
             case 1:
                 currentMenu.children[currentMenu.select].value.announce()
