@@ -62,8 +62,8 @@ class AnalogStick {
                 stick.position = CGPoint(x: -distanceX, y: distanceY)
             }
             
-            velocityX = (stick.position.x) / 50
-            velocityY = (stick.position.y) / 50
+            velocityX = (stick.position.x) / 100
+            velocityY = (stick.position.y) / 100
             
 //            player.zRotation = angle
         }

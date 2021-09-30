@@ -37,6 +37,8 @@
 		C0BAC6282703AAA0005DA83D /* Cap1Fala04Isabella.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0BAC6242703AAA0005DA83D /* Cap1Fala04Isabella.mp3 */; };
 		C0BAC6292703AAA0005DA83D /* Cap1Fala03Maya.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0BAC6252703AAA0005DA83D /* Cap1Fala03Maya.mp3 */; };
 		C0BAC62D2703AFF8005DA83D /* Cap1Narracao02Pimenta.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0BAC62B2703AFF8005DA83D /* Cap1Narracao02Pimenta.mp3 */; };
+		C0D178FE2704E7B1002AD299 /* Masks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D178FD2704E7B1002AD299 /* Masks.swift */; };
+		C0D179012704F88A002AD299 /* NodeNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D179002704F88A002AD299 /* NodeNames.swift */; };
 		C0ECBF072703B30E00F6F819 /* Cap1Narracao01Pimenta.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0ECBF062703B30E00F6F819 /* Cap1Narracao01Pimenta.mp3 */; };
 		C0FD2C5B26FA4D83007C370A /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FD2C5A26FA4D83007C370A /* MenuNode.swift */; };
 /* End PBXBuildFile section */
@@ -74,6 +76,8 @@
 		C0BAC6242703AAA0005DA83D /* Cap1Fala04Isabella.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cap1Fala04Isabella.mp3; sourceTree = "<group>"; };
 		C0BAC6252703AAA0005DA83D /* Cap1Fala03Maya.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cap1Fala03Maya.mp3; sourceTree = "<group>"; };
 		C0BAC62B2703AFF8005DA83D /* Cap1Narracao02Pimenta.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cap1Narracao02Pimenta.mp3; sourceTree = "<group>"; };
+		C0D178FD2704E7B1002AD299 /* Masks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Masks.swift; sourceTree = "<group>"; };
+		C0D179002704F88A002AD299 /* NodeNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeNames.swift; sourceTree = "<group>"; };
 		C0ECBF062703B30E00F6F819 /* Cap1Narracao01Pimenta.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cap1Narracao01Pimenta.mp3; sourceTree = "<group>"; };
 		C0FD2C5A26FA4D83007C370A /* MenuNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				C0304C8926F3CD94004546C1 /* Assets */,
+				C0D178FF2704E7B7002AD299 /* Enums */,
 				C0304C8826F3CD72004546C1 /* Classes */,
 				212EE77D26F136D90065FB03 /* ViewControllers */,
 				212EE77F26F225040065FB03 /* Scenes */,
@@ -175,6 +180,15 @@
 				2137064126EFC8270085794F /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		C0D178FF2704E7B7002AD299 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				C0D178FD2704E7B1002AD299 /* Masks.swift */,
+				C0D179002704F88A002AD299 /* NodeNames.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,7 +284,9 @@
 				212EE78126F2251F0065FB03 /* MenuScene.swift in Sources */,
 				C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */,
 				212EE78326F242B50065FB03 /* SKButtonNode.swift in Sources */,
+				C0D178FE2704E7B1002AD299 /* Masks.swift in Sources */,
 				2137063B26EFC8240085794F /* SceneDelegate.swift in Sources */,
+				C0D179012704F88A002AD299 /* NodeNames.swift in Sources */,
 				214859FD26F5332200BD193F /* HeadphonesScene.swift in Sources */,
 				212EE77C26F136CE0065FB03 /* ViewController.swift in Sources */,
 				C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */,

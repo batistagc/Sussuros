@@ -1,34 +1,37 @@
 import SpriteKit
 import AVFoundation
 
-class GameScene: SKScene {
-    
+class GameScene: SKScene, SKPhysicsContactDelegate {
+    // UserDefaults
     let defaults = UserDefaults.standard
+    
+    // System
+    var singleTouch: UITouch?
+    var gameStarted = false
+    var currentAudio: SKAudioNode?
+    var nextAction: (() -> Void)?
+    var isNarrating = false
+    var isTutorial = false
+    var isTutorialRotation = false
+    var isTutorialSingleTap = false
+    var objectiveComplete = false
+    var currentPlayerRotation: CGFloat = 0
     
     // Graphics
     let analogStick = AnalogStick(stick: "stick-1", outline: "outline-1")
     let backgroundDelegacia = SKSpriteNode(imageNamed: "Delegacia")
     
-    // System
-    var singleTouch: UITouch?
-    var gameStarted = false
-    
-    let delegacia = SKNode()
-    let oregano = OreganoNode()
-    let player = SKNode()
-    
-    // Speech Synthesizer
-    let instructions: [String] = [
-        "Encoste na tela e deslize para cima para andar pra frente.",
-        "Deslize para os lados para virar para a esquerda e para a direita.",
-        "Deslize para baixo para andar para trás.",
-        "Toque uma vez na tela para o Orégano latir.",
-        "Para pausar o jogo, toque duas vezes na tela."
-    ]
-    
     // Narration
-    let cap1Narracao01Pimenta = SKAudioNode(fileNamed: "Cap1Narracao01Pimenta")
-    let cap1Narracao02Pimenta = SKAudioNode(fileNamed: "Cap1Narracao02Pimenta")
+    let cap1Narracao01Pimenta: SKAudioNode = {
+        let skAudioNode = SKAudioNode(fileNamed: "Cap1Narracao01Pimenta")
+        skAudioNode.autoplayLooped = false
+        return skAudioNode
+    }()
+    let cap1Narracao02Pimenta: SKAudioNode = {
+        let skAudioNode = SKAudioNode(fileNamed: "Cap1Narracao02Pimenta")
+        skAudioNode.autoplayLooped = false
+        return skAudioNode
+    }()
     
     // Sounds
     let sfxCrowdTalking0 = SKAudioNode(fileNamed: "SFXCrowdTalking0")
@@ -41,81 +44,158 @@ class GameScene: SKScene {
     let audioMixAttenuationRefDistance: Float = 50
     let audioMixAttenuationMaxDistance: Float = 300
     
-//    var array: [SKAudioNode] = []
-//    var nextSpeech: [String] = []
+    // Nodes
+    let playerNode = SKNode()
+    let playerReachNode = SKNode()
+    let oreganoNode = OreganoNode()
     
     override func didMove(to view: SKView) {
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        
+        physicsWorld.contactDelegate = self
         physicsWorld.gravity = .zero
-        
         SpeechSynthesizer.shared.synthesizer.delegate = self
         
-//        array = [cap1PimentaIntrodução, cap1PimentaFinal]
-//        defaults.set(1, forKey: "chapter")
-//        if defaults.integer(forKey: "chapter") == 1 {
-//            array[0].run(.play())
-//        } else if defaults.integer(forKey: "chapter") == 2{
-//            array[1].run(.play())
-//        }
+        setUpCamera()
+        camera!.addChild(backgroundDelegacia)
+        camera!.addChild(analogStick.createStick(named: "AnalogStick"))
         
+        // Add player node to scene
+        addChild(playerNode)
+        
+        // Add audio nodes to scene
+        addChild(oreganoNode)
+        addChild(sfxTypingKeyboard)
+        
+        // Add narration nodes to player
+        playerNode.addChild(cap1Narracao01Pimenta)
+        playerNode.addChild(cap1Narracao02Pimenta)
+        
+        setUpPhysicsBodies()
+        
+        setUp3dAudio()
+        
+        nextAction = gamePart01
+        
+        playerNode.name = NodeNames.player.rawValue
+        playerNode.position = CGPoint(x: 400, y: -20)
+        playerNode.zRotation = .pi
+        playerNode.physicsBody = SKPhysicsBody(circleOfRadius: 10)
+        playerNode.physicsBody?.categoryBitMask = Masks.player.rawValue
+        playerNode.physicsBody?.collisionBitMask = Masks.walls.rawValue
+        playerNode.physicsBody?.contactTestBitMask = Masks.oregano.rawValue
+        
+        oreganoNode.name = NodeNames.oregano.rawValue
+        oreganoNode.position = CGPoint(x: 400, y: -120)
+        oreganoNode.physicsBody = SKPhysicsBody(circleOfRadius: 20)
+        oreganoNode.physicsBody?.categoryBitMask = Masks.oregano.rawValue
+        oreganoNode.physicsBody?.collisionBitMask = Masks.none.rawValue
+        
+//        sfxTypingKeyboard.position = CGPoint(x: 392, y: -261)
+//        sfxTypingKeyboard.run(.play())
+        
+        cap1Narracao01Pimenta.run(.play())
+        isNarrating = true
+        currentAudio = cap1Narracao01Pimenta
+        run(.wait(forDuration: 87)) { [self] in
+            guard let nextAction = nextAction else { return }
+            nextAction()
+        }
+        
+        addPinchGestureRecognizer()
+        addTapGestureRecognizer()
+        addLongPressGestureRecognizer()
+    }
+    
+    func gamePart01() {
+        gameStarted = true
+        isNarrating = false
+        isTutorial = true
+        SpeechSynthesizer.shared.speak("Encoste na tela e deslize para cima para andar pra frente.")
+        objectiveComplete = false
+        nextAction = gamePart02
+    }
+    
+    func gamePart02() {
+        analogStick.resetStick()
+        singleTouch = nil
+        playerNode.position = CGPoint(x: 400, y: -20)
+        playerNode.zRotation = 0
+        SpeechSynthesizer.shared.speak("Deslize para os lados para virar para a esquerda e para a direita.")
+        isTutorialRotation = true
+        objectiveComplete = false
+        nextAction = gamePart03
+    }
+    
+    func gamePart03() {
+        analogStick.resetStick()
+        singleTouch = nil
+        playerNode.position = CGPoint(x: 400, y: -20)
+        playerNode.zRotation = 0
+        SpeechSynthesizer.shared.speak("Deslize para baixo para andar para trás.")
+        objectiveComplete = false
+        nextAction = gamePart04
+    }
+    
+    func gamePart04() {
+        analogStick.resetStick()
+        singleTouch = nil
+        playerNode.position = CGPoint(x: 400, y: -20)
+        playerNode.zRotation = 90*CGFloat.pi/180
+        SpeechSynthesizer.shared.speak("Toque uma vez na tela para o Orégano latir.")
+        isTutorialSingleTap = true
+        objectiveComplete = false
+        nextAction = gamePart05
+    }
+    
+    func gamePart05() {
+        run(.wait(forDuration: 1)) {
+            SpeechSynthesizer.shared.speak("O latido do Orégano irá indicar para qual direção você deve seguir. Assim que você chegar lá, o Orégano irá para a próxima direção até que se chegue no objetivo final.")
+        }
+        isTutorial = false
+        nextAction = gamePart06
+    }
+    
+    func gamePart06() {
+        SpeechSynthesizer.shared.speak("Obrigado por testar o audio game Sussurros!")
+        nextAction = nil
+    }
+    
+    // MARK: Camera Setup
+    func setUpCamera() {
+        let cameraNode = SKCameraNode()
+        camera = cameraNode
+        guard let camera = camera else { return }
+        let playerConstraint = SKConstraint.distance(SKRange(constantValue: 0), to: playerNode)
+        camera.constraints = [playerConstraint]
+        camera.zPosition = .infinity
+        addChild(camera)
+    }
+    
+    // MARK: AVAudioEnvironmentNode
+    func setUp3dAudio() {
         let mainMixer = audioEngine.mainMixerNode
         audioEngine.attach(audioMix)
         
-        player.position = CGPoint(x: 400, y: -20)
-        player.zRotation = .pi
-        player.physicsBody = SKPhysicsBody(circleOfRadius: 10)
-        addChild(player)
-        
-        cap1Narracao01Pimenta.autoplayLooped = false
-        player.addChild(cap1Narracao01Pimenta)
+        // Connect Nodes
         audioEngine.connect(cap1Narracao01Pimenta.avAudioNode!, to: audioMix, format: nil)
-        cap1Narracao01Pimenta.run(.play())
-        run(.wait(forDuration: 85)) { [self] in
-            SpeechSynthesizer.shared.speak(instructions[0])
-            
-            setUpCamera()
-            camera!.addChild(backgroundDelegacia)
-            camera!.addChild(analogStick.createStick(named: "AnalogStick"))
-            
-            addPhysicsBodies()
-            
-            addChild(oregano)
-            oregano.connectAudio(audioEngine: audioEngine, node: audioMix)
-            
-            sfxTypingKeyboard.position = CGPoint(x: 392, y: -261)
-            addChild(sfxTypingKeyboard)
-            audioEngine.connect(sfxTypingKeyboard.avAudioNode!, to: audioMix, format: nil)
-            sfxTypingKeyboard.run(.play())
-            
-            gameStarted = true
-        }
         
-        // MARK: AVAudioEnvironmentNode
+        oreganoNode.connectAudio(audioEngine: audioEngine, node: audioMix)
+        audioEngine.connect(sfxTypingKeyboard.avAudioNode!, to: audioMix, format: nil)
+        
         audioEngine.connect(audioMix, to: mainMixer, format: nil)
+        
+        // Audio Settings
         audioMix.distanceAttenuationParameters.distanceAttenuationModel = .linear
         audioMix.distanceAttenuationParameters.referenceDistance = audioMixAttenuationRefDistance
         audioMix.distanceAttenuationParameters.maximumDistance = audioMixAttenuationMaxDistance
         audioMix.outputType = .headphones
         audioMix.renderingAlgorithm = .HRTFHQ
         audioMix.sourceMode = .spatializeIfMono
-        
-        addPinchGestureRecognizer()
-        addTapGestureRecognizer()
-    }
-    
-    func setUpCamera() {
-        let cameraNode = SKCameraNode()
-        camera = cameraNode
-        guard let camera = camera else { return }
-        let playerConstraint = SKConstraint.distance(SKRange(constantValue: 0), to: player)
-        camera.constraints = [playerConstraint]
-        camera.zPosition = .infinity
-        addChild(camera)
     }
     
     // MARK: Map Physics
-    func addPhysicsBodies() {
+    func setUpPhysicsBodies() {
+        let delegacia = SKNode()
         delegacia.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: -660, width: 900, height: 660))
         delegacia.physicsBody?.isDynamic = false
         addChild(delegacia)
@@ -219,6 +299,12 @@ class GameScene: SKScene {
         singleTap.require(toFail: doubleTap)
     }
     
+    func addLongPressGestureRecognizer() {
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPress.minimumPressDuration = 1
+        self.scene?.view?.addGestureRecognizer(longPress)
+    }
+    
     @objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
         switch sender.state {
             case .recognized:
@@ -234,7 +320,14 @@ class GameScene: SKScene {
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         switch sender.numberOfTapsRequired {
             case 1:
-                oregano.bark()
+                if gameStarted && !isTutorial {
+                    oreganoNode.bark()
+                }
+                if isTutorialSingleTap {
+                    oreganoNode.bark()
+                    objectiveComplete = true
+                    isTutorialSingleTap = false
+                }
             case 2:
                 if let view = self.view {
                     let newScene = MenuScene(size: view.bounds.size)
@@ -244,6 +337,36 @@ class GameScene: SKScene {
                 }
             default:
                 break
+        }
+    }
+    
+    @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
+        if isNarrating {
+            guard let currentAudio = currentAudio else { return }
+            currentAudio.run(.stop())
+            self.currentAudio = nil
+            playerNode.removeAllActions()
+            guard let nextAction = nextAction else { return }
+            nextAction()
+        }
+    }
+    
+    func contactBetween(_ player: SKNode, _ node: SKNode) {
+        switch node.name {
+            case NodeNames.oregano.rawValue:
+                objectiveComplete = true
+            default:
+                break
+        }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard let nodeA = contact.bodyA.node else { return }
+        guard let nodeB = contact.bodyB.node else { return }
+        if nodeA.name == NodeNames.player.rawValue {
+            contactBetween(nodeA, nodeB)
+        } else if nodeB.name == NodeNames.player.rawValue {
+            contactBetween(nodeB, nodeA)
         }
     }
     
@@ -293,20 +416,20 @@ class GameScene: SKScene {
     }
     
     func updatePlayer() {
-        let angle = player.zRotation
+        let angle = playerNode.zRotation
         let radius: CGFloat = -analogStick.getVelocity().dy
-        player.position.x += cos(angle - CGFloat.pi / 2) * radius
-        player.position.y += sin(angle - CGFloat.pi / 2) * radius
-        player.zRotation -= (analogStick.getVelocity().dx*analogStick.getVelocity().dx*analogStick.getVelocity().dx) / 400
+        playerNode.position.x += cos(angle - CGFloat.pi / 2) * radius
+        playerNode.position.y += sin(angle - CGFloat.pi / 2) * radius
+        playerNode.zRotation -= (analogStick.getVelocity().dx*analogStick.getVelocity().dx*analogStick.getVelocity().dx) / 50
     }
     
     func updateCamera() {
-        camera?.zRotation = player.zRotation
+        camera?.zRotation = playerNode.zRotation
     }
     
     func updateListener() {
-        audioMix.listenerPosition = AVAudio3DPoint(x: Float(player.position.x), y: Float(player.position.y), z: 0)
-        audioMix.listenerAngularOrientation.roll = -Float(player.zRotation) * 180 / Float.pi
+        audioMix.listenerPosition = AVAudio3DPoint(x: Float(playerNode.position.x), y: Float(playerNode.position.y), z: 0)
+        audioMix.listenerAngularOrientation.roll = -Float(playerNode.zRotation) * 180 / Float.pi
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -314,6 +437,16 @@ class GameScene: SKScene {
         updatePlayer()
         updateCamera()
         updateListener()
+        if objectiveComplete {
+            guard let nextAction = nextAction else { return }
+            nextAction()
+        }
+        if isTutorialRotation {
+            if abs(playerNode.zRotation-currentPlayerRotation) > 60*CGFloat.pi/180 {
+                objectiveComplete = true
+                isTutorialRotation = false
+            }
+        }
     }
 }
 
