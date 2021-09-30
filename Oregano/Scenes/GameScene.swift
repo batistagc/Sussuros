@@ -66,10 +66,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let oreganoNode = OreganoNode()
     
     override func didMove(to view: SKView) {
+        UIApplication.shared.isIdleTimerDisabled = true
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = .zero
         SpeechSynthesizer.shared.synthesizer.delegate = self
+        SpeechSynthesizer.shared.speak("")
         
         setUpCamera()
         camera!.addChild(backgroundDelegacia)

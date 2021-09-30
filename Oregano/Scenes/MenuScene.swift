@@ -30,6 +30,8 @@ class MenuScene: SKScene {
     var nextSpeech: [() -> Void] = []
     
     override init(size: CGSize) {
+        UIApplication.shared.isIdleTimerDisabled = true
+        
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
         continueGameButton = MenuNode(SKButtonNode(tts: "Continuar jogo."))
         continueGameButton.value.name = "continueGame"
