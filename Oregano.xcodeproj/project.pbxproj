@@ -17,6 +17,15 @@
 		214859FD26F5332200BD193F /* HeadphonesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214859FC26F5332200BD193F /* HeadphonesScene.swift */; };
 		216A675D26F3D00C004F043C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216A675C26F3D00C004F043C /* GameScene.swift */; };
 		C00083EA26FB924D005B0748 /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00083E926FB924D005B0748 /* AnalogStick.swift */; };
+		C038275C27064F8F007ABFF6 /* SKPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C038275B27064F8F007ABFF6 /* SKPlayerNode.swift */; };
+		C038277527065397007ABFF6 /* SFXStep6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C038276D27065397007ABFF6 /* SFXStep6.mp3 */; };
+		C038277627065397007ABFF6 /* SFXStep0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C038276E27065397007ABFF6 /* SFXStep0.mp3 */; };
+		C038277727065397007ABFF6 /* SFXStep7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C038276F27065397007ABFF6 /* SFXStep7.mp3 */; };
+		C038277827065397007ABFF6 /* SFXStep3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C038277027065397007ABFF6 /* SFXStep3.mp3 */; };
+		C038277927065397007ABFF6 /* SFXStep1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C038277127065397007ABFF6 /* SFXStep1.mp3 */; };
+		C038277A27065397007ABFF6 /* SFXStep4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C038277227065397007ABFF6 /* SFXStep4.mp3 */; };
+		C038277B27065397007ABFF6 /* SFXStep5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C038277327065397007ABFF6 /* SFXStep5.mp3 */; };
+		C038277C27065397007ABFF6 /* SFXStep2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C038277427065397007ABFF6 /* SFXStep2.mp3 */; };
 		C09EDF2627023AFD00543C35 /* SFXCrowdTalking2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2027023AFC00543C35 /* SFXCrowdTalking2.mp3 */; };
 		C09EDF2827023AFD00543C35 /* SFXTypingKeyboard.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2227023AFC00543C35 /* SFXTypingKeyboard.mp3 */; };
 		C09EDF2A27023AFD00543C35 /* SFXCrowdTalking1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C09EDF2427023AFD00543C35 /* SFXCrowdTalking1.mp3 */; };
@@ -31,7 +40,7 @@
 		C0B74AFA2702654600A642FB /* SFXBark6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF22702654600A642FB /* SFXBark6.mp3 */; };
 		C0B74AFB2702654600A642FB /* SFXBark1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF32702654600A642FB /* SFXBark1.mp3 */; };
 		C0B74AFC2702654600A642FB /* SFXBark7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0B74AF42702654600A642FB /* SFXBark7.mp3 */; };
-		C0B74AFE2702656700A642FB /* OreganoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B74AFD2702656700A642FB /* OreganoNode.swift */; };
+		C0B74AFE2702656700A642FB /* SKOreganoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B74AFD2702656700A642FB /* SKOreganoNode.swift */; };
 		C0BAC6262703AAA0005DA83D /* Cap1Fala01Maya.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0BAC6222703AAA0005DA83D /* Cap1Fala01Maya.mp3 */; };
 		C0BAC6272703AAA0005DA83D /* Cap1Fala02Isabella.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0BAC6232703AAA0005DA83D /* Cap1Fala02Isabella.mp3 */; };
 		C0BAC6282703AAA0005DA83D /* Cap1Fala04Isabella.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0BAC6242703AAA0005DA83D /* Cap1Fala04Isabella.mp3 */; };
@@ -56,6 +65,15 @@
 		214859FC26F5332200BD193F /* HeadphonesScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadphonesScene.swift; sourceTree = "<group>"; };
 		216A675C26F3D00C004F043C /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		C00083E926FB924D005B0748 /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
+		C038275B27064F8F007ABFF6 /* SKPlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPlayerNode.swift; sourceTree = "<group>"; };
+		C038276D27065397007ABFF6 /* SFXStep6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXStep6.mp3; sourceTree = "<group>"; };
+		C038276E27065397007ABFF6 /* SFXStep0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXStep0.mp3; sourceTree = "<group>"; };
+		C038276F27065397007ABFF6 /* SFXStep7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXStep7.mp3; sourceTree = "<group>"; };
+		C038277027065397007ABFF6 /* SFXStep3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXStep3.mp3; sourceTree = "<group>"; };
+		C038277127065397007ABFF6 /* SFXStep1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXStep1.mp3; sourceTree = "<group>"; };
+		C038277227065397007ABFF6 /* SFXStep4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXStep4.mp3; sourceTree = "<group>"; };
+		C038277327065397007ABFF6 /* SFXStep5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXStep5.mp3; sourceTree = "<group>"; };
+		C038277427065397007ABFF6 /* SFXStep2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXStep2.mp3; sourceTree = "<group>"; };
 		C09EDF2027023AFC00543C35 /* SFXCrowdTalking2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXCrowdTalking2.mp3; sourceTree = "<group>"; };
 		C09EDF2227023AFC00543C35 /* SFXTypingKeyboard.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXTypingKeyboard.mp3; sourceTree = "<group>"; };
 		C09EDF2427023AFD00543C35 /* SFXCrowdTalking1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXCrowdTalking1.mp3; sourceTree = "<group>"; };
@@ -70,7 +88,7 @@
 		C0B74AF22702654600A642FB /* SFXBark6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark6.mp3; sourceTree = "<group>"; };
 		C0B74AF32702654600A642FB /* SFXBark1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark1.mp3; sourceTree = "<group>"; };
 		C0B74AF42702654600A642FB /* SFXBark7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SFXBark7.mp3; sourceTree = "<group>"; };
-		C0B74AFD2702656700A642FB /* OreganoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OreganoNode.swift; sourceTree = "<group>"; };
+		C0B74AFD2702656700A642FB /* SKOreganoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKOreganoNode.swift; sourceTree = "<group>"; };
 		C0BAC6222703AAA0005DA83D /* Cap1Fala01Maya.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cap1Fala01Maya.mp3; sourceTree = "<group>"; };
 		C0BAC6232703AAA0005DA83D /* Cap1Fala02Isabella.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cap1Fala02Isabella.mp3; sourceTree = "<group>"; };
 		C0BAC6242703AAA0005DA83D /* Cap1Fala04Isabella.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cap1Fala04Isabella.mp3; sourceTree = "<group>"; };
@@ -148,10 +166,11 @@
 			children = (
 				212EE78226F242B50065FB03 /* SKButtonNode.swift */,
 				C0B0AD0426F8FBB5008015F4 /* SKToggleNode.swift */,
+				C038275B27064F8F007ABFF6 /* SKPlayerNode.swift */,
+				C0B74AFD2702656700A642FB /* SKOreganoNode.swift */,
 				C0A8CC4226F5386A00904C42 /* SpeechSynthesizer.swift */,
 				C0FD2C5A26FA4D83007C370A /* MenuNode.swift */,
 				C00083E926FB924D005B0748 /* AnalogStick.swift */,
-				C0B74AFD2702656700A642FB /* OreganoNode.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -173,6 +192,14 @@
 				C0B74AEE2702654600A642FB /* SFXBark5.mp3 */,
 				C0B74AF22702654600A642FB /* SFXBark6.mp3 */,
 				C0B74AF42702654600A642FB /* SFXBark7.mp3 */,
+				C038276E27065397007ABFF6 /* SFXStep0.mp3 */,
+				C038277127065397007ABFF6 /* SFXStep1.mp3 */,
+				C038277427065397007ABFF6 /* SFXStep2.mp3 */,
+				C038277027065397007ABFF6 /* SFXStep3.mp3 */,
+				C038277227065397007ABFF6 /* SFXStep4.mp3 */,
+				C038277327065397007ABFF6 /* SFXStep5.mp3 */,
+				C038276D27065397007ABFF6 /* SFXStep6.mp3 */,
+				C038276F27065397007ABFF6 /* SFXStep7.mp3 */,
 				C0BAC6222703AAA0005DA83D /* Cap1Fala01Maya.mp3 */,
 				C0BAC6232703AAA0005DA83D /* Cap1Fala02Isabella.mp3 */,
 				C0BAC6252703AAA0005DA83D /* Cap1Fala03Maya.mp3 */,
@@ -254,9 +281,13 @@
 				C0B74AFC2702654600A642FB /* SFXBark7.mp3 in Resources */,
 				C0B74AF72702654600A642FB /* SFXBark2.mp3 in Resources */,
 				C0B74AF92702654600A642FB /* SFXBark4.mp3 in Resources */,
+				C038277B27065397007ABFF6 /* SFXStep5.mp3 in Resources */,
+				C038277927065397007ABFF6 /* SFXStep1.mp3 in Resources */,
 				C0ECBF072703B30E00F6F819 /* Cap1Narracao01Pimenta.mp3 in Resources */,
 				C0BAC6282703AAA0005DA83D /* Cap1Fala04Isabella.mp3 in Resources */,
+				C038277A27065397007ABFF6 /* SFXStep4.mp3 in Resources */,
 				2137064226EFC8270085794F /* Assets.xcassets in Resources */,
+				C038277527065397007ABFF6 /* SFXStep6.mp3 in Resources */,
 				C09EDF2827023AFD00543C35 /* SFXTypingKeyboard.mp3 in Resources */,
 				C09EDF2D27023B3400543C35 /* SFXCrowdTalking0.mp3 in Resources */,
 				C09EDF2A27023AFD00543C35 /* SFXCrowdTalking1.mp3 in Resources */,
@@ -264,9 +295,13 @@
 				C0B74AF52702654600A642FB /* SFXBark0.mp3 in Resources */,
 				C0B74AF62702654600A642FB /* SFXBark5.mp3 in Resources */,
 				C0BAC62D2703AFF8005DA83D /* Cap1Narracao02Pimenta.mp3 in Resources */,
+				C038277627065397007ABFF6 /* SFXStep0.mp3 in Resources */,
+				C038277827065397007ABFF6 /* SFXStep3.mp3 in Resources */,
 				C0B74AF82702654600A642FB /* SFXBark3.mp3 in Resources */,
 				C0BAC6262703AAA0005DA83D /* Cap1Fala01Maya.mp3 in Resources */,
 				C0B74AFB2702654600A642FB /* SFXBark1.mp3 in Resources */,
+				C038277C27065397007ABFF6 /* SFXStep2.mp3 in Resources */,
+				C038277727065397007ABFF6 /* SFXStep7.mp3 in Resources */,
 				C0B74AFA2702654600A642FB /* SFXBark6.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,13 +320,14 @@
 				C0B0AD0526F8FBB5008015F4 /* SKToggleNode.swift in Sources */,
 				212EE78326F242B50065FB03 /* SKButtonNode.swift in Sources */,
 				C0D178FE2704E7B1002AD299 /* Masks.swift in Sources */,
+				C038275C27064F8F007ABFF6 /* SKPlayerNode.swift in Sources */,
 				2137063B26EFC8240085794F /* SceneDelegate.swift in Sources */,
 				C0D179012704F88A002AD299 /* NodeNames.swift in Sources */,
 				214859FD26F5332200BD193F /* HeadphonesScene.swift in Sources */,
 				212EE77C26F136CE0065FB03 /* ViewController.swift in Sources */,
 				C0A8CC4326F5386A00904C42 /* SpeechSynthesizer.swift in Sources */,
 				C00083EA26FB924D005B0748 /* AnalogStick.swift in Sources */,
-				C0B74AFE2702656700A642FB /* OreganoNode.swift in Sources */,
+				C0B74AFE2702656700A642FB /* SKOreganoNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +468,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R36LU3NVAA;
+				DEVELOPMENT_TEAM = 337G99FP8D;
 				INFOPLIST_FILE = Oregano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -453,7 +489,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R36LU3NVAA;
+				DEVELOPMENT_TEAM = 337G99FP8D;
 				INFOPLIST_FILE = Oregano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

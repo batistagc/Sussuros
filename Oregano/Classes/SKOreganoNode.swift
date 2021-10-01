@@ -1,12 +1,12 @@
 import SpriteKit
 import AVFAudio
 
-class OreganoNode: SKNode {
+class SKOreganoNode: SKNode {
     
-    private let barkSounds: [SKAudioNode]
+    private let barkSfx: [SKAudioNode]
     
     override init() {
-        barkSounds = [
+        barkSfx = [
             SKAudioNode(fileNamed: "SFXBark0"),
             SKAudioNode(fileNamed: "SFXBark1"),
             SKAudioNode(fileNamed: "SFXBark2"),
@@ -19,7 +19,7 @@ class OreganoNode: SKNode {
         
         super.init()
         
-        barkSounds.forEach {
+        barkSfx.forEach {
             $0.autoplayLooped = false
             addChild($0)
         }
@@ -30,12 +30,12 @@ class OreganoNode: SKNode {
     }
     
     func bark() {
-        guard let bark = barkSounds.randomElement() else { return }
+        guard let bark = barkSfx.randomElement() else { return }
         bark.run(.play())
     }
     
     func connectAudio(audioEngine: AVAudioEngine, node: AVAudioEnvironmentNode) {
-        barkSounds.forEach {
+        barkSfx.forEach {
             audioEngine.connect($0.avAudioNode!, to: node, format: nil)
         }
     }
