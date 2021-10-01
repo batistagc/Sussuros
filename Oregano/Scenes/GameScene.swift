@@ -110,17 +110,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        sfxTypingKeyboard.position = CGPoint(x: 392, y: -261)
 //        sfxTypingKeyboard.run(.play())
         
-        cap1Narracao01Pimenta.run(.play())
-        isNarrating = true
-        currentAudio = cap1Narracao01Pimenta
-        run(.wait(forDuration: 87)) { [self] in
-            guard let nextAction = nextAction else { return }
-            nextAction()
+        
+        switch defaults.integer(forKey: "stage") {
+        case 1:
+            gamePart01()
+            break
+        case 2:
+            gamePart06()
+            break
+        default:
+            gamePart00()
+            run(.wait(forDuration: 87)) { [self] in
+                guard let nextAction = nextAction else { return }
+                nextAction()
+            }
         }
+        
+        
         
         addPinchGestureRecognizer()
         addTapGestureRecognizer()
         addLongPressGestureRecognizer()
+    }
+    
+    func gamePart00() {
+        defaults.set(0, forKey: "stage")
+        gameStarted = true
+        isNarrating = false
+        isTutorial = false
+        cap1Narracao01Pimenta.run(.play())
+        currentAudio = cap1Narracao01Pimenta
+        objectiveComplete = false
+        nextAction = gamePart01
     }
     
     func gamePart01() {
@@ -129,6 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isTutorial = true
         SpeechSynthesizer.shared.speak("Para andar para frente, toque na tela e arraste para cima. Você continuará andando enquanto mantiver pressionado.")
         objectiveComplete = false
+        defaults.set(1, forKey: "stage")
         nextAction = gamePart02
     }
     
@@ -174,6 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gamePart06() {
+        defaults.set(2, forKey: "savedGame")
         SpeechSynthesizer.shared.speak("Obrigado por testar o audio game Sussurros!")
         nextAction = nil
     }

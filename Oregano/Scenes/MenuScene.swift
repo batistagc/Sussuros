@@ -190,6 +190,7 @@ class MenuScene: SKScene {
                 currentMenu.children[currentMenu.select].value.announce()
             case 2:
                 if currentMenu.value.tts == "Atenção!" {
+                    defaults.set(0, forKey: "stage")
                     presentGame()
                 }  else if currentMenu.children[currentMenu.select].children.count > 0 {
                     currentMenu.children[currentMenu.select].value.announce()
@@ -208,6 +209,7 @@ class MenuScene: SKScene {
                         resetGame()
                     } else {
                         defaults.set(true, forKey: "savedGame")
+                        defaults.set(0, forKey: "stage")
                         presentGame()
                     }
                 } else {
