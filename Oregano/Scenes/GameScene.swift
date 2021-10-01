@@ -16,6 +16,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isTutorialSingleTap = false
     var objectiveComplete = false
     var currentPlayerRotation: CGFloat = 0
+    var isWalking = false
+    var currentPlayerPosition: CGPoint = CGPoint.zero
+    
+    // Actions
+    var actionWalk = SKAction()
     
     // Graphics
     let analogStick = AnalogStick(stick: "stick-1", outline: "outline-1")
@@ -61,17 +66,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let audioMixAttenuationMaxDistance: Float = 300
     
     // Nodes
-    let playerNode = SKNode()
+    let playerNode = SKPlayerNode()
     let playerReachNode = SKNode()
-    let oreganoNode = OreganoNode()
+    let oreganoNode = SKOreganoNode()
     
     override func didMove(to view: SKView) {
         UIApplication.shared.isIdleTimerDisabled = true
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = .zero
-        SpeechSynthesizer.shared.synthesizer.delegate = self
         SpeechSynthesizer.shared.speak("")
+        
+        // Actions
+        actionWalk = .repeatForever(.sequence([
+            .wait(forDuration: 0.5),
+            .customAction(withDuration: 0, actionBlock: { [self] _, _ in
+                playerNode.walk()
+            })
+        ]))
         
         setUpCamera()
         camera!.addChild(backgroundDelegacia)
@@ -91,12 +103,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setUpPhysicsBodies()
         setUp3dAudio()
         
-        nextAction = gamePart01
-        
         playerNode.name = NodeNames.player.rawValue
         playerNode.position = CGPoint(x: 400, y: -20)
         playerNode.zRotation = .pi
-        playerNode.physicsBody = SKPhysicsBody(circleOfRadius: 10)
         playerNode.physicsBody?.categoryBitMask = Masks.player.rawValue
         playerNode.physicsBody?.collisionBitMask = Masks.walls.rawValue
         playerNode.physicsBody?.contactTestBitMask = Masks.oregano.rawValue
@@ -110,23 +119,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        sfxTypingKeyboard.position = CGPoint(x: 392, y: -261)
 //        sfxTypingKeyboard.run(.play())
         
-        
-        switch defaults.integer(forKey: "stage") {
-        case 1:
-            gamePart01()
-            break
-        case 2:
-            gamePart06()
-            break
-        default:
-            gamePart00()
-            run(.wait(forDuration: 87)) { [self] in
-                guard let nextAction = nextAction else { return }
-                nextAction()
-            }
+        switch defaults.integer(forKey: "gamePart") {
+            case 1:
+                gamePart01()
+            case 2:
+                gamePart06()
+            default:
+                gamePart00()
         }
-        
-        
         
         addPinchGestureRecognizer()
         addTapGestureRecognizer()
@@ -134,27 +134,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gamePart00() {
-        defaults.set(0, forKey: "stage")
-        gameStarted = true
-        isNarrating = false
-        isTutorial = false
-        cap1Narracao01Pimenta.run(.play())
-        currentAudio = cap1Narracao01Pimenta
-        objectiveComplete = false
+        defaults.set(0, forKey: "gamePart")
         nextAction = gamePart01
+        cap1Narracao01Pimenta.run(.play())
+        isNarrating = true
+        currentAudio = cap1Narracao01Pimenta
+        run(.wait(forDuration: 87)) { [self] in
+            guard let nextAction = nextAction else { return }
+            nextAction()
+        }
     }
     
     func gamePart01() {
+        defaults.set(1, forKey: "gamePart")
         gameStarted = true
         isNarrating = false
         isTutorial = true
         SpeechSynthesizer.shared.speak("Para andar para frente, toque na tela e arraste para cima. Você continuará andando enquanto mantiver pressionado.")
         objectiveComplete = false
-        defaults.set(1, forKey: "stage")
         nextAction = gamePart02
     }
     
     func gamePart02() {
+        playerNode.removeAction(forKey: "playerWalk")
         analogStick.resetStick()
         singleTouch = nil
         playerNode.position = CGPoint(x: 400, y: -20)
@@ -166,6 +168,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gamePart03() {
+        playerNode.removeAction(forKey: "playerWalk")
         analogStick.resetStick()
         singleTouch = nil
         playerNode.position = CGPoint(x: 400, y: -20)
@@ -176,6 +179,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gamePart04() {
+        playerNode.removeAction(forKey: "playerWalk")
         analogStick.resetStick()
         singleTouch = nil
         playerNode.position = CGPoint(x: 400, y: -20)
@@ -196,7 +200,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gamePart06() {
-        defaults.set(2, forKey: "savedGame")
+        defaults.set(2, forKey: "gamePart")
         SpeechSynthesizer.shared.speak("Obrigado por testar o audio game Sussurros!")
         nextAction = nil
     }
@@ -220,6 +224,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Connect Nodes
         audioEngine.connect(cap1Narracao01Pimenta.avAudioNode!, to: audioMix, format: nil)
         
+        playerNode.connectAudio(audioEngine: audioEngine, node: audioMix)
         oreganoNode.connectAudio(audioEngine: audioEngine, node: audioMix)
         audioEngine.connect(sfxTypingKeyboard.avAudioNode!, to: audioMix, format: nil)
         
@@ -360,7 +365,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch sender.state {
             case .recognized:
                 if sender.scale < 1.0 {
-                    print("Item collected!")
+                    print("downscalingPinch")
                     // TODO: Coletar item
                 }
             default:
@@ -408,6 +413,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
+        print("longPress")
         if isNarrating {
             guard let currentAudio = currentAudio else { return }
             currentAudio.run(.stop())
@@ -421,7 +427,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func contactBetween(_ player: SKNode, _ node: SKNode) {
         switch node.name {
             case NodeNames.oregano.rawValue:
-                objectiveComplete = true
+                if !isTutorialRotation && !isTutorialSingleTap {
+                    objectiveComplete = true
+                }
             default:
                 break
         }
@@ -438,6 +446,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         if gameStarted {
             for touch in touches {
                 if singleTouch == nil {
@@ -450,9 +459,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
         if gameStarted {
             for touch in touches {
                 if touch == singleTouch {
+                    if playerNode.action(forKey: "playerWalk") == nil {
+                        playerNode.run(actionWalk, withKey: "playerWalk")
+                    }
                     let location = touch.location(in: camera!)
                     analogStick.updateVector(for: location)
                 }
@@ -461,9 +474,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         if gameStarted {
             for touch in touches {
                 if touch == singleTouch {
+                    isWalking = false
+                    playerNode.removeAction(forKey: "playerWalk")
                     analogStick.resetStick()
                     singleTouch = nil
                 }
@@ -472,9 +488,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
         if gameStarted {
             for touch in touches {
                 if touch == singleTouch {
+                    isWalking = false
+                    playerNode.removeAction(forKey: "playerWalk")
                     analogStick.resetStick()
                     singleTouch = nil
                 }
@@ -514,14 +533,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 isTutorialRotation = false
             }
         }
-    }
-}
-
-extension GameScene: AVSpeechSynthesizerDelegate {
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-//        if nextSpeech.count > 0 {
-//            SpeechSynthesizer.shared.speak(nextSpeech[0])
-//            nextSpeech.remove(at: 0)
-//        }
+        if currentPlayerPosition.x != playerNode.position.x || currentPlayerPosition.y != playerNode.position.y {
+            isWalking = true
+            currentPlayerPosition = playerNode.position
+        }
     }
 }
