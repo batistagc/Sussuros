@@ -5,72 +5,104 @@ class MenuScene: SKScene {
     // User Defaults
     let defaults = UserDefaults.standard
     
-    // Background
-    let lilypadFlower = SKSpriteNode(imageNamed: "vitoriaRegiaFlor")
-    let lilypadRight = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
-    let lilypadLeft = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
-    let lilypadSmallLeft = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
-    let lilypadSmallBottom = SKSpriteNode(imageNamed: "vitoriaRegiaInteira")
-    let lilypadBottom = SKSpriteNode(imageNamed: "halfVitoriaRegia")
-    
-    // Menu Options
-    let welcome: MenuNode<SKButtonNode>
-    let mainMenu: MenuNode<SKButtonNode>
-    let continueGameButton: MenuNode<SKButtonNode>
-    let newGameButton: MenuNode<SKButtonNode>
-    let warningButton: MenuNode<SKButtonNode>
-    let settingsButton: MenuNode<SKButtonNode>
-//    let vibrationsButton: MenuNode<SKButtonNode>
-    let screenButton: MenuNode<SKButtonNode>
-    let helpButton: MenuNode<SKButtonNode>
-    let controlsMenu: MenuNode<SKButtonNode>
-    let controlsGame: MenuNode<SKButtonNode>
-    
     // System
     var currentMenu: MenuNode<SKButtonNode>
-    var nextSpeech: [() -> Void] = []
     
+    // Background Images
+    let lilypadFlower = SKSpriteNode(imageNamed: ImageNames.lilypadFlower.rawValue)
+    let lilypadRight = SKSpriteNode(imageNamed: ImageNames.lilypad.rawValue)
+    let lilypadLeft = SKSpriteNode(imageNamed: ImageNames.lilypad.rawValue)
+    let lilypadSmallLeft = SKSpriteNode(imageNamed: ImageNames.lilypad.rawValue)
+    let lilypadSmallBottom = SKSpriteNode(imageNamed: ImageNames.lilypad.rawValue)
+    let lilypadBottom = SKSpriteNode(imageNamed: ImageNames.lilypadHalf.rawValue)
+    
+    // Menu Options
+    let mainMenu: MenuNode<SKButtonNode>
+    let continueGameOption: MenuNode<SKButtonNode>
+    let newGameOption: MenuNode<SKButtonNode>
+    let newGameOverwriteOption: MenuNode<SKButtonNode>
+    let settingsOption: MenuNode<SKButtonNode>
+//    let toggleVibrationsOption: MenuNode<SKButtonNode>
+    let toggleScreenOption: MenuNode<SKButtonNode>
+    let helpOption: MenuNode<SKButtonNode>
+    let speakMenuControlsOption: MenuNode<SKButtonNode>
+    let speakGameControlsOption: MenuNode<SKButtonNode>
+    
+    // MARK: init
     override init(size: CGSize) {
-        UIApplication.shared.isIdleTimerDisabled = true
-        
-        welcome = MenuNode(SKButtonNode(tts: "Bem vindo ao jogo Sussurros."))
+        // Set Up Options
+        // Main Menu
         mainMenu = MenuNode(SKButtonNode(tts: "Menu principal."))
-        continueGameButton = MenuNode(SKButtonNode(tts: "Continuar jogo."))
-        continueGameButton.value.name = "continueGame"
-        newGameButton = MenuNode(SKButtonNode(tts: "Novo jogo."))
-        newGameButton.value.name = "newGame"
-        settingsButton = MenuNode(SKButtonNode(tts: "Configurações."))
-//        vibrationsButton = MenuNode(SKToggleNode(tts: "Vibrações."))
-        screenButton = MenuNode(SKToggleNode(tts: "Tela."))
-        helpButton = MenuNode(SKButtonNode(tts: "Ajuda."))
-        controlsMenu = MenuNode(SKButtonNode(tts: "Controles do menu."))
-        controlsMenu.value.action = {
+        mainMenu.value.name = OptionNames.mainMenu.rawValue
+        // Continue Game
+        continueGameOption = MenuNode(SKButtonNode(tts: "Continuar jogo."))
+        continueGameOption.value.name = OptionNames.continueGame.rawValue
+        // New Game
+        newGameOption = MenuNode(SKButtonNode(tts: "Novo jogo."))
+        newGameOption.value.name = OptionNames.newGame.rawValue
+        // New Game Overwrite Warning
+        newGameOverwriteOption = MenuNode(SKButtonNode(tts: "Tem certeza que quer iniciar um novo jogo? Todo o progresso do jogo anterior será perdido."))
+        newGameOverwriteOption.value.name = OptionNames.newGameOverwrite.rawValue
+        // Settings
+        settingsOption = MenuNode(SKButtonNode(tts: "Configurações."))
+        settingsOption.value.name = OptionNames.settings.rawValue
+        // Toggle Vibrations
+//        toggleVibrationsOption = MenuNode(SKToggleNode(tts: "Vibrações."))
+        // Toggle Screen
+        toggleScreenOption = MenuNode(SKToggleNode(tts: "Tela."))
+        toggleScreenOption.value.name = OptionNames.toggleScreen.rawValue
+        // Help
+        helpOption = MenuNode(SKButtonNode(tts: "Ajuda."))
+        helpOption.value.name = OptionNames.help.rawValue
+        // Speak Menu Controls
+        speakMenuControlsOption = MenuNode(SKButtonNode(tts: "Controles do menu."))
+        speakMenuControlsOption.value.name = OptionNames.speakMenuControls.rawValue
+        speakMenuControlsOption.value.action = {
             SpeechSynthesizer.shared.speak("Para selecionar uma opção, dê dois toques na tela. Para ver as opções do menu, deslize para cima. Para ver as outras opções do menu, deslize para os lados. Se quiser voltar ao menu principal a partir do jogo, dê dois toques na tela com dois dedos.")
         }
-        controlsGame = MenuNode(SKButtonNode(tts: "Controles do jogo."))
-        controlsGame.value.action = {
+        // Speak Game Controls
+        speakGameControlsOption = MenuNode(SKButtonNode(tts: "Controles do jogo."))
+        speakMenuControlsOption.value.name = OptionNames.speakGameControls.rawValue
+        speakGameControlsOption.value.action = {
             SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Toque uma vez na tela para o Orégano latir. Para voltar ao menu principal, toque duas vezes na tela com dois dedos. Caso queira ouvir novamente os comandos, agite o celular.")
         }
-        warningButton = MenuNode(SKButtonNode(tts: "Atenção!"))
         
-        if UserDefaults.standard.bool(forKey: "savedGame") {
-            mainMenu.add(child: continueGameButton)
+        // Set Up Main Menu
+        if defaults.string(forKey: Defaults.lastCheckpoint.rawValue) != nil {
+            mainMenu.add(child: continueGameOption)
         }
-        mainMenu.add(child: newGameButton)
-//        if UserDefaults.standard.bool(forKey: "savedGame") {
-//            mainMenu.add(child: warningButton)
-//        }
-        mainMenu.add(child: settingsButton)
-        settingsButton.add(child: screenButton)
-        mainMenu.add(child: helpButton)
-        helpButton.add(child: controlsMenu)
-        helpButton.add(child: controlsGame)
+        mainMenu.add(child: newGameOption)
+        if defaults.string(forKey: Defaults.lastCheckpoint.rawValue) != nil {
+            newGameOption.add(child: newGameOverwriteOption)
+        }
+        mainMenu.add(child: settingsOption)
+        settingsOption.add(child: toggleScreenOption)
+        mainMenu.add(child: helpOption)
+        helpOption.add(child: speakMenuControlsOption)
+        helpOption.add(child: speakGameControlsOption)
         
         currentMenu = mainMenu
         
         super.init(size: size)
         
-        if let screen = screenButton.value as? SKToggleNode {
+        // Set Up Actions
+        // Continue Game
+        continueGameOption.value.action = { [self] in
+            presentGame()
+        }
+        // New Game
+        if defaults.string(forKey: Defaults.lastCheckpoint.rawValue) == nil {
+            newGameOption.value.action = { [self] in
+                presentGame()
+            }
+        }
+        // New Game Overwrite Warning
+        newGameOverwriteOption.value.action = { [self] in
+            resetGame()
+            presentGame()
+        }
+        // Toggle Screen
+        if let screen = toggleScreenOption.value as? SKToggleNode {
             screen.action = { [self] in
                 let blackScreen = view?.subviews.filter { $0.tag == 1 }
                 blackScreen![0].isHidden = false
@@ -80,19 +112,23 @@ class MenuScene: SKScene {
                 blackScreen![0].isHidden = true
             }
         }
+        
+        // Disable Screen Locking
+        UIApplication.shared.isIdleTimerDisabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: didMove
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.backgroundColor = UIColor(red: 5/255, green: 31/255, blue: 30/255, alpha: 1.0)
         
         SpeechSynthesizer.shared.synthesizer.delegate = self
         
-        // Background
+        // Add Background
         addChild(lilypadFlower)
         addChild(lilypadRight)
         addChild(lilypadLeft)
@@ -109,20 +145,16 @@ class MenuScene: SKScene {
         lilypadSmallBottom.position = CGPoint(x: 60.0, y: -260.0)
         lilypadBottom.position = CGPoint(x: 70.0, y: -340.0)
         
-        if !defaults.bool(forKey: "firstStart") {
-            controlsMenu.value.runAction()
-            defaults.set(true, forKey: "firstStart")
-            nextSpeech.append { [self] in
-                currentMenu.value.announce()
-                nextSpeech.insert({
-                    mainMenu.children[mainMenu.select].value.announce()
-                }, at: 0)
-            }
+        // Speak controls if first time opening game
+        SpeechSynthesizer.shared.speak("Bem vindo ao jogo Sussurros.")
+        if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
+            defaults.set(true, forKey: Defaults.IsOldUser.rawValue)
+            SpeechSynthesizer.shared.addNextSpeech("Para selecionar uma opção, dê dois toques na tela. Para ver as opções do menu, deslize para cima. Para ver as outras opções do menu, deslize para os lados. Se quiser voltar ao menu principal a partir do jogo, dê dois toques na tela com dois dedos.")
+            SpeechSynthesizer.shared.addNextSpeech(currentMenu.value.tts)
+            SpeechSynthesizer.shared.addNextSpeech(mainMenu.children[mainMenu.select].value.tts)
         } else {
-            currentMenu.value.announce()
-            nextSpeech.insert({ [self] in
-                mainMenu.children[mainMenu.select].value.announce()
-            }, at: 0)
+            SpeechSynthesizer.shared.addNextSpeech(currentMenu.value.tts)
+            SpeechSynthesizer.shared.addNextSpeech(mainMenu.children[mainMenu.select].value.tts)
         }
         
         // Gestures Recognizers
@@ -130,6 +162,29 @@ class MenuScene: SKScene {
         addTapGestureRecognizer()
     }
     
+    // MARK: Mod Function
+    func mod(_ a: Int, _ n: Int) -> Int {
+        precondition(n > 0, "modulus must be positive")
+        let r = a % n
+        return r >= 0 ? r : r + n
+    }
+    
+    // MARK: Present Game
+    func presentGame() {
+        if let view = self.view {
+            let newScene = LoadingScene(size: view.bounds.size)
+            newScene.scaleMode = .aspectFill
+            view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
+            view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
+        }
+    }
+    
+    // MARK: Reset Game
+    func resetGame() {
+        defaults.set(nil, forKey: Defaults.lastCheckpoint.rawValue)
+    }
+    
+    // MARK: Swipe Gesture Recognizer
     func addSwipeGestureRecognizer() {
         let gestureDirections: [UISwipeGestureRecognizer.Direction] = [.up, .right, .down, .left]
         for gestureDirection in gestureDirections{
@@ -139,6 +194,7 @@ class MenuScene: SKScene {
         }
     }
     
+    // MARK: Tap Gesture Recognizer
     func addTapGestureRecognizer() {
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.scene?.view?.addGestureRecognizer(singleTap)
@@ -150,102 +206,58 @@ class MenuScene: SKScene {
         singleTap.require(toFail: doubleTap)
     }
     
+    // MARK: Handle Swipe
     @objc func handleSwipe(_ sender: UISwipeGestureRecognizer) {
-        if currentMenu.value.tts == "Atenção!"{
-            switch sender.direction {
-                case .up:
-                    currentMenu = mainMenu
+        switch sender.direction {
+            case .up:
+                if let parent = currentMenu.parent {
+                    currentMenu = parent
                     currentMenu.value.announce()
-                    nextSpeech.insert({ [self] in
-                        currentMenu.children[currentMenu.select].value.announce()
-                    }, at: 0)
-                default:
-                    break
-            }
-        } else {
-            switch sender.direction {
-                case .up:
-                    if let parent = currentMenu.parent {
-                        currentMenu = parent
-                        currentMenu.value.announce()
-                        nextSpeech.insert({ [self] in
-                            currentMenu.children[currentMenu.select].value.announce()
-                        }, at: 0)
-                    }
-                case .left:
-                    currentMenu.select = mod(currentMenu.select - 1, currentMenu.children.count)
-                    currentMenu.children[currentMenu.select].value.announce()
-                case .right:
-                    currentMenu.select = mod(currentMenu.select + 1, currentMenu.children.count)
-                    currentMenu.children[currentMenu.select].value.announce()
-                default:
-                    break
-            }
-        }
-    }
-    
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        switch sender.numberOfTapsRequired {
-            case 1:
-                currentMenu.children[currentMenu.select].value.announce()
-            case 2:
-                if currentMenu.value.tts == "Atenção!" {
-                    defaults.set(0, forKey: "stage")
-                    presentGame()
-                }  else if currentMenu.children[currentMenu.select].children.count > 0 {
-                    currentMenu.children[currentMenu.select].value.announce()
-                    currentMenu = currentMenu.children[currentMenu.select]
-                    currentMenu.select = 0
-                    nextSpeech.insert({ [self] in
-                        currentMenu.children[currentMenu.select].value.announce()
-                    }, at: 0)
-                } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
-                    toggle.toggle()
-                    currentMenu.children[currentMenu.select].value.announce()
-                } else if currentMenu.children[currentMenu.select].value.name == "continueGame" {
-                    presentGame()
-                } else if currentMenu.children[currentMenu.select].value.name == "newGame" {
-                    if defaults.bool(forKey: "savedGame") {
-                        resetGame()
-                    } else {
-                        defaults.set(true, forKey: "savedGame")
-                        defaults.set(0, forKey: "stage")
-                        presentGame()
-                    }
-                } else {
-                    let controls = currentMenu.children[currentMenu.select].value
-                    controls.runAction()
+                    SpeechSynthesizer.shared.addNextSpeech(currentMenu.children[currentMenu.select].value.tts)
                 }
+            case .left:
+                currentMenu.select = mod(currentMenu.select - 1, currentMenu.children.count)
+                currentMenu.children[currentMenu.select].value.announce()
+            case .right:
+                currentMenu.select = mod(currentMenu.select + 1, currentMenu.children.count)
+                currentMenu.children[currentMenu.select].value.announce()
             default:
                 break
         }
     }
     
-    func presentGame() {
-        if let view = self.view {
-            let newScene = GameScene(size: view.bounds.size)
-            newScene.scaleMode = .resizeFill
-            view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
-            view.presentScene(newScene, transition: .fade(with: .clear, duration: .zero))
+    // MARK: Handle Tap
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        SpeechSynthesizer.shared.clearNextSpeeches()
+        switch sender.numberOfTapsRequired {
+            case 1:
+                currentMenu.children[currentMenu.select].value.announce()
+            case 2:
+                if currentMenu.children[currentMenu.select].children.count > 0 {
+                    if currentMenu.children[currentMenu.select].value.name == OptionNames.newGame.rawValue {
+                        SpeechSynthesizer.shared.speak("")
+                    } else {
+                        currentMenu.children[currentMenu.select].value.announce()
+                    }
+                    currentMenu = currentMenu.children[currentMenu.select]
+                    currentMenu.select = 0
+                    SpeechSynthesizer.shared.addNextSpeech(currentMenu.children[currentMenu.select].value.tts)
+                } else if let toggle = currentMenu.children[currentMenu.select].value as? SKToggleNode {
+                    toggle.toggle()
+                    currentMenu.children[currentMenu.select].value.announce()
+                } else {
+                    let action = currentMenu.children[currentMenu.select].value
+                    action.runAction()
+                }
+            default:
+                break
         }
-    }
-    
-    func resetGame() {
-        currentMenu = warningButton
-        currentMenu.value.announce()
-        SpeechSynthesizer.shared.speak("Tem certeza que quer iniciar um novo jogo? Todo o progresso do jogo anterior será perdido.")
-    }
-    
-    func mod(_ a: Int, _ n: Int) -> Int {
-        precondition(n > 0, "modulus must be positive")
-        let r = a % n
-        return r >= 0 ? r : r + n
     }
 }
 
+// MARK: AVSpeechSynthesizerDelegate
 extension MenuScene: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        guard let nextSpeech = nextSpeech.popLast() else { return }
-        nextSpeech()
+        SpeechSynthesizer.shared.speakNextSpeech()
     }
 }
