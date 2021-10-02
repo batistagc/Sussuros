@@ -36,7 +36,7 @@ class ViewController: UIViewController {
             scene.scaleMode = .aspectFill
             view.presentScene(scene)
             view.ignoresSiblingOrder = true
-//            view.showsPhysics = true
+            view.showsPhysics = true
             view.isMultipleTouchEnabled = true
         }
     }
