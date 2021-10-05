@@ -18,6 +18,7 @@ class SpeechSynthesizer {
         
         // Configure the utterance.
         utterance.volume = volume
+        utterance.rate = 0.45
         
         // Retrieve the voice from selected language.
         let voice = AVSpeechSynthesisVoice(language: language)

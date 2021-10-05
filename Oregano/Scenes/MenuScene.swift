@@ -49,7 +49,7 @@ class MenuScene: SKScene {
         // Toggle Vibrations
 //        toggleVibrationsOption = MenuNode(SKToggleNode(tts: "Vibrações."))
         // Toggle Screen
-        toggleScreenOption = MenuNode(SKToggleNode(tts: "Tela."))
+        toggleScreenOption = MenuNode(SKToggleNode(tts: "Tela.", state: !defaults.bool(forKey: Defaults.toggleScreen.rawValue)))
         toggleScreenOption.value.name = OptionNames.toggleScreen.rawValue
         // Help
         helpOption = MenuNode(SKButtonNode(tts: "Ajuda."))
@@ -58,7 +58,7 @@ class MenuScene: SKScene {
         speakMenuControlsOption = MenuNode(SKButtonNode(tts: "Controles do menu."))
         speakMenuControlsOption.value.name = OptionNames.speakMenuControls.rawValue
         speakMenuControlsOption.value.action = {
-            SpeechSynthesizer.shared.speak("Para selecionar uma opção, dê dois toques na tela. Para ver as opções do menu, deslize para cima. Para ver as outras opções do menu, deslize para os lados. Se quiser voltar ao menu principal a partir do jogo, dê dois toques na tela com dois dedos.")
+            SpeechSynthesizer.shared.speak("Para selecionar uma opção, dê dois toques na tela. Para navegar entre as opções do menu, deslize para os lados. Para voltar para as opções anteriores, deslize para cima. Se quiser voltar ao menu principal a partir do jogo, dê dois toques na tela com dois dedos.")
         }
         // Speak Game Controls
         speakGameControlsOption = MenuNode(SKButtonNode(tts: "Controles do jogo."))
@@ -104,10 +104,12 @@ class MenuScene: SKScene {
         // Toggle Screen
         if let screen = toggleScreenOption.value as? SKToggleNode {
             screen.action = { [self] in
+                defaults.set(true, forKey: Defaults.toggleScreen.rawValue)
                 let blackScreen = view?.subviews.filter { $0.tag == 1 }
                 blackScreen![0].isHidden = false
             }
             screen.secondaryAction = { [self] in
+                defaults.set(false, forKey: Defaults.toggleScreen.rawValue)
                 let blackScreen = view?.subviews.filter { $0.tag == 1 }
                 blackScreen![0].isHidden = true
             }
