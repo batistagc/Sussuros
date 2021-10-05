@@ -7,6 +7,7 @@ class MenuScene: SKScene {
     
     // System
     var currentMenu: MenuNode<SKButtonNode>
+    var cont: Int = 0
     
     // Background Images
     let lilypadFlower = SKSpriteNode(imageNamed: ImageNames.lilypadFlower.rawValue)
@@ -27,6 +28,7 @@ class MenuScene: SKScene {
     let helpOption: MenuNode<SKButtonNode>
     let speakMenuControlsOption: MenuNode<SKButtonNode>
     let speakGameControlsOption: MenuNode<SKButtonNode>
+   
     
     // MARK: init
     override init(size: CGSize) {
@@ -150,18 +152,16 @@ class MenuScene: SKScene {
         // Speak controls if first time opening game
         SpeechSynthesizer.shared.speak("Bem vindo ao jogo Sussurros.")
         if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
-            defaults.set(true, forKey: Defaults.IsOldUser.rawValue)
             SpeechSynthesizer.shared.addNextSpeech("Para selecionar uma opção, dê dois toques na tela. Para ver as opções do menu, deslize para cima. Para ver as outras opções do menu, deslize para os lados. Se quiser voltar ao menu principal a partir do jogo, dê dois toques na tela com dois dedos.")
             SpeechSynthesizer.shared.addNextSpeech(currentMenu.value.tts)
             SpeechSynthesizer.shared.addNextSpeech(mainMenu.children[mainMenu.select].value.tts)
         } else {
             SpeechSynthesizer.shared.addNextSpeech(currentMenu.value.tts)
             SpeechSynthesizer.shared.addNextSpeech(mainMenu.children[mainMenu.select].value.tts)
+            // Gestures Recognizers
+            addSwipeGestureRecognizer()
+            addTapGestureRecognizer()
         }
-        
-        // Gestures Recognizers
-        addSwipeGestureRecognizer()
-        addTapGestureRecognizer()
     }
     
     // MARK: Mod Function
@@ -261,5 +261,12 @@ class MenuScene: SKScene {
 extension MenuScene: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         SpeechSynthesizer.shared.speakNextSpeech()
+        
+        if (!defaults.bool(forKey: Defaults.IsOldUser.rawValue) && cont == 2){
+            defaults.set(true, forKey: Defaults.IsOldUser.rawValue)
+            addTapGestureRecognizer()
+            addSwipeGestureRecognizer()
+        }
+        cont += 1
     }
 }
