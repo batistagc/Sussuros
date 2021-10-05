@@ -49,7 +49,7 @@ class MenuScene: SKScene {
         // Toggle Vibrations
 //        toggleVibrationsOption = MenuNode(SKToggleNode(tts: "Vibrações."))
         // Toggle Screen
-        toggleScreenOption = MenuNode(SKToggleNode(tts: "Tela."))
+        toggleScreenOption = MenuNode(SKToggleNode(tts: "Tela.", state: !defaults.bool(forKey: Defaults.toggleScreen.rawValue)))
         toggleScreenOption.value.name = OptionNames.toggleScreen.rawValue
         // Help
         helpOption = MenuNode(SKButtonNode(tts: "Ajuda."))
@@ -104,10 +104,12 @@ class MenuScene: SKScene {
         // Toggle Screen
         if let screen = toggleScreenOption.value as? SKToggleNode {
             screen.action = { [self] in
+                defaults.set(true, forKey: Defaults.toggleScreen.rawValue)
                 let blackScreen = view?.subviews.filter { $0.tag == 1 }
                 blackScreen![0].isHidden = false
             }
             screen.secondaryAction = { [self] in
+                defaults.set(false, forKey: Defaults.toggleScreen.rawValue)
                 let blackScreen = view?.subviews.filter { $0.tag == 1 }
                 blackScreen![0].isHidden = true
             }
