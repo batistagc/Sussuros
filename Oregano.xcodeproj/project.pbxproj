@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21061635270CE3AA004EBD54 /* buttonTransition.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21061634270CE3AA004EBD54 /* buttonTransition.mp3 */; };
 		212EE77C26F136CE0065FB03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EE77B26F136CE0065FB03 /* ViewController.swift */; };
 		212EE78126F2251F0065FB03 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EE78026F2251F0065FB03 /* MenuScene.swift */; };
 		212EE78326F242B50065FB03 /* SKButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EE78226F242B50065FB03 /* SKButtonNode.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21061634270CE3AA004EBD54 /* buttonTransition.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = buttonTransition.mp3; sourceTree = "<group>"; };
 		212EE77B26F136CE0065FB03 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		212EE78026F2251F0065FB03 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		212EE78226F242B50065FB03 /* SKButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButtonNode.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				C0B74AF42702654600A642FB /* SFXBark7.mp3 */,
 				C038276E27065397007ABFF6 /* SFXStep0.mp3 */,
 				C038277127065397007ABFF6 /* SFXStep1.mp3 */,
+				21061634270CE3AA004EBD54 /* buttonTransition.mp3 */,
 				C038277427065397007ABFF6 /* SFXStep2.mp3 */,
 				C038277027065397007ABFF6 /* SFXStep3.mp3 */,
 				C038277227065397007ABFF6 /* SFXStep4.mp3 */,
@@ -321,6 +324,7 @@
 				C0B74AF82702654600A642FB /* SFXBark3.mp3 in Resources */,
 				C0BAC6262703AAA0005DA83D /* Cap1Fala01Maya.mp3 in Resources */,
 				C0B74AFB2702654600A642FB /* SFXBark1.mp3 in Resources */,
+				21061635270CE3AA004EBD54 /* buttonTransition.mp3 in Resources */,
 				C038277C27065397007ABFF6 /* SFXStep2.mp3 in Resources */,
 				C038277727065397007ABFF6 /* SFXStep7.mp3 in Resources */,
 				C0B74AFA2702654600A642FB /* SFXBark6.mp3 in Resources */,
@@ -496,7 +500,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R36LU3NVAA;
 				INFOPLIST_FILE = Oregano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,7 +520,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R36LU3NVAA;
+				DEVELOPMENT_TEAM = QMPGVXKJVA;
 				INFOPLIST_FILE = Oregano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
