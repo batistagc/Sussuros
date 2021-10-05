@@ -251,7 +251,6 @@ class ChapterOneScene: SKScene, SKPhysicsContactDelegate {
         cap1Narracao02Pimenta.run(.play())
         currentAudio = cap1Narracao02Pimenta
         nextAction = { [self] in
-            SpeechSynthesizer.shared.speak("Obrigado por participar do teste do audio game Sussurros!")
             run(.wait(forDuration: 6)) {
                 objectiveComplete = true
                 nextAction = {
