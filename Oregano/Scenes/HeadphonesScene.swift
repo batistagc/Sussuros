@@ -8,7 +8,7 @@ class HeadphonesScene: SKScene {
     let warningLabel = SKLabelNode()
     var isheadphoneconnected = false
     
-    let loopSpeech: String = "Sussurros é um audio game. Utilize fones de ouvido para que tenha uma melhor experiência. Toque duas vezes na tela para continuar."
+    let loopSpeech: String = "Sussurros é um audio game. Recomendamos fortemente o uso de fones de ouvido para uma melhor experiência. Toque duas vezes na tela para continuar."
 
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -24,7 +24,7 @@ class HeadphonesScene: SKScene {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         warningLabel.attributedText = NSAttributedString(
-                                    string: "Sussurros é um audiogame.\nUtilize fones de ouvido para que tenha uma melhor experiência.",
+                                    string: "Sussurros é um audiogame.\nRecomendamos fortemente o uso de fones de ouvido para uma melhor experiência.",
                                     attributes: [
                                         .foregroundColor: UIColor.white,
                                         .font: UIFont.systemFont(ofSize: 17, weight: .regular),
