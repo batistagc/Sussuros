@@ -161,7 +161,7 @@ class MenuScene: SKScene {
         }
         // Speak controls if first time opening game
         if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
-            SpeechSynthesizer.shared.addNextSpeech("Para selecionar uma opção, dê dois toques na tela. Para ver as opções do menu, deslize para cima. Para ver as outras opções do menu, deslize para os lados. Se quiser voltar ao menu principal a partir do jogo, dê dois toques na tela com dois dedos. Se quiser escutar novamente os comandos, acesse a opção Ajuda do menu.")
+            SpeechSynthesizer.shared.addNextSpeech("Para navegar entre as opções do menu, deslize para os lados. Para selecionar uma opção, dê dois toques na tela. Para voltar para as opções anteriores, deslize para cima. Se quiser voltar ao menu principal depois que o jogo for iniciado, dê dois toques na tela com dois dedos. Para escutar novamente os comandos, acesse a opção Ajuda do menu.")
             SpeechSynthesizer.shared.addNextSpeech(currentMenu.value.tts)
             SpeechSynthesizer.shared.addNextSpeech(mainMenu.children[mainMenu.select].value.tts)
         } else {
