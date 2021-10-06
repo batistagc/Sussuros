@@ -47,10 +47,15 @@ class HeadphonesScene: SKScene {
      
         switch audioRouteChangeReason {
         case AVAudioSession.RouteChangeReason.newDeviceAvailable.rawValue:
-            if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
-                SpeechSynthesizer.shared.speak("oh yeah!")
+//            if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
+//                SpeechSynthesizer.shared.speak("")
+//            }
+//            isheadphoneconnected = true
+            if let newView = self.view {
+                let scene = MenuScene(size: (self.view?.bounds.size)!)
+                scene.scaleMode = .resizeFill
+                newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
             }
-            isheadphoneconnected = true
         default:
             break
         }
@@ -66,10 +71,15 @@ class HeadphonesScene: SKScene {
     @objc func handleTap(sender: UITapGestureRecognizer) {
         switch sender.numberOfTapsRequired {
             case 2:
-                if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
-                    SpeechSynthesizer.shared.speak("oh yeah!")
+//                if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
+//                    SpeechSynthesizer.shared.speak("")
+//                }
+//                isheadphoneconnected = true
+                if let newView = self.view {
+                    let scene = MenuScene(size: (self.view?.bounds.size)!)
+                    scene.scaleMode = .resizeFill
+                    newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
                 }
-                isheadphoneconnected = true
             default:
                 break
         }
@@ -81,13 +91,13 @@ extension HeadphonesScene: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         run(.wait(forDuration: 5)) { [self] in
             SpeechSynthesizer.shared.speak(loopSpeech)
-            if isheadphoneconnected{
-                if let newView = self.view {
-                    let scene = MenuScene(size: (self.view?.bounds.size)!)
-                    scene.scaleMode = .resizeFill
-                    newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
-                }
-            }
+//            if isheadphoneconnected{
+//                if let newView = self.view {
+//                    let scene = MenuScene(size: (self.view?.bounds.size)!)
+//                    scene.scaleMode = .resizeFill
+//                    newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+//                }
+//            }
         }
     }
 }
