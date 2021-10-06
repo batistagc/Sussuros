@@ -3,8 +3,10 @@ import AVFAudio
 
 class HeadphonesScene: SKScene {
     
+    let defaults = UserDefaults.standard
     let headphonesImage = SKSpriteNode(texture: SKTexture(imageNamed: "􀑈"))
     let warningLabel = SKLabelNode()
+    var isheadphoneconnected = false
     
     let loopSpeech: String = "Sussurros é um audio game. Recomendamos fortemente o uso de fones de ouvido para uma melhor experiência. Toque duas vezes na tela para continuar."
 
@@ -45,11 +47,10 @@ class HeadphonesScene: SKScene {
      
         switch audioRouteChangeReason {
         case AVAudioSession.RouteChangeReason.newDeviceAvailable.rawValue:
-            if let newView = self.view {
-                let scene = MenuScene(size: (self.view?.bounds.size)!)
-                scene.scaleMode = .resizeFill
-                newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+            if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
+                SpeechSynthesizer.shared.speak("oh yeah!")
             }
+            isheadphoneconnected = true
         default:
             break
         }
@@ -65,11 +66,10 @@ class HeadphonesScene: SKScene {
     @objc func handleTap(sender: UITapGestureRecognizer) {
         switch sender.numberOfTapsRequired {
             case 2:
-                if let newView = self.view {
-                    let scene = MenuScene(size: (self.view?.bounds.size)!)
-                    scene.scaleMode = .resizeFill
-                    newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+                if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
+                    SpeechSynthesizer.shared.speak("oh yeah!")
                 }
+                isheadphoneconnected = true
             default:
                 break
         }
@@ -81,6 +81,13 @@ extension HeadphonesScene: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         run(.wait(forDuration: 5)) { [self] in
             SpeechSynthesizer.shared.speak(loopSpeech)
+            if isheadphoneconnected{
+                if let newView = self.view {
+                    let scene = MenuScene(size: (self.view?.bounds.size)!)
+                    scene.scaleMode = .resizeFill
+                    newView.presentScene(scene, transition: .fade(with: .clear, duration: .zero))
+                }
+            }
         }
     }
 }

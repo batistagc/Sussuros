@@ -7,6 +7,7 @@ class MenuScene: SKScene {
     
     // System
     var currentMenu: MenuNode<SKButtonNode>
+    let optionTransition: SKAction
     var cont: Int = 0
     
     // Background Images
@@ -84,6 +85,8 @@ class MenuScene: SKScene {
         helpOption.add(child: speakGameControlsOption)
         
         currentMenu = mainMenu
+        
+        optionTransition = .playSoundFileNamed("buttonTransition", waitForCompletion: true)
         
         super.init(size: size)
         
@@ -219,10 +222,14 @@ class MenuScene: SKScene {
                 }
             case .left:
                 currentMenu.select = mod(currentMenu.select - 1, currentMenu.children.count)
-                currentMenu.children[currentMenu.select].value.announce()
+                run(optionTransition){ [self] in
+                    currentMenu.children[currentMenu.select].value.announce()
+                }
             case .right:
                 currentMenu.select = mod(currentMenu.select + 1, currentMenu.children.count)
-                currentMenu.children[currentMenu.select].value.announce()
+                run(optionTransition){ [self] in
+                    currentMenu.children[currentMenu.select].value.announce()
+                }
             default:
                 break
         }
