@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21061635270CE3AA004EBD54 /* buttonTransition.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21061634270CE3AA004EBD54 /* buttonTransition.mp3 */; };
 		212EE77C26F136CE0065FB03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EE77B26F136CE0065FB03 /* ViewController.swift */; };
 		212EE78126F2251F0065FB03 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EE78026F2251F0065FB03 /* MenuScene.swift */; };
 		212EE78326F242B50065FB03 /* SKButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EE78226F242B50065FB03 /* SKButtonNode.swift */; };
@@ -17,6 +16,8 @@
 		2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2137064326EFC8270085794F /* LaunchScreen.storyboard */; };
 		214859FD26F5332200BD193F /* HeadphonesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214859FC26F5332200BD193F /* HeadphonesScene.swift */; };
 		216A675D26F3D00C004F043C /* TutorialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216A675C26F3D00C004F043C /* TutorialScene.swift */; };
+		219E5E43270E22CD008C8FBE /* feedbackDeslizar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 219E5E42270E22CD008C8FBE /* feedbackDeslizar.mp3 */; };
+		219E5E45270E23C5008C8FBE /* feedbackClique.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 219E5E44270E23C5008C8FBE /* feedbackClique.mp3 */; };
 		C00083EA26FB924D005B0748 /* AnalogStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00083E926FB924D005B0748 /* AnalogStick.swift */; };
 		C02EA7642708A03700726D52 /* OptionNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02EA7632708A03700726D52 /* OptionNames.swift */; };
 		C02EA7662708A3B600726D52 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02EA7652708A3B600726D52 /* Defaults.swift */; };
@@ -61,7 +62,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		21061634270CE3AA004EBD54 /* buttonTransition.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = buttonTransition.mp3; sourceTree = "<group>"; };
 		212EE77B26F136CE0065FB03 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		212EE78026F2251F0065FB03 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		212EE78226F242B50065FB03 /* SKButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButtonNode.swift; sourceTree = "<group>"; };
@@ -73,6 +73,8 @@
 		2137064626EFC8270085794F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214859FC26F5332200BD193F /* HeadphonesScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadphonesScene.swift; sourceTree = "<group>"; };
 		216A675C26F3D00C004F043C /* TutorialScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialScene.swift; sourceTree = "<group>"; };
+		219E5E42270E22CD008C8FBE /* feedbackDeslizar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = feedbackDeslizar.mp3; sourceTree = "<group>"; };
+		219E5E44270E23C5008C8FBE /* feedbackClique.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = feedbackClique.mp3; sourceTree = "<group>"; };
 		C00083E926FB924D005B0748 /* AnalogStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogStick.swift; sourceTree = "<group>"; };
 		C02EA7632708A03700726D52 /* OptionNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionNames.swift; sourceTree = "<group>"; };
 		C02EA7652708A3B600726D52 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
@@ -212,7 +214,6 @@
 				C0B74AF42702654600A642FB /* SFXBark7.mp3 */,
 				C038276E27065397007ABFF6 /* SFXStep0.mp3 */,
 				C038277127065397007ABFF6 /* SFXStep1.mp3 */,
-				21061634270CE3AA004EBD54 /* buttonTransition.mp3 */,
 				C038277427065397007ABFF6 /* SFXStep2.mp3 */,
 				C038277027065397007ABFF6 /* SFXStep3.mp3 */,
 				C038277227065397007ABFF6 /* SFXStep4.mp3 */,
@@ -223,6 +224,8 @@
 				C0BAC6232703AAA0005DA83D /* Cap1Fala02Isabella.mp3 */,
 				C0BAC6252703AAA0005DA83D /* Cap1Fala03Maya.mp3 */,
 				C0BAC6242703AAA0005DA83D /* Cap1Fala04Isabella.mp3 */,
+				219E5E42270E22CD008C8FBE /* feedbackDeslizar.mp3 */,
+				219E5E44270E23C5008C8FBE /* feedbackClique.mp3 */,
 				2137064126EFC8270085794F /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -303,6 +306,7 @@
 				C09EDF2627023AFD00543C35 /* SFXCrowdTalking2.mp3 in Resources */,
 				2137064526EFC8270085794F /* LaunchScreen.storyboard in Resources */,
 				C0B74AFC2702654600A642FB /* SFXBark7.mp3 in Resources */,
+				219E5E45270E23C5008C8FBE /* feedbackClique.mp3 in Resources */,
 				C0B74AF72702654600A642FB /* SFXBark2.mp3 in Resources */,
 				C0B74AF92702654600A642FB /* SFXBark4.mp3 in Resources */,
 				C038277B27065397007ABFF6 /* SFXStep5.mp3 in Resources */,
@@ -320,11 +324,11 @@
 				C0B74AF62702654600A642FB /* SFXBark5.mp3 in Resources */,
 				C0BAC62D2703AFF8005DA83D /* Cap1Narracao02Pimenta.mp3 in Resources */,
 				C038277627065397007ABFF6 /* SFXStep0.mp3 in Resources */,
+				219E5E43270E22CD008C8FBE /* feedbackDeslizar.mp3 in Resources */,
 				C038277827065397007ABFF6 /* SFXStep3.mp3 in Resources */,
 				C0B74AF82702654600A642FB /* SFXBark3.mp3 in Resources */,
 				C0BAC6262703AAA0005DA83D /* Cap1Fala01Maya.mp3 in Resources */,
 				C0B74AFB2702654600A642FB /* SFXBark1.mp3 in Resources */,
-				21061635270CE3AA004EBD54 /* buttonTransition.mp3 in Resources */,
 				C038277C27065397007ABFF6 /* SFXStep2.mp3 in Resources */,
 				C038277727065397007ABFF6 /* SFXStep7.mp3 in Resources */,
 				C0B74AFA2702654600A642FB /* SFXBark6.mp3 in Resources */,

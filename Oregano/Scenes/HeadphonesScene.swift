@@ -36,6 +36,7 @@ class HeadphonesScene: SKScene {
         
         SpeechSynthesizer.shared.speak(loopSpeech)
         
+        MenuScene.firstOpen = true
         addTapGestureRecognizer()
         
         NotificationCenter.default.addObserver(self, selector: #selector(foneConectado(_:)), name: AVAudioSession.routeChangeNotification, object: nil)

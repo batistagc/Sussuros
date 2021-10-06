@@ -9,6 +9,7 @@ class MenuScene: SKScene {
     var currentMenu: MenuNode<SKButtonNode>
     let optionTransition: SKAction
     var cont: Int = 0
+    static var firstOpen: Bool = false
     
     // Background Images
     let lilypadFlower = SKSpriteNode(imageNamed: ImageNames.lilypadFlower.rawValue)
@@ -86,7 +87,7 @@ class MenuScene: SKScene {
         
         currentMenu = mainMenu
         
-        optionTransition = .playSoundFileNamed("buttonTransition", waitForCompletion: true)
+        optionTransition = .playSoundFileNamed(AudioNames.swipeSound.rawValue, waitForCompletion: true)
         
         super.init(size: size)
         
@@ -152,12 +153,15 @@ class MenuScene: SKScene {
         lilypadSmallBottom.position = CGPoint(x: 60.0, y: -260.0)
         lilypadBottom.position = CGPoint(x: 70.0, y: -340.0)
         
-        // Speak controls if first time opening game
-        
-       
-        if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
+        if MenuScene.firstOpen {
             SpeechSynthesizer.shared.speak("Bem vindo ao jogo Sussurros.")
-            SpeechSynthesizer.shared.addNextSpeech("Para selecionar uma opção, dê dois toques na tela. Para ver as opções do menu, deslize para cima. Para ver as outras opções do menu, deslize para os lados. Se quiser voltar ao menu principal a partir do jogo, dê dois toques na tela com dois dedos.")
+            MenuScene.firstOpen = false
+        }else {
+            SpeechSynthesizer.shared.speak("")
+        }
+        // Speak controls if first time opening game
+        if !defaults.bool(forKey: Defaults.IsOldUser.rawValue) {
+            SpeechSynthesizer.shared.addNextSpeech("Para selecionar uma opção, dê dois toques na tela. Para ver as opções do menu, deslize para cima. Para ver as outras opções do menu, deslize para os lados. Se quiser voltar ao menu principal a partir do jogo, dê dois toques na tela com dois dedos. Se quiser escutar novamente os comandos, acesse a opção Ajuda do menu.")
             SpeechSynthesizer.shared.addNextSpeech(currentMenu.value.tts)
             SpeechSynthesizer.shared.addNextSpeech(mainMenu.children[mainMenu.select].value.tts)
         } else {

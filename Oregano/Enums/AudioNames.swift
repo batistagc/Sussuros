@@ -11,4 +11,7 @@ enum AudioNames: String {
     case sfxCrowdTalking1 = "SFXCrowdTalking1"
     case sfxCrowdTalking2 = "SFXCrowdTalking2"
     case sfxTypingKeyboard = "SFXTypingKeyboard"
+    
+    case swipeSound = "feedbackDeslizar"
+    case clickSound = "feedbackClique"
 }
