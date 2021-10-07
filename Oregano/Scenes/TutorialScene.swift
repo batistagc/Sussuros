@@ -137,7 +137,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         singleTouch = nil
         playerNode.position = CGPoint(x: 400, y: -20)
         playerNode.zRotation = 0
-        SpeechSynthesizer.shared.speak("Deslize para os lados para virar para a esquerda e para a direita. Você continuará virando enquanto mantiver pressionado.")
+        SpeechSynthesizer.shared.speak("Deslize para os lados para rotacionar para a esquerda e para a direita. Você continuará rotacionando enquanto mantiver pressionado.")
         isTutorialRotation = true
         objectiveComplete = false
         nextAction = gameTutorial02

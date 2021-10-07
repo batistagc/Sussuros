@@ -8,6 +8,7 @@ class MenuScene: SKScene {
     // System
     var currentMenu: MenuNode<SKButtonNode>
     let optionTransition: SKAction
+    let selectOption: SKAction
     var cont: Int = 0
     static var firstOpen: Bool = false
     
@@ -68,7 +69,7 @@ class MenuScene: SKScene {
         speakGameControlsOption = MenuNode(SKButtonNode(tts: "Controles do jogo."))
         speakMenuControlsOption.value.name = OptionNames.speakGameControls.rawValue
         speakGameControlsOption.value.action = {
-            SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para virar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Toque uma vez na tela para o Orégano latir. Para voltar ao menu principal, toque duas vezes na tela com dois dedos. Caso queira ouvir novamente os comandos, agite o celular.")
+            SpeechSynthesizer.shared.speak("Para andar para frente, encoste na tela e deslize para cima. Para rotacionar para a esquerda e direita, deslize para os lados. Para andar para trás, deslize para baixo. Toque uma vez na tela para o Orégano latir. Para voltar ao menu principal, toque duas vezes na tela com dois dedos. Caso queira ouvir novamente os comandos, agite o celular.")
         }
         
         // Set Up Main Menu
@@ -88,6 +89,7 @@ class MenuScene: SKScene {
         currentMenu = mainMenu
         
         optionTransition = .playSoundFileNamed(AudioNames.swipeSound.rawValue, waitForCompletion: true)
+        selectOption = .playSoundFileNamed(AudioNames.clickSound.rawValue, waitForCompletion: true)
         
         super.init(size: size)
         
@@ -248,6 +250,7 @@ class MenuScene: SKScene {
             case 1:
                 currentMenu.children[currentMenu.select].value.announce()
             case 2:
+                run(selectOption)
                 if currentMenu.children[currentMenu.select].children.count > 0 {
                     if currentMenu.children[currentMenu.select].value.name == OptionNames.newGame.rawValue {
                         SpeechSynthesizer.shared.speak("")
