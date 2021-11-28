@@ -65,7 +65,7 @@
 		212EE77B26F136CE0065FB03 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		212EE78026F2251F0065FB03 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		212EE78226F242B50065FB03 /* SKButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButtonNode.swift; sourceTree = "<group>"; };
-		2137063526EFC8240085794F /* Oregano.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oregano.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2137063526EFC8240085794F /* Sussurros.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sussurros.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2137063826EFC8240085794F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2137063A26EFC8240085794F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2137064126EFC8270085794F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 		2137062C26EFC8240085794F = {
 			isa = PBXGroup;
 			children = (
-				2137063726EFC8240085794F /* Oregano */,
+				2137063726EFC8240085794F /* Sussurros */,
 				2137063626EFC8240085794F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -160,12 +160,12 @@
 		2137063626EFC8240085794F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2137063526EFC8240085794F /* Oregano.app */,
+				2137063526EFC8240085794F /* Sussurros.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2137063726EFC8240085794F /* Oregano */ = {
+		2137063726EFC8240085794F /* Sussurros */ = {
 			isa = PBXGroup;
 			children = (
 				C0304C8926F3CD94004546C1 /* Assets */,
@@ -178,7 +178,7 @@
 				2137064326EFC8270085794F /* LaunchScreen.storyboard */,
 				2137064626EFC8270085794F /* Info.plist */,
 			);
-			path = Oregano;
+			path = Sussurros;
 			sourceTree = "<group>";
 		};
 		C0304C8826F3CD72004546C1 /* Classes */ = {
@@ -248,9 +248,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2137063426EFC8240085794F /* Oregano */ = {
+		2137063426EFC8240085794F /* Sussurros */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2137064926EFC8270085794F /* Build configuration list for PBXNativeTarget "Oregano" */;
+			buildConfigurationList = 2137064926EFC8270085794F /* Build configuration list for PBXNativeTarget "Sussurros" */;
 			buildPhases = (
 				2137063126EFC8240085794F /* Sources */,
 				2137063226EFC8240085794F /* Frameworks */,
@@ -260,9 +260,9 @@
 			);
 			dependencies = (
 			);
-			name = Oregano;
+			name = Sussurros;
 			productName = Oregano;
-			productReference = 2137063526EFC8240085794F /* Oregano.app */;
+			productReference = 2137063526EFC8240085794F /* Sussurros.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -279,7 +279,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2137063026EFC8240085794F /* Build configuration list for PBXProject "Oregano" */;
+			buildConfigurationList = 2137063026EFC8240085794F /* Build configuration list for PBXProject "Sussurros" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -292,7 +292,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2137063426EFC8240085794F /* Oregano */,
+				2137063426EFC8240085794F /* Sussurros */,
 			);
 		};
 /* End PBXProject section */
@@ -504,8 +504,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R36LU3NVAA;
-				INFOPLIST_FILE = Oregano/Info.plist;
+				DEVELOPMENT_TEAM = 337G99FP8D;
+				INFOPLIST_FILE = "$(SRCROOT)/Sussurros/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -525,8 +525,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R36LU3NVAA;
-				INFOPLIST_FILE = Oregano/Info.plist;
+				DEVELOPMENT_TEAM = 337G99FP8D;
+				INFOPLIST_FILE = "$(SRCROOT)/Sussurros/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,7 +542,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2137063026EFC8240085794F /* Build configuration list for PBXProject "Oregano" */ = {
+		2137063026EFC8240085794F /* Build configuration list for PBXProject "Sussurros" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2137064726EFC8270085794F /* Debug */,
@@ -551,7 +551,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2137064926EFC8270085794F /* Build configuration list for PBXNativeTarget "Oregano" */ = {
+		2137064926EFC8270085794F /* Build configuration list for PBXNativeTarget "Sussurros" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2137064A26EFC8270085794F /* Debug */,
